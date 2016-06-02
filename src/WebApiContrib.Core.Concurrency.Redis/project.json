@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0-*",
+  "description": "WebApiContrib.Core.Concurrency.Redis Class Library",
+  "authors": [ "WebApiContrib" ],
+  "packOptions": {
+    "tags": [ "" ],
+    "licenseUrl": "",
+    "projectUrl": ""
+  },
+  "dependencies": {
+    "Microsoft.Extensions.Caching.Redis": "1.0.0-rc4",
+    "WebApiContrib.Core.Concurrency": "*"
+  },
+  "tooling": {
+    "defaultNamespace": "WebApiContrib.Core.Concurrency.Redis"
+  },
+  "frameworks": {
+    "net46": {
+    },
+    "netstandard1.5": {
+    }
+  }
+}

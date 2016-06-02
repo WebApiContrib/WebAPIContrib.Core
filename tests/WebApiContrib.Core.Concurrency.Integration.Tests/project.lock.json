@@ -1458,6 +1458,31 @@
           }
         }
       },
+      "StackExchange.Redis.StrongName/1.1.604-alpha": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.5.0-rc2-24027",
+          "System.Collections.NonGeneric": "4.0.1-rc2-24027",
+          "System.IO.FileSystem": "4.0.1-rc2-24027",
+          "System.Net.NameResolution": "4.0.0-rc2-24027",
+          "System.Net.Security": "4.0.0-rc2-24027",
+          "System.Net.Sockets": "4.1.0-rc2-24027",
+          "System.Reflection.Emit": "4.0.1-rc2-24027",
+          "System.Reflection.Emit.Lightweight": "4.0.1-rc2-24027",
+          "System.Reflection.TypeExtensions": "4.1.0-rc2-24027",
+          "System.Security.Cryptography.Algorithms": "4.1.0-rc2-24027",
+          "System.Security.Cryptography.X509Certificates": "4.1.0-rc2-24027",
+          "System.Threading.Thread": "4.0.0-rc2-24027",
+          "System.Threading.ThreadPool": "4.0.10-rc2-24027",
+          "System.Threading.Timer": "4.0.1-rc2-24027"
+        },
+        "compile": {
+          "lib/netstandard1.5/StackExchange.Redis.StrongName.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.5/StackExchange.Redis.StrongName.dll": {}
+        }
+      },
       "System.AppContext/4.1.0-rc2-24027": {
         "type": "package",
         "dependencies": {
@@ -1546,7 +1571,7 @@
           "System.Threading": "4.0.11-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Collections.NonGeneric.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Collections.NonGeneric.dll": {}
@@ -1967,9 +1992,13 @@
           "lib/portable-net45+win8+wpa81/_._": {}
         },
         "runtimeTargets": {
-          "runtimes/unix/lib/netstandard1.3/_._": {
+          "runtimes/unix/lib/netstandard1.3/System.IO.Compression.dll": {
             "assetType": "runtime",
             "rid": "unix"
+          },
+          "runtimes/win7/lib/netstandard1.3/System.IO.Compression.dll": {
+            "assetType": "runtime",
+            "rid": "win7"
           }
         }
       },
@@ -1990,7 +2019,7 @@
           "ref/netstandard1.3/System.IO.Compression.ZipFile.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/_._": {}
+          "lib/netstandard1.3/System.IO.Compression.ZipFile.dll": {}
         }
       },
       "System.IO.FileSystem/4.0.1-rc2-24027": {
@@ -2526,7 +2555,7 @@
           "System.Runtime": "4.1.0-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.1/_._": {}
+          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Reflection.Emit.dll": {}
@@ -3394,6 +3423,21 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "Microsoft.Extensions.Caching.Redis/1.0.0-rc4": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.5",
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Abstractions": "1.0.0",
+          "Microsoft.Extensions.Options": "1.0.0",
+          "StackExchange.Redis.StrongName": "1.1.604-alpha"
+        },
+        "compile": {
+          "netstandard1.5/Microsoft.Extensions.Caching.Redis.dll": {}
+        },
+        "runtime": {
+          "netstandard1.5/Microsoft.Extensions.Caching.Redis.dll": {}
+        }
+      },
       "WebApiContrib.Core.Concurrency/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.5",
@@ -3417,12 +3461,32 @@
           "netstandard1.5/WebApiContrib.Core.Concurrency.dll": {}
         }
       },
+      "WebApiContrib.Core.Concurrency.Redis/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.5",
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Redis": "1.0.0-rc4",
+          "WebApiContrib.Core.Concurrency": "1.0.0"
+        },
+        "compile": {
+          "netstandard1.5/WebApiContrib.Core.Concurrency.Redis.dll": {}
+        },
+        "runtime": {
+          "netstandard1.5/WebApiContrib.Core.Concurrency.Redis.dll": {}
+        }
+      },
       "WebApiContrib.Core.Concurrency.SqlServer/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.5",
         "dependencies": {
           "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
           "WebApiContrib.Core.Concurrency": "1.0.0"
+        },
+        "compile": {
+          "netstandard1.5/WebApiContrib.Core.Concurrency.SqlServer.dll": {}
+        },
+        "runtime": {
+          "netstandard1.5/WebApiContrib.Core.Concurrency.SqlServer.dll": {}
         }
       }
     },
@@ -4503,6 +4567,18 @@
           }
         }
       },
+      "StackExchange.Redis.StrongName/1.1.604-alpha": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.IO.Compression"
+        ],
+        "compile": {
+          "lib/net46/StackExchange.Redis.StrongName.dll": {}
+        },
+        "runtime": {
+          "lib/net46/StackExchange.Redis.StrongName.dll": {}
+        }
+      },
       "System.AppContext/4.1.0-rc2-24027": {
         "type": "package",
         "frameworkAssemblies": [
@@ -5163,6 +5239,24 @@
           "lib/net46/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "Microsoft.Extensions.Caching.Redis/1.0.0-rc4": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Abstractions": "1.0.0",
+          "Microsoft.Extensions.Options": "1.0.0",
+          "StackExchange.Redis.StrongName": "1.1.604-alpha"
+        },
+        "frameworkAssemblies": [
+          "System.Runtime"
+        ],
+        "compile": {
+          "net451/Microsoft.Extensions.Caching.Redis.dll": {}
+        },
+        "runtime": {
+          "net451/Microsoft.Extensions.Caching.Redis.dll": {}
+        }
+      },
       "WebApiContrib.Core.Concurrency/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
@@ -5188,12 +5282,32 @@
           "net46/WebApiContrib.Core.Concurrency.dll": {}
         }
       },
+      "WebApiContrib.Core.Concurrency.Redis/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Redis": "1.0.0-rc4",
+          "WebApiContrib.Core.Concurrency": "1.0.0"
+        },
+        "compile": {
+          "net46/WebApiContrib.Core.Concurrency.Redis.dll": {}
+        },
+        "runtime": {
+          "net46/WebApiContrib.Core.Concurrency.Redis.dll": {}
+        }
+      },
       "WebApiContrib.Core.Concurrency.SqlServer/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
           "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
           "WebApiContrib.Core.Concurrency": "1.0.0"
+        },
+        "compile": {
+          "net46/WebApiContrib.Core.Concurrency.SqlServer.dll": {}
+        },
+        "runtime": {
+          "net46/WebApiContrib.Core.Concurrency.SqlServer.dll": {}
         }
       }
     }
@@ -6383,6 +6497,22 @@
         "runtime.win7-x86.runtime.native.System.Data.SqlClient.sni.4.0.1-rc2-24027.nupkg.sha512",
         "runtime.win7-x86.runtime.native.System.Data.SqlClient.sni.nuspec",
         "runtimes/win7-x86/native/sni.dll"
+      ]
+    },
+    "StackExchange.Redis.StrongName/1.1.604-alpha": {
+      "sha512": "Rv4bf6EZkjI3Z2aRycFu3zncTBc7eJR7+zgq/OlFtTrTqeg0VdslaJcUvzZnCYAn72oI4OzKz0cjW+ixJ/W82g==",
+      "type": "package",
+      "files": [
+        "StackExchange.Redis.StrongName.1.1.604-alpha.nupkg.sha512",
+        "StackExchange.Redis.StrongName.nuspec",
+        "lib/net40/StackExchange.Redis.StrongName.dll",
+        "lib/net40/StackExchange.Redis.StrongName.xml",
+        "lib/net45/StackExchange.Redis.StrongName.dll",
+        "lib/net45/StackExchange.Redis.StrongName.xml",
+        "lib/net46/StackExchange.Redis.StrongName.dll",
+        "lib/net46/StackExchange.Redis.StrongName.xml",
+        "lib/netstandard1.5/StackExchange.Redis.StrongName.dll",
+        "lib/netstandard1.5/StackExchange.Redis.StrongName.xml"
       ]
     },
     "System.AppContext/4.1.0-rc2-24027": {
@@ -10922,14 +11052,25 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
+    "Microsoft.Extensions.Caching.Redis/1.0.0-rc4": {
+      "type": "project",
+      "path": "../../other/Microsoft.Extensions.Caching.Redis/project.json",
+      "msbuildProject": "../../other/Microsoft.Extensions.Caching.Redis/Microsoft.Extensions.Caching.Redis.xproj"
+    },
     "WebApiContrib.Core.Concurrency/1.0.0": {
       "type": "project",
       "path": "../../src/WebApiContrib.Core.Concurrency/project.json",
       "msbuildProject": "../../src/WebApiContrib.Core.Concurrency/WebApiContrib.Core.Concurrency.xproj"
     },
+    "WebApiContrib.Core.Concurrency.Redis/1.0.0": {
+      "type": "project",
+      "path": "../../src/WebApiContrib.Core.Concurrency.Redis/project.json",
+      "msbuildProject": "../../src/WebApiContrib.Core.Concurrency.Redis/WebApiContrib.Core.Concurrency.Redis.xproj"
+    },
     "WebApiContrib.Core.Concurrency.SqlServer/1.0.0": {
       "type": "project",
-      "path": "../../src/WebApiContrib.Core.Concurrency.SqlServer/project.json"
+      "path": "../../src/WebApiContrib.Core.Concurrency.SqlServer/project.json",
+      "msbuildProject": "../../src/WebApiContrib.Core.Concurrency.SqlServer/WebApiContrib.Core.Concurrency.SqlServer.xproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -10942,6 +11083,7 @@
       "Microsoft.Extensions.Configuration.EnvironmentVariables >= 1.0.0-*",
       "Microsoft.Extensions.Configuration.Json >= 1.0.0-*",
       "WebApiContrib.Core.Concurrency",
+      "WebApiContrib.Core.Concurrency.Redis",
       "WebApiContrib.Core.Concurrency.SqlServer"
     ],
     ".NETCoreApp,Version=v1.0": [
