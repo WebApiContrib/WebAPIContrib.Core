@@ -1,0 +1,162 @@
+﻿#region copyright
+// Copyright 2016 WebApiContrib
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//     http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+#endregion
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using WebApiContrib.Core.Concurrency.Extensions;
+using WebApiContrib.Core.Concurrency.Tests.Models;
+using Xunit;
+
+namespace WebApiContrib.Core.Concurrency.Tests.Controllers
+{
+    public class ConcurrencyServerFixture
+    {
+        private class FakeStartup
+        {
+            public void ConfigureServices(IServiceCollection serviceCollection)
+            {
+                serviceCollection.AddConcurrency(opt => opt.UseInMemoryStorage());
+                serviceCollection.AddMvc();
+            }
+
+            public void Configure(IApplicationBuilder app)
+            {
+                app.UseMvc();
+            }
+        }
+
+        [Fact]
+        public async Task When_Customer_Is_Created_Then_Etag_Is_Returned()
+        {
+            // ARRANGE
+            var customer = new Customer
+            {
+                FirstName = "loki"
+            };
+            var server = CreateServer();
+            var client = server.CreateClient();
+            var requestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json")
+            };
+
+            // ACT
+            var response = await client.SendAsync(requestMessage);
+
+            // ASSERT
+            Assert.NotEmpty(response.Headers.GetEtag());
+        }
+
+        [Fact]
+        public async Task When_Updating_Customer_With_Constraint_Then_NewEtag_Is_Returned()
+        {
+            // ARRANGE
+            var customer = new Customer
+            {
+                FirstName = "loki"
+            };
+            var server = CreateServer();
+            var client = server.CreateClient();
+            var insertRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json")
+            };
+            var response = await client.SendAsync(insertRequestMessage);
+            var newCustomer = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
+            var etag = response.Headers.GetEtag();
+            var updateRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Put,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(newCustomer), Encoding.UTF8, "application/json")
+            };
+            updateRequestMessage.Headers.IfMatch.Add(new EntityTagHeaderValue(etag));
+
+            // ARRANGE
+            var updateResponse = await client.SendAsync(updateRequestMessage);
+
+            // ASSERTS
+            Assert.NotEmpty(updateResponse.Headers.GetEtag());
+            Assert.True(updateResponse.Headers.GetEtag() != etag);
+        }
+
+        [Fact]
+        public async Task When_Updating_Previous_Representation_Then_Error_Is_Returned()
+        {
+            // ARRANGE
+            var customer = new Customer
+            {
+                FirstName = "loki"
+            };
+            var server = CreateServer();
+            var client = server.CreateClient();
+            var insertRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json")
+            };
+            var response = await client.SendAsync(insertRequestMessage);
+            var newCustomer = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
+            var etag = response.Headers.GetEtag();
+            var updateRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Put,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(newCustomer), Encoding.UTF8, "application/json")
+            };
+            updateRequestMessage.Headers.IfMatch.Add(new EntityTagHeaderValue(etag));
+            await client.SendAsync(updateRequestMessage);
+            var newUpdateRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Put,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(newCustomer), Encoding.UTF8, "application/json")
+            };
+            newUpdateRequestMessage.Headers.IfMatch.Add(new EntityTagHeaderValue(etag));
+            
+            // ARRANGE
+            var updateResponse = await client.SendAsync(newUpdateRequestMessage);
+
+            // ASSERTS
+            Assert.True(updateResponse.StatusCode == HttpStatusCode.PreconditionFailed);
+        }
+        
+        #region Private methods
+
+        private static TestServer CreateServer()
+        {
+            var builder = new WebHostBuilder()
+                .UseStartup(typeof(FakeStartup));
+            return new TestServer(builder);
+        }
+
+        #endregion
+    }
+}

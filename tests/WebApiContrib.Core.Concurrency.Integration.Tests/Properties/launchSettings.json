@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WebApiContrib.Core.Integration.Tests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

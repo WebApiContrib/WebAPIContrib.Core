@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0-*",
+  "description": "WebApiContrib.Core.Concurrency.Tests Unit test project",
+  "authors": [ "WebApiContrib" ],
+  "packOptions": {
+    "tags": [ "" ],
+    "licenseUrl": "",
+    "projectUrl": ""
+  },
+  "tooling": {
+    "defaultNamespace": "WebApiContrib.Core.Concurrency.Tests"
+  },
+  "testRunner": "xunit",
+  "dependencies": {
+    "xunit": "2.1.0",
+    "dotnet-test-xunit": "1.0.0-*",
+    "Microsoft.AspNetCore.TestHost": "1.0.0-*",
+    "WebApiContrib.Core.Concurrency": "*",
+    "System.Runtime.Serialization.Primitives": "4.1.1-*"
+  },
+  "frameworks": {
+    "net46": {
+      "frameworkAssemblies": { },
+      "dependencies": {
+        "Moq": "4.5.9-*",
+        "Microsoft.NETCore.Platforms": "1.0.1-*"
+      }
+    }
+  }
+}
