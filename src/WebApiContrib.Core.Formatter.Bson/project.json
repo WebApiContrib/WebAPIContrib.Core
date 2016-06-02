@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0-*",
+  "description": "WebApiContrib.Core.Formatter.Bson Class Library",
+  "authors": [ "WebApiContrib" ],
+  "packOptions": {
+    "tags": [ "" ],
+    "licenseUrl": "",
+    "projectUrl": ""
+  },
+  "dependencies": {
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.0-*",
+    "Newtonsoft.Json": "8.0.4-*"
+  },
+  "tooling": {
+    "defaultNamespace": "WebApiContrib.Core.Formatter.Bson"
+  },
+  "frameworks": {
+    "net46": {
+    },
+    "netstandard1.5": {
+    }
+  }
+}
