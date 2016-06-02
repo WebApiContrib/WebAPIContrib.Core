@@ -72,7 +72,7 @@ namespace WebApiContrib.Core.Concurrency.Tests.Controllers
         }
 
         [Fact]
-        public async Task When_Updating_Customer_With_Constraint_Then_NewEtag_Is_Returned()
+        public async Task When_Updating_Customer_And_Correct_Etag_Is_Passed_Then_NewEtag_Is_Returned()
         {
             // ARRANGE
             var customer = new Customer
@@ -107,7 +107,43 @@ namespace WebApiContrib.Core.Concurrency.Tests.Controllers
         }
 
         [Fact]
-        public async Task When_Updating_Previous_Representation_Then_Error_Is_Returned()
+        public async Task When_Updating_Customer_And_Correct_ModifiedDate_Is_Passed_Then_NewEtag_Is_Returned()
+        {
+            // ARRANGE
+            var customer = new Customer
+            {
+                FirstName = "loki"
+            };
+            var server = CreateServer();
+            var client = server.CreateClient();
+            var insertRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json")
+            };
+            var response = await client.SendAsync(insertRequestMessage);
+            var newCustomer = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
+            var etag = response.Headers.GetEtag();
+            var updateRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Put,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(newCustomer), Encoding.UTF8, "application/json")
+            };
+            updateRequestMessage.Headers.IfMatch.Add(EntityTagHeaderValue.Any);
+            updateRequestMessage.Headers.IfUnmodifiedSince = DateTime.UtcNow.AddDays(1).ToUniversalTime();
+
+            // ARRANGE
+            var updateResponse = await client.SendAsync(updateRequestMessage);
+
+            // ASSERTS
+            Assert.NotEmpty(updateResponse.Headers.GetEtag());
+            Assert.True(updateResponse.Headers.GetEtag() != etag);
+        }
+
+        [Fact]
+        public async Task When_Updating_Customer_And_Old_Etag_Is_Passed_Then_Error_412_Is_Returned()
         {
             // ARRANGE
             var customer = new Customer
@@ -147,7 +183,75 @@ namespace WebApiContrib.Core.Concurrency.Tests.Controllers
             // ASSERTS
             Assert.True(updateResponse.StatusCode == HttpStatusCode.PreconditionFailed);
         }
-        
+
+        [Fact]
+        public async Task When_Updating_Customer_And_Passed_Too_Old_UnModifiedDate_Is_Passed_Then_Error_412_Is_Returned()
+        {
+            // ARRANGE
+            var customer = new Customer
+            {
+                FirstName = "loki"
+            };
+            var server = CreateServer();
+            var client = server.CreateClient();
+            var insertRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json")
+            };
+            var response = await client.SendAsync(insertRequestMessage);
+            var newCustomer = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
+            var etag = response.Headers.GetEtag();
+            var updateRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Put,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(newCustomer), Encoding.UTF8, "application/json")
+            };
+            updateRequestMessage.Headers.IfMatch.Add(EntityTagHeaderValue.Any);
+            updateRequestMessage.Headers.IfUnmodifiedSince = DateTime.UtcNow.AddDays(-2).ToUniversalTime();
+
+            // ARRANGE
+            var updateResponse = await client.SendAsync(updateRequestMessage);
+
+            // ASSERTS
+            Assert.True(updateResponse.StatusCode == HttpStatusCode.PreconditionFailed);
+        }
+
+        [Fact]
+        public async Task When_Getting_Existing_Representation_Then_304_Is_Returned()
+        {
+            // ARRANGE
+            var customer = new Customer
+            {
+                FirstName = "loki"
+            };
+            var server = CreateServer();
+            var client = server.CreateClient();
+            var insertRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json")
+            };
+            var response = await client.SendAsync(insertRequestMessage);
+            var newCustomer = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
+            var etag = response.Headers.GetEtag();
+            var getRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"http://localhost/customers/{newCustomer.CustomerId}")
+            };
+            getRequestMessage.Headers.IfNoneMatch.Add(new EntityTagHeaderValue(etag));
+
+            // ARRANGE
+            var updateResponse = await client.SendAsync(getRequestMessage);
+
+            // ASSERTS
+            Assert.True(updateResponse.StatusCode == HttpStatusCode.NotModified);
+        }
+
         #region Private methods
 
         private static TestServer CreateServer()

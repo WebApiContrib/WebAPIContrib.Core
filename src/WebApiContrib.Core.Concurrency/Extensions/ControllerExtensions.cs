@@ -30,6 +30,21 @@ namespace WebApiContrib.Core.Concurrency.Extensions
             return Get(controller.Request.Headers, Constants.ConcurrencyParameterNames.IfMatch);
         }
 
+        public static string GetIfNoneMatch(this Controller controller)
+        {
+            return Get(controller.Request.Headers, Constants.ConcurrencyParameterNames.IfNoneMatch);
+        }
+
+        public static string GetUnmodifiedSince(this Controller controller)
+        {
+            return Get(controller.Request.Headers, Constants.ConcurrencyParameterNames.IfUnmodifiedSince);
+        }
+
+        public static string GetModifiedSince(this Controller controller)
+        {
+            return Get(controller.Request.Headers, Constants.ConcurrencyParameterNames.IfModifiedSince);
+        }
+
         public static void SetEtag(this Controller controller, string value)
         {
             controller.Response.Headers.Add(Constants.ConcurrencyParameterNames.Etag, value);

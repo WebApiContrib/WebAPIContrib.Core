@@ -17,6 +17,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using WebApiContrib.Core.Concurrency.Tests.Models;
 
@@ -55,7 +57,7 @@ namespace WebApiContrib.Core.Concurrency.Tests.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] Customer customer)
         {
-            if (!await _representationManager.CheckRepresentationAsync(this, EntityName + customer.CustomerId))
+            if (!await _representationManager.CheckRepresentationExistsAsync(this, EntityName + customer.CustomerId))
             {
                 return new ContentResult
                 {
@@ -69,9 +71,18 @@ namespace WebApiContrib.Core.Concurrency.Tests.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public  async Task<IActionResult> Get(string id)
         {
-            return Ok();
+            if(!await _representationManager.CheckRepresentationHasChangedAsync(this, EntityName + id))
+            {
+                return new ContentResult
+                {
+                    StatusCode = 304
+                };
+            }
+
+            await _representationManager.UpdateHeader(this, EntityName + id);
+            return new OkObjectResult(_customers.First(c => c.CustomerId == id));
         }
 
         #endregion

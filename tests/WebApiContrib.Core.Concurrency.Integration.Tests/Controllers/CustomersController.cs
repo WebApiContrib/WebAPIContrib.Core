@@ -57,7 +57,7 @@ namespace WebApiContrib.Core.Integration.Tests.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] Customer customer)
         {
-            if (!await _representationManager.CheckRepresentationAsync(this, EntityName + customer.CustomerId))
+            if (!await _representationManager.CheckRepresentationExistsAsync(this, EntityName + customer.CustomerId))
             {
                 return new ContentResult
                 {
