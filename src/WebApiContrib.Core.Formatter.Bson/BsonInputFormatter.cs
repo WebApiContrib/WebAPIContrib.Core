@@ -15,8 +15,8 @@
 #endregion
 
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.ObjectPool;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 using Newtonsoft.Json.Serialization;
@@ -31,8 +31,6 @@ namespace WebApiContrib.Core.Formatter.Bson
     /// </summary>
     public class BsonInputFormatter : TextInputFormatter
     {
-        private readonly ILogger _logger;
-
         private readonly JsonSerializerSettings _jsonSerializerSettings;
 
         private readonly ObjectPoolProvider _objectPoolProvider;
@@ -42,13 +40,14 @@ namespace WebApiContrib.Core.Formatter.Bson
         #region Constructor
 
         public BsonInputFormatter(
-            ILogger logger,
             JsonSerializerSettings jsonSerializerSettings,
             ObjectPoolProvider objectPoolProvider)
         {
-            _logger = logger;
             _jsonSerializerSettings = jsonSerializerSettings;
             _objectPoolProvider = objectPoolProvider;
+            SupportedEncodings.Add(Encoding.Unicode);
+            SupportedEncodings.Add(Encoding.UTF8);
+            SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/bson"));
         }
 
         #endregion
@@ -65,7 +64,6 @@ namespace WebApiContrib.Core.Formatter.Bson
                 {
                     successful = false;
                     var exception = eventArgs.ErrorContext.Error;
-                    _logger.LogDebug(1, exception, "BSON input formatter threw an exception");
                     eventArgs.ErrorContext.Handled = true;
                 };                
                 var jsonSerializer = CreateJsonSerializer();

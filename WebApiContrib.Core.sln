@@ -27,6 +27,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Concurre
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Formatter.Bson", "src\WebApiContrib.Core.Formatter.Bson\WebApiContrib.Core.Formatter.Bson.xproj", "{1AEA74F2-9B85-48EB-B52F-71C3A2B22F4C}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Formatter.Integration.Tests", "tests\WebApiContrib.Core.Formatter.Integration.Tests\WebApiContrib.Core.Formatter.Integration.Tests.xproj", "{1E281A68-6516-43F0-B444-93EF34D8A02D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{1AEA74F2-9B85-48EB-B52F-71C3A2B22F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AEA74F2-9B85-48EB-B52F-71C3A2B22F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AEA74F2-9B85-48EB-B52F-71C3A2B22F4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E281A68-6516-43F0-B444-93EF34D8A02D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E281A68-6516-43F0-B444-93EF34D8A02D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E281A68-6516-43F0-B444-93EF34D8A02D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E281A68-6516-43F0-B444-93EF34D8A02D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,5 +81,6 @@ Global
 		{02E23070-947C-4438-8E50-CC2456D237BA} = {FA211DF3-D9A7-431A-B239-8B448021CEBA}
 		{3751E3BA-0333-4240-899F-2607FB83AB0D} = {5898776F-DBF8-4C30-85A3-66401B12016F}
 		{1AEA74F2-9B85-48EB-B52F-71C3A2B22F4C} = {5898776F-DBF8-4C30-85A3-66401B12016F}
+		{1E281A68-6516-43F0-B444-93EF34D8A02D} = {A98104E8-D149-44EA-AE61-8E2A350B6D91}
 	EndGlobalSection
 EndGlobal

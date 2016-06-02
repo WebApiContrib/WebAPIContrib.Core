@@ -17,21 +17,75 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Newtonsoft.Json;
+using Microsoft.Net.Http.Headers;
+using System.Text;
+using Newtonsoft.Json.Bson;
 
 namespace WebApiContrib.Core.Formatter.Bson
 {
-    public class BsonOutputFormatter : IOutputFormatter
+    /// <summary>
+    /// A <see cref="BsonOutputFormatter"/> for BSON content
+    /// </summary>
+    public class BsonOutputFormatter : TextOutputFormatter
     {
-        #region Public methods
+        private readonly JsonSerializerSettings _jsonSerializerSettings;
 
-        public bool CanWriteResult(OutputFormatterCanWriteContext context)
+        private JsonSerializer _serializer;
+
+        #region Constructor
+
+        public BsonOutputFormatter(JsonSerializerSettings serializerSettings)
         {
-            throw new NotImplementedException();
+            if (serializerSettings == null)
+            {
+                throw new ArgumentNullException(nameof(serializerSettings));
+            }
+
+
+            _jsonSerializerSettings = serializerSettings;
+            SupportedEncodings.Add(Encoding.UTF8);
+            SupportedEncodings.Add(Encoding.Unicode);
+            SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/bson"));
         }
 
-        public Task WriteAsync(OutputFormatterWriteContext context)
+        #endregion
+
+        #region Public methods
+
+        public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
         {
-            throw new NotImplementedException();
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (selectedEncoding == null)
+            {
+                throw new ArgumentNullException(nameof(selectedEncoding));
+            }
+
+            var response = context.HttpContext.Response;
+            using (var bsonWriter = new BsonWriter(response.Body) { CloseOutput = false })
+            {
+                var jsonSerializer = CreateJsonSerializer();
+                jsonSerializer.Serialize(bsonWriter, context.Object);
+                bsonWriter.Flush();
+            }
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private JsonSerializer CreateJsonSerializer()
+        {
+            if (_serializer == null)
+            {
+                _serializer = JsonSerializer.Create(_jsonSerializerSettings);
+            }
+
+            return _serializer;
         }
 
         #endregion
