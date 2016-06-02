@@ -220,7 +220,7 @@ namespace WebApiContrib.Core.Concurrency.Tests.Controllers
         }
 
         [Fact]
-        public async Task When_Getting_Existing_Representation_Then_304_Is_Returned()
+        public async Task When_Getting_Customer_For_An_Existing_Representation_Then_304_Is_Returned()
         {
             // ARRANGE
             var customer = new Customer
@@ -250,6 +250,107 @@ namespace WebApiContrib.Core.Concurrency.Tests.Controllers
 
             // ASSERTS
             Assert.True(updateResponse.StatusCode == HttpStatusCode.NotModified);
+        }
+
+        [Fact]
+        public async Task When_Getting_Customer_And_Passed_Latest_ModificationDate_Then_304_Is_Returned()
+        {
+            // ARRANGE
+            var customer = new Customer
+            {
+                FirstName = "loki"
+            };
+            var server = CreateServer();
+            var client = server.CreateClient();
+            var insertRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json")
+            };
+            var response = await client.SendAsync(insertRequestMessage);
+            var newCustomer = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
+            var etag = response.Headers.GetEtag();
+            var getRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"http://localhost/customers/{newCustomer.CustomerId}")
+            };
+            getRequestMessage.Headers.IfNoneMatch.Add(EntityTagHeaderValue.Any);
+            getRequestMessage.Headers.IfModifiedSince = DateTime.UtcNow.AddDays(1).ToUniversalTime();
+
+            // ARRANGE
+            var updateResponse = await client.SendAsync(getRequestMessage);
+
+            // ASSERTS
+            Assert.True(updateResponse.StatusCode == HttpStatusCode.NotModified);
+        }
+
+        [Fact]
+        public async Task When_Getting_Customer_And_Passing_Old_Representation_Then_NewOne_Is_Returned()
+        {
+            // ARRANGE
+            var customer = new Customer
+            {
+                FirstName = "loki"
+            };
+            var server = CreateServer();
+            var client = server.CreateClient();
+            var insertRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json")
+            };
+            var response = await client.SendAsync(insertRequestMessage);
+            var newCustomer = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
+            var etag = response.Headers.GetEtag();
+            var getRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"http://localhost/customers/{newCustomer.CustomerId}")
+            };
+            getRequestMessage.Headers.IfNoneMatch.Add(new EntityTagHeaderValue("\"old_representation\""));
+
+            // ARRANGE
+            var getResponse = await client.SendAsync(getRequestMessage);
+
+            // ASSERTS
+            Assert.NotEmpty(getResponse.Headers.GetEtag());
+        }
+
+        [Fact]
+        public async Task When_Getting_Customer_Add_Passing_Old_ModifiedSinceDateTime_Then_New_Representation_Is_Returned()
+        {
+            // ARRANGE
+            var customer = new Customer
+            {
+                FirstName = "loki"
+            };
+            var server = CreateServer();
+            var client = server.CreateClient();
+            var insertRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("http://localhost/customers"),
+                Content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json")
+            };
+            var response = await client.SendAsync(insertRequestMessage);
+            var newCustomer = JsonConvert.DeserializeObject<Customer>(await response.Content.ReadAsStringAsync());
+            var etag = response.Headers.GetEtag();
+            var getRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"http://localhost/customers/{newCustomer.CustomerId}")
+            };
+            getRequestMessage.Headers.IfNoneMatch.Add(EntityTagHeaderValue.Any);
+            getRequestMessage.Headers.IfModifiedSince = DateTime.UtcNow.AddDays(-2).ToUniversalTime();
+
+            // ARRANGE
+            var getResponse = await client.SendAsync(getRequestMessage);
+
+            // ASSERTS
+            Assert.NotEmpty(getResponse.Headers.GetEtag());
         }
 
         #region Private methods

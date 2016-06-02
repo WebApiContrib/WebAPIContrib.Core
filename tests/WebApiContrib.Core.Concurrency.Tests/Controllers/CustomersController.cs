@@ -17,8 +17,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using WebApiContrib.Core.Concurrency.Tests.Models;
 
@@ -82,7 +80,7 @@ namespace WebApiContrib.Core.Concurrency.Tests.Controllers
             }
 
             await _representationManager.UpdateHeader(this, EntityName + id);
-            return new OkObjectResult(_customers.First(c => c.CustomerId == id));
+            return Ok();
         }
 
         #endregion
