@@ -1,0 +1,23 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "WebApiContrib.Core - extensions and add ons for ASP.NET Core MVC",
+  "authors": [ "WebApiContrib" ],
+  "packOptions": {
+    "tags": [ "" ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/WebApiContrib/WebAPIContrib.Core.git"
+    }
+  },
+  "dependencies": {
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.0-rc2-final",
+    "Newtonsoft.Json": "8.0.4-*"
+  },
+  "tooling": {
+    "defaultNamespace": "WebApiContrib.Core"
+  },
+  "frameworks": {
+      "net451": { },
+      "netstandard1.5": { }
+  }
+}
