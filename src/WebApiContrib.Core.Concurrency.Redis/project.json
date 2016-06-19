@@ -15,7 +15,7 @@
     "defaultNamespace": "WebApiContrib.Core.Concurrency.Redis"
   },
   "frameworks": {
-    "net46": {
+    "net451": {
     },
     "netstandard1.5": {
     }
