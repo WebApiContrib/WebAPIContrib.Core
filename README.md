@@ -16,6 +16,7 @@ Current version - **RC2**.
 ## Formatters
 
 * [WebApiContrib.Core.Formatter.Bson](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Bson)
+* [WebApiContrib.Core.Formatter.Csv](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Csv)
 
 ## Other
 
