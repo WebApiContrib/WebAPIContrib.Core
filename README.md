@@ -12,6 +12,7 @@ Current version - **RC2**.
 
 * [WebApiContrib.Core](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core)
   * `GlobalRoutePrefixConvention` - `IApplicationModelConvention` allowing you to set a global route prefix
+  * `OverridableFilterProvider` - allows you to override filters from higher scope (i.e. global filters) on lower scope (i.e. controller filters)
 
 ## Formatters
 
