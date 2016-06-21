@@ -4,7 +4,9 @@
     "Microsoft.AspNetCore.Mvc.Core": "1.0.0-rc2-final"
   },
   "frameworks": {
-    "net451":  {}, 
-    "netstandard1.5": {}
+    "net451":  {},
+    "netstandard1.5": {
+      "imports": "dnxcore50"
+    }
   }
 }
