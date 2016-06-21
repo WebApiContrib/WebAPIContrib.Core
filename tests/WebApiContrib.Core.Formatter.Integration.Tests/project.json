@@ -10,7 +10,7 @@
     "WebApiContrib.Core.Formatter.Bson": "*"
   },
   "frameworks": {
-    "net46": {
+    "net451": {
       "frameworkAssemblies": {
         "System.Web": "4.0.0.0"
       }

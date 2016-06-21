@@ -15,7 +15,7 @@
     "defaultNamespace": "WebApiContrib.Core.Formatter.Bson"
   },
   "frameworks": {
-    "net46": {
+    "net451": {
     },
     "netstandard1.5": {
     }
