@@ -1,5 +1,7 @@
 ﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Net.Http.Headers;
 
 namespace WebApiContrib.Core.Formatter.PlainText
