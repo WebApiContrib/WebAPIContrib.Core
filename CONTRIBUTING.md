@@ -4,7 +4,7 @@ WebAPIContrib is always **thrilled** to welcome any contributions!
 
 ## Where to find help
 
-Before contributing any feature, make sure to discuss it upfront with the team - this can be done on Github in an [issue](https://github.com/WebApiContrib/WebAPIContrib.Core/issues), on [the mailing list](https://groups.google.com/group/webapicontrib) or on [Slack](webapicontrib.slack.com). 
+Before contributing any feature, make sure to discuss it upfront with the team - this can be done on Github in an [issue](https://github.com/WebApiContrib/WebAPIContrib.Core/issues), on [the mailing list](https://groups.google.com/group/webapicontrib) or on [Slack](https://webapicontrib.azurewebsites.net). 
 
 ## Code Style
 
