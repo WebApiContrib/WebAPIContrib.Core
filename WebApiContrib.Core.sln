@@ -37,7 +37,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Formatte
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Samples", "samples\WebApiContrib.Core.Samples\WebApiContrib.Core.Samples.xproj", "{8179D011-CED0-40FB-98FA-86326A0F8055}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Formatter.PlainText", "WebApiContrib.Core.Formatter.PlainText\WebApiContrib.Core.Formatter.PlainText.xproj", "{31DA6013-7513-41FC-A5FE-0FB444FBAB9C}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Formatter.PlainText", "src\WebApiContrib.Core.Formatter.PlainText\WebApiContrib.Core.Formatter.PlainText.xproj", "{31DA6013-7513-41FC-A5FE-0FB444FBAB9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
