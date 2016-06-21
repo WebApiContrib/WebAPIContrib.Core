@@ -14,6 +14,7 @@
         "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
         "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
         "WebApiContrib.Core.Formatter.Csv": "*",
+        "WebApiContrib.Core.Formatter.PlainText": "*",
         "Microsoft.AspNetCore.StaticFiles": "1.0.0-rc2-final"
     },
 

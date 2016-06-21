@@ -1,7 +1,5 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Net.Http.Headers;
 
 namespace WebApiContrib.Core.Formatter.PlainText
@@ -10,6 +8,8 @@ namespace WebApiContrib.Core.Formatter.PlainText
     {
         public PlainTextOutputFormatter(PlainTextFormatterOptions opts)
         {
+            SupportedEncodings.Clear();
+            SupportedMediaTypes.Clear();
             foreach (var enc in opts.SupportedEncodings)
             {
                 SupportedEncodings.Add(enc);
