@@ -1,6 +1,22 @@
 {
-  "version": "1.0.0-*",
-
+    "version": "1.0.0",
+    "description": "ASP.NET Core InputFormatter, OutputFormatter for IList CSV data",
+    "authors": [ "damienbod, WebAPIContrib" ],
+    "packOptions": {
+        "summary": "ASP.NET Core InputFormatter, OutputFormatter for IList CSV data",
+        "tags": [ "ASP.NET Core", "InputFormatter", "OutputFormatter" , "MediaFormatter" , "CSV"  , "Content-Type"],
+        "owners": [ "damienbod, WebAPIContrib" ],
+        "releaseNotes": "initial version",
+        "title": "WebApiContrib.Core.Formatter.Csv",
+        "iconUrl": "https://avatars1.githubusercontent.com/u/1561645?s=140",
+        "projectUrl": "https://github.com/damienbod/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Csv",
+        "licenseUrl": "",
+        "requireLicenseAcceptance": false,
+        "repository": {
+            "type": "git",
+            "url": "https://github.com/damienbod/WebAPIContrib.Core"
+        }
+    },
     "dependencies": {
         "Microsoft.AspNetCore.Mvc.Core": "1.0.0-rc2-final"
     },
