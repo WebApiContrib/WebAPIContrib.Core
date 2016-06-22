@@ -6,6 +6,8 @@ WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/
 
 2016.06.22: project init
 
+# Documentation
+
 The InputFormatter and the OutputFormatter classes are used to convert the csv data to the C# model classes. 
 
 <strong>Code Sample usage: </strong> https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/samples/WebApiContrib.Core.Samples
@@ -105,7 +107,7 @@ namespace AspNetCoreCsvImportExport.Controllers
 
 ```
 
-The Formatters can be added to the ASP.NET Core project in the Startup class in the ConfigureServices method. The code configuration accepts an options object to define the delimiter and if a single header header should be included in the csv file or not.
+The formatters can be added to the ASP.NET Core project in the Startup class in the ConfigureServices method. The code configuration accepts an options object to define the delimiter and if a single header header should be included in the csv file or not.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
