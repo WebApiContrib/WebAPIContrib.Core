@@ -10,7 +10,7 @@ WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/
 
 The InputFormatter and the OutputFormatter classes are used to convert the csv data to the C# model classes. 
 
-<strong>Code Sample usage: </strong> https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/samples/WebApiContrib.Core.Samples
+<strong>Code sample: </strong> https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/samples/WebApiContrib.Core.Samples
 
 The LocalizationRecord class is used as the model class to import and export to and from csv data.
 
