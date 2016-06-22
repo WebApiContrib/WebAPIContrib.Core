@@ -107,7 +107,9 @@ namespace AspNetCoreCsvImportExport.Controllers
 
 ```
 
-The formatters can be added to the ASP.NET Core project in the Startup class in the ConfigureServices method. The code configuration accepts an options object to define the delimiter and if a single header header should be included in the csv file or not.
+The formatters can be added to the ASP.NET Core project in the Startup class in the ConfigureServices method. The code configuration accepts an options object to define the delimiter and if a single line header should be included in the csv file or not.
+
+The default delimiter is set to ';' and the header is included by default.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
