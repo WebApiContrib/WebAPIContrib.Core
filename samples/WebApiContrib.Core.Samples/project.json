@@ -13,14 +13,15 @@
     "Microsoft.Extensions.Logging": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
-    "WebApiContrib.Core.Formatter.Csv": "*",
-    "WebApiContrib.Core.Formatter.PlainText": "*",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0-rc2-final",
     "Microsoft.AspNetCore.Razor.Tools": {
       "version": "1.0.0-preview1-final",
       "type": "build"
     },
-    "WebApiContrib.Core.TagHelpers.Markdown": "*"
+    "WebApiContrib.Core.Formatter.Csv": "*",
+    "WebApiContrib.Core.Formatter.PlainText": "*",
+    "WebApiContrib.Core.TagHelpers.Markdown": "*",
+    "WebApiContrib.Core": "*"
   },
 
   "tools": {
