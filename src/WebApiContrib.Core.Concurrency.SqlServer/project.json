@@ -8,7 +8,7 @@
     "projectUrl": ""
   },
   "dependencies": {
-    "Microsoft.Extensions.Caching.SqlServer": "1.0.0-*",
+    "Microsoft.Extensions.Caching.SqlServer": "1.0.0",
     "WebApiContrib.Core.Concurrency": "*"
   },
   "tooling": {
@@ -17,7 +17,7 @@
   "frameworks": {
     "net451": {
     },
-    "netstandard1.5": {
+    "netstandard1.6": {
     }
   }
 }

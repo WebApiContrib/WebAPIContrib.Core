@@ -14,16 +14,16 @@
   "dependencies": {
     "xunit": "2.1.0",
     "dotnet-test-xunit": "1.0.0-*",
-    "Microsoft.AspNetCore.TestHost": "1.0.0-*",
+    "Microsoft.AspNetCore.TestHost": "1.0.0",
     "WebApiContrib.Core.Concurrency": "*",
-    "System.Runtime.Serialization.Primitives": "4.1.1-*"
+    "System.Runtime.Serialization.Primitives": "4.1.1"
   },
   "frameworks": {
     "net451": {
       "frameworkAssemblies": { },
       "dependencies": {
         "Moq": "4.5.9-*",
-        "Microsoft.NETCore.Platforms": "1.0.1-*"
+        "Microsoft.NETCore.Platforms": "1.0.1"
       }
     }
   }

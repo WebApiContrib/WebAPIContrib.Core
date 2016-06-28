@@ -8,7 +8,7 @@
     "projectUrl": ""
   },
   "dependencies": {
-    "Microsoft.AspNetCore.Mvc.Core": "1.0.0-*",
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
     "Newtonsoft.Json": "8.0.4-*"
   },
   "tooling": {
@@ -17,7 +17,7 @@
   "frameworks": {
     "net451": {
     },
-    "netstandard1.5": {
+    "netstandard1.6": {
     }
   }
 }
