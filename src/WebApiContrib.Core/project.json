@@ -10,14 +10,13 @@
     }
   },
   "dependencies": {
-    "Microsoft.AspNetCore.Mvc.Core": "1.0.0-rc2-final",
-    "Newtonsoft.Json": "8.0.4-*"
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.0"
   },
   "tooling": {
     "defaultNamespace": "WebApiContrib.Core"
   },
   "frameworks": {
       "net451": { },
-      "netstandard1.5": { }
+      "netstandard1.6": { }
   }
 }

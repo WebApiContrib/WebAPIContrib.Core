@@ -21,8 +21,8 @@
     "xmlDoc": true
   },
   "dependencies": {
-    "Microsoft.Extensions.Caching.Abstractions": "1.0.0-*",
-    "Microsoft.Extensions.Options": "1.0.0-*",
+    "Microsoft.Extensions.Caching.Abstractions": "1.0.0",
+    "Microsoft.Extensions.Options": "1.0.0",
     "StackExchange.Redis.StrongName": "1.1.604-alpha"
   },
   "frameworks": {
@@ -33,7 +33,7 @@
         }
       }
     },
-    "netstandard1.5": {
+    "netstandard1.6": {
     }
   }
 }

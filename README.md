@@ -2,11 +2,9 @@
 
 |                           | Badges                                                                                                                                                       |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| NET46 & DOTNETCORE        | [![Build status](https://ci.appveyor.com/api/projects/status/4n10t3rrkju3fwyy?svg=true)](https://ci.appveyor.com/project/thabart/webapicontrib-core)         |
+| net451 & netstandard 1.6        | [![Build status](https://ci.appveyor.com/api/projects/status/4n10t3rrkju3fwyy?svg=true)](https://ci.appveyor.com/project/thabart/webapicontrib-core)         |
 
 WebAPIContrib.Core is a collection of open source projects, add-ons and extensions to help improve your work with ASP.NET Core and ASP.NET Core MVC.
-
-Current version - **RC2**.
 
 ## Main
 

@@ -1,12 +1,12 @@
 {
   "dependencies": {
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-*",
-    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-*",
-    "Microsoft.Extensions.Configuration.CommandLine": "1.0.0-*",
-    "Microsoft.AspNetCore.Mvc": "1.0.0-*",
-    "Microsoft.AspNetCore.Mvc.Core": "1.0.0-*",
-    "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0-*",
-    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-*",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
+    "Microsoft.Extensions.Configuration.CommandLine": "1.0.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.0",
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
+    "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "WebApiContrib.Core.Concurrency": "*",
     "WebApiContrib.Core.Concurrency.SqlServer": "*",
     "WebApiContrib.Core.Concurrency.Redis": "*"
@@ -22,7 +22,7 @@
       "dependencies": {
         "Microsoft.NETCore.App": {
           "type": "platform",
-          "version": "1.0.0-*"
+          "version": "1.0.0"
         }
       }
     }

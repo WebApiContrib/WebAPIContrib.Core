@@ -1,20 +1,4 @@
-﻿#region copyright
-// Copyright 2016 WebApiContrib
-// 
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-// 
-//     http://www.apache.org/licenses/LICENSE-2.0
-// 
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-#endregion
-
-using Moq;
+﻿using Moq;
 using System;
 using System.Threading.Tasks;
 using WebApiContrib.Core.Concurrency.Storage;
@@ -34,8 +18,6 @@ namespace WebApiContrib.Core.Concurrency.Tests
             public string FirstName { get; set; }
         }
 
-        #region Exceptions
-
         [Fact]
         public void When_Passing_Null_Parameters_Then_Exceptions_Are_Thrown()
         {
@@ -49,10 +31,6 @@ namespace WebApiContrib.Core.Concurrency.Tests
             Assert.ThrowsAsync<ArgumentNullException>(() => _concurrencyManager.TryGetRepresentationAsync(null));
             Assert.ThrowsAsync<ArgumentNullException>(() => _concurrencyManager.RemoveAsync(null));
         }
-
-        #endregion
-
-        #region Happy paths
 
         [Fact]
         public async Task When_Resource_Is_Removed_Then_Operation_Is_Called()
@@ -84,10 +62,6 @@ namespace WebApiContrib.Core.Concurrency.Tests
             Assert.Null(result);
         }
 
-        #endregion
-
-        #region Private methods
-
         private void InitializeFakeObjects()
         {
             _storageStub = new Mock<IStorage>();
@@ -97,7 +71,5 @@ namespace WebApiContrib.Core.Concurrency.Tests
             };
             _concurrencyManager = new ConcurrencyManager(options);
         }
-
-        #endregion
     }
 }
