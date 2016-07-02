@@ -19,6 +19,7 @@ WebAPIContrib.Core is a collection of open source projects, add-ons and extensio
 * [WebApiContrib.Core.Formatter.Bson](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Bson)
 * [WebApiContrib.Core.Formatter.Csv](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Csv)
 * [WebApiContrib.Core.Formatter.PlainText](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.PlainText)
+* [WebApiContrib.Core.Formatter.Jsonp](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Jsonp)
 
 ## TagHelpers
 * [WebApiContrib.Core.TagHelpers.Markdown](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.TagHelpers.Markdown)

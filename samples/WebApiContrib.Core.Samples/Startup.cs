@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using WebApiContrib.Core;
 using WebApiContrib.Core.Formatter.Csv;
+using WebApiContrib.Core.Formatter.Jsonp;
 using WebApiContrib.Core.Formatter.PlainText;
 using WebApiContrib.Core.Samples.Controllers;
 
@@ -28,6 +28,7 @@ namespace WebApiContrib.Core.Samples
         {
             services.AddMvc(o =>
             {
+                o.AddJsonpOutputFormatter();
                 o.UseFromBodyBinding(controllerPredicate: c => c.ControllerType.AsType() == typeof(BindingController));
             }).AddCsvSerializerFormatters()
               .AddPlainTextFormatters();
@@ -38,6 +39,7 @@ namespace WebApiContrib.Core.Samples
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseMvc();
         }

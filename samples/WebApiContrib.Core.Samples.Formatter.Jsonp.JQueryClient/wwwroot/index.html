@@ -1,0 +1,33 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <p>Please remember to run the "WebApiContrib.Core.Samples". It should be running on port 4987.</p>
+    <button id="getjsonp">Get JSONP</button><br/>
+    <h4>Request result:</h4>
+    <div id="jsonp"></div>
+
+    <script type="text/javascript">
+        function showResult(json) {
+            $('#jsonp').append('<p>'+json+'</p>');
+        }
+
+        $(function () {
+            $('#getjsonp').on('click', function () {
+                $.ajax({
+                    url: 'http://localhost:4987/api/values',
+                    dataType: 'jsonp',
+                    jsonpCallback: 'showResult'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
