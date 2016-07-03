@@ -13,11 +13,7 @@ using System.IO;
 
 namespace WebApiContrib.Core.WebPages
 {
-    //public class WebPagesRazorViewEngine : RazorViewEngine
-    //{
-    //    override 
-    //}
-
+    // adapted, with Imran's permission, from https://weblogs.asp.net/imranbaloch/adding-web-pages-in-aspnet-core
     public class RazorViewToStringRenderer
     {
         private IRazorViewEngine _viewEngine;

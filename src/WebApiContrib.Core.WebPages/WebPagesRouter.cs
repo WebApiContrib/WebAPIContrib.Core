@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace WebApiContrib.Core.WebPages
 {
+    // adapted, with Imran's permission, from https://weblogs.asp.net/imranbaloch/adding-web-pages-in-aspnet-core
     public class WebPagesRouter : IRouter
     {
         private IHostingEnvironment _hostingEnvironment;
