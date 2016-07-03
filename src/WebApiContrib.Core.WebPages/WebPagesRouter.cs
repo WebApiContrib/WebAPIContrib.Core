@@ -28,20 +28,19 @@ namespace WebApiContrib.Core.WebPages
 
         public async Task RouteAsync(RouteContext context)
         {
-            var path = context.HttpContext.Request.Path.ToString().TrimStart('/');
+            var path = context.HttpContext.Request.Path.ToString().TrimStart('/').TrimEnd('/');
 
-            if (Regex.IsMatch(path, "^([\\w]+/)*[\\w]+[.]cshtml$"))
+            // if path doesn't have an extension, we want to probe it for being a page
+            if (!path.Contains("."))
             {
-                var filePath = Path.Combine(_hostingEnvironment.ContentRootPath, path);
-
-                //context.IsHandled = true;
+                var filePath = Path.Combine(_hostingEnvironment.ContentRootPath, "Views", path + ".cshtml");
                 if (!File.Exists(filePath))
                 {
                     context.HttpContext.Response.StatusCode = 404;
                     return;
                 }
 
-                var contents = _renderer.RenderViewToString("~/" + path);
+                var contents = _renderer.RenderViewToString(path);
                 await context.HttpContext.Response.WriteAsync(contents);
             }
         }
