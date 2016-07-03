@@ -24,6 +24,11 @@ WebAPIContrib.Core is a collection of open source projects, add-ons and extensio
 ## TagHelpers
 * [WebApiContrib.Core.TagHelpers.Markdown](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.TagHelpers.Markdown)
 
+## WebPages
+* [WebApiContrib.Core.WebPages](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.WebPages)
+
+A project allowing you to create Razor web pages without any controller/action infrastructure. Just add a `Views/MyPage.cshtml` and you can now navigate to `<server root>/MyPage` in the browser. Supports the typical Razor constructs - inline C# code, `@inject` etc.
+
 ## Other
 
 * [WebApiContrib.Core.Concurrency](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Concurrency)
