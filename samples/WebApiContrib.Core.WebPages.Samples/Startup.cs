@@ -19,7 +19,7 @@ namespace WebApiContrib.Core.WebPages.Samples
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseWebPages();
+            app.UseWebPages(rootViewName: "RazorSample");
         }
     }
 }

@@ -13,13 +13,15 @@ namespace WebApiContrib.Core.WebPages
     // adapted, with Imran's permission, from https://weblogs.asp.net/imranbaloch/adding-web-pages-in-aspnet-core
     public class WebPagesRouter : IRouter
     {
-        private IHostingEnvironment _hostingEnvironment;
-        private RazorViewToStringRenderer _renderer;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly RazorViewToStringRenderer _renderer;
+        private readonly string _rootViewName;
 
-        public WebPagesRouter(IHostingEnvironment hostingEnvironment, RazorViewToStringRenderer renderer)
+        public WebPagesRouter(IHostingEnvironment hostingEnvironment, RazorViewToStringRenderer renderer, string rootViewName)
         {
             _hostingEnvironment = hostingEnvironment;
             _renderer = renderer;
+            _rootViewName = rootViewName;
         }
 
         public VirtualPathData GetVirtualPath(VirtualPathContext context)
@@ -31,8 +33,13 @@ namespace WebApiContrib.Core.WebPages
         {
             var path = context.HttpContext.Request.Path.ToString().TrimStart('/').TrimEnd('/');
 
-            // if path doesn't have an extension, we want to probe it for being a page
-            if (!path.Contains("."))
+            // root
+            if (path == string.Empty && _rootViewName != null)
+            {
+                path = _rootViewName;
+            }
+
+            if (!path.Contains(".")) // if path doesn't have an extension, we want to probe it for being a page
             {
                 var filePath = Path.Combine(_hostingEnvironment.ContentRootPath, "Views", path + ".cshtml");
                 if (!File.Exists(filePath))
