@@ -16,9 +16,9 @@ namespace WebApiContrib.Core.WebPages
     // adapted, with Imran's permission, from https://weblogs.asp.net/imranbaloch/adding-web-pages-in-aspnet-core
     public class RazorViewToStringRenderer
     {
-        private IRazorViewEngine _viewEngine;
-        private ITempDataProvider _tempDataProvider;
-        private IServiceProvider _serviceProvider;
+        private readonly IRazorViewEngine _viewEngine;
+        private readonly ITempDataProvider _tempDataProvider;
+        private readonly IServiceProvider _serviceProvider;
 
         public RazorViewToStringRenderer(IRazorViewEngine viewEngine, ITempDataProvider tempDataProvider,
             IServiceProvider serviceProvider)
@@ -37,7 +37,7 @@ namespace WebApiContrib.Core.WebPages
 
                 if (!viewEngineResult.Success)
                 {
-                    throw new InvalidOperationException(string.Format("Couldn't find view '{0}'", path));
+                    throw new InvalidOperationException($"Couldn't find view '{path}'");
                 }
 
                 var view = viewEngineResult.View;
@@ -67,8 +67,7 @@ namespace WebApiContrib.Core.WebPages
 
         private ActionContext GetActionContext()
         {
-            var httpContext = new DefaultHttpContext();
-            httpContext.RequestServices = _serviceProvider;
+            var httpContext = new DefaultHttpContext {RequestServices = _serviceProvider};
             return new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         }
     }
