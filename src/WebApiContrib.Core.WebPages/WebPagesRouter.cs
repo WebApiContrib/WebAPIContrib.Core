@@ -15,13 +15,15 @@ namespace WebApiContrib.Core.WebPages
     {
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly RazorViewToStringRenderer _renderer;
-        private readonly string _rootViewName;
+        private readonly WebPagesOptions _opts;
 
-        public WebPagesRouter(IHostingEnvironment hostingEnvironment, RazorViewToStringRenderer renderer, string rootViewName)
+        public WebPagesRouter(IHostingEnvironment hostingEnvironment, RazorViewToStringRenderer renderer, WebPagesOptions opts)
         {
+            if (opts == null) throw new ArgumentNullException(nameof(opts));
+
             _hostingEnvironment = hostingEnvironment;
             _renderer = renderer;
-            _rootViewName = rootViewName;
+            _opts = opts;
         }
 
         public VirtualPathData GetVirtualPath(VirtualPathContext context)
@@ -34,14 +36,14 @@ namespace WebApiContrib.Core.WebPages
             var path = context.HttpContext.Request.Path.ToString().TrimStart('/').TrimEnd('/');
 
             // root
-            if (path == string.Empty && _rootViewName != null)
+            if (path == string.Empty && _opts.RootViewName != null)
             {
-                path = _rootViewName;
+                path = _opts.RootViewName;
             }
 
             if (!path.Contains(".")) // if path doesn't have an extension, we want to probe it for being a page
             {
-                var filePath = Path.Combine(_hostingEnvironment.ContentRootPath, "Views", path + ".cshtml");
+                var filePath = Path.Combine(_hostingEnvironment.ContentRootPath, _opts.ViewsFolderName, path + ".cshtml");
                 if (!File.Exists(filePath))
                 {
                     context.HttpContext.Response.StatusCode = 404;

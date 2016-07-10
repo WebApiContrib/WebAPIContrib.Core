@@ -16,6 +16,11 @@ namespace WebApiContrib.Core.WebPages
     {
         public static void AddWebPages(this IServiceCollection services)
         {
+            AddWebPages(services, new WebPagesOptions());
+        }
+
+        public static void AddWebPages(this IServiceCollection services, WebPagesOptions webPagesOptions)
+        {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -24,8 +29,10 @@ namespace WebApiContrib.Core.WebPages
             services.AddMvcCore().AddRazorViewEngine(o =>
             {
                 o.ViewLocationFormats.Clear();
-                o.ViewLocationFormats.Add("/Views/{0}" + RazorViewEngine.ViewExtension);
+                o.ViewLocationFormats.Add("/" + webPagesOptions.ViewsFolderName + "/{0}" + RazorViewEngine.ViewExtension);
             });
+
+            services.AddSingleton<WebPagesOptions>(webPagesOptions);
             services.AddSingleton<RazorViewToStringRenderer>();
         }
     }
