@@ -14,12 +14,12 @@ namespace WebApiContrib.Core.WebPages.Samples
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddWebPages();
+            services.AddWebPages(new WebPagesOptions { RootViewName = "RazorSample" });
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseWebPages(rootViewName: "RazorSample");
+            app.UseWebPages();
         }
     }
 }
