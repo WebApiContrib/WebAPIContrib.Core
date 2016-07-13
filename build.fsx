@@ -31,7 +31,7 @@ Target "BuildProjects" (fun _ ->
           DotnetRestore id proj
           DotnetPack (fun c -> 
               { c with 
-                  Configuration = Debug;                    
+                  Configuration = Release;                    
                   OutputPath = Some (currentDirectory @@ "artifacts")
               }) proj
       )
