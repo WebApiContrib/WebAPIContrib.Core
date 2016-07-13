@@ -10,21 +10,14 @@ Target "Clean" (fun _ ->
 
 Target "PrepareDotnetCli" (fun _ ->
     let sdkVersion = GlobalJsonSdk "global.json"
-    tracefn "Using global.json sdk version: %s" sdkVersion
-
-    // set custom install directory
-    let customInstallDirectory = environVar "LocalAppData" @@ "Microsoft" @@ "dotnetbld" @@ sdkVersion
-
     let setOptions (options: DotNetCliInstallOptions) = 
         { options with 
             Version = Version sdkVersion
             InstallerBranch = "rel/1.0.0-preview2"
             Channel = Channel "preview"
-            CustomInstallDir = Some customInstallDirectory
             AlwaysDownload = false
         }    
 
-    DefaultDotnetCliDir <- customInstallDirectory
     DotnetCliInstall setOptions
 )
 
