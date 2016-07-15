@@ -1,9 +1,16 @@
 ﻿{
-  "version": "1.0.0-*",
-  "description": "WebApiContrib.Core - extensions and add ons for ASP.NET Core MVC",
-  "authors": [ "WebApiContrib" ],
+  "version": "1.0.0",
+  "description": "Community Contributions for ASP.NET Core. Add-ons and extensions to help improve your work with ASP.NET Core and ASP.NET Core MVC.",
+  "authors": [ "filipw", "WebApiContrib Contributors" ],
   "packOptions": {
-    "tags": [ "" ],
+    "summary": "Community Contributions for ASP.NET Core.",
+    "tags": [ "ASP.NET Core", "webapicontrib", "api", "aspnetcore", "mvc", "rotuing", "convention" ],
+    "owners": [ "filipw", "panesofglass" ],
+    "title": "WebApiContrib.Core",
+    "iconUrl": "https://avatars1.githubusercontent.com/u/1561645?s=140",
+    "projectUrl": "https://github.com/WebApiContrib/WebAPIContrib.Core",
+    "licenseUrl": "https://github.com/WebApiContrib/WebAPIContrib.Core/blob/master/LICENSE",
+    "requireLicenseAcceptance": false,
     "repository": {
       "type": "git",
       "url": "https://github.com/WebApiContrib/WebAPIContrib.Core.git"
@@ -16,7 +23,7 @@
     "defaultNamespace": "WebApiContrib.Core"
   },
   "frameworks": {
-      "net451": { },
-      "netstandard1.6": { }
+    "net451": { },
+    "netstandard1.6": { }
   }
 }
