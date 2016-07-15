@@ -8,7 +8,7 @@ WebAPIContrib.Core is a collection of open source projects, add-ons and extensio
 
 ## Main
 
-* [WebApiContrib.Core](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core)
+* [WebApiContrib.Core](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core) [![Nuget](http://img.shields.io/nuget/v/WebApiContrib.Core.svg?maxAge=10800)](https://www.nuget.org/packages/WebApiContrib.Core/)
   * `GlobalRoutePrefixConvention` - `IApplicationModelConvention` allowing you to set a global route prefix, which is then combined into all actions
   * `FromBodyApplicationModelConvention` - `IApplicationModelConvention` allowing you to globally apply body binding source to action parameters. You can also provide predicates to filter on specific controllers, actions or parameters
   * `OverridableFilterProvider` - allows you to override filters from higher scope (i.e. global filters) on lower scope (i.e. controller filters)
@@ -16,16 +16,16 @@ WebAPIContrib.Core is a collection of open source projects, add-ons and extensio
 
 ## Formatters
 
-* [WebApiContrib.Core.Formatter.Bson](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Bson)
-* [WebApiContrib.Core.Formatter.Csv](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Csv)
-* [WebApiContrib.Core.Formatter.PlainText](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.PlainText)
-* [WebApiContrib.Core.Formatter.Jsonp](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Jsonp)
+* [WebApiContrib.Core.Formatter.Bson](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Bson) [![Nuget](http://img.shields.io/nuget/v/WebApiContrib.Core.Formatter.Bson.svg?maxAge=10800)](https://www.nuget.org/packages/WebApiContrib.Core.Formatter.Bson/)
+* [WebApiContrib.Core.Formatter.Csv](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Csv) [![Nuget](http://img.shields.io/nuget/v/WebApiContrib.Core.Formatter.Csv.svg?maxAge=10800)](https://www.nuget.org/packages/WebApiContrib.Core.Formatter.Csv/)
+* [WebApiContrib.Core.Formatter.PlainText](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.PlainText) [![Nuget](http://img.shields.io/nuget/v/WebApiContrib.Core.Formatter.PlainText.svg?maxAge=10800)](https://www.nuget.org/packages/WebApiContrib.Core.Formatter.PlainText/)
+* [WebApiContrib.Core.Formatter.Jsonp](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Jsonp) [![Nuget](http://img.shields.io/nuget/v/WebApiContrib.Core.Formatter.Jsonp.svg?maxAge=10800)](https://www.nuget.org/packages/WebApiContrib.Core.Formatter.Jsonp/)
 
 ## TagHelpers
-* [WebApiContrib.Core.TagHelpers.Markdown](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.TagHelpers.Markdown)
+* [WebApiContrib.Core.TagHelpers.Markdown](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.TagHelpers.Markdown) [![Nuget](http://img.shields.io/nuget/v/WebApiContrib.Core.TagHelpers.Markdown.svg?maxAge=10800)](https://www.nuget.org/packages/WebApiContrib.Core.TagHelpers.Markdown/)
 
 ## WebPages
-* [WebApiContrib.Core.WebPages](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.WebPages)
+* [WebApiContrib.Core.WebPages](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.WebPages) [![Nuget](http://img.shields.io/nuget/v/WebApiContrib.Core.WebPages.svg?maxAge=10800)](https://www.nuget.org/packages/WebApiContrib.Core.WebPages/)
 
 A project allowing you to create Razor web pages without any controller/action infrastructure. Just add a `Views/MyPage.cshtml` and you can now navigate to `<server root>/MyPage` in the browser. Supports the typical Razor constructs - inline C# code, `@inject` etc.
 
