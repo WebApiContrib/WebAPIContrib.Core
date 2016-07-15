@@ -1,5 +1,21 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "1.0.0",
+  "description": "ASP.NET Core tag helper,  allowing you to use Markdown in your Razor views.",
+  "authors": [ "filipw", "WebApiContrib Contributors" ],
+  "packOptions": {
+    "summary": "ASP.NET Core tag helper,  allowing you to use Markdown in your Razor views.",
+    "tags": [ "ASP.NET Core", "webapicontrib", "markdown", "razor", "aspnetcore" ],
+    "owners": [ "filipw", "panesofglass" ],
+    "title": "WebApiContrib.Core.TagHelpers.Markdown",
+    "iconUrl": "https://avatars1.githubusercontent.com/u/1561645?s=140",
+    "projectUrl": "https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.TagHelpers.Markdown",
+    "licenseUrl": "https://github.com/WebApiContrib/WebAPIContrib.Core/blob/master/LICENSE",
+    "requireLicenseAcceptance": false,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/WebApiContrib/WebAPIContrib.Core.git"
+    }
+  },
   "buildOptions": {
     "copyToOutput": [ "markdig-license.txt" ]
   },

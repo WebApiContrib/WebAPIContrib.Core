@@ -1,10 +1,26 @@
 {
-  "version": "1.0.0-*",
+  "version": "1.0.0",
+  "description": "ASP.NET Core plain text formatter, used for returning plain text API responses and accepting plain text requests.",
+  "authors": [ "filipw", "WebApiContrib Contributors" ],
+  "packOptions": {
+    "summary": "ASP.NET Core plain text formatter.",
+    "tags": [ "ASP.NET Core", "webapicontrib", "plain text", "text", "aspnetcore", "formatter" ],
+    "owners": [ "filipw", "panesofglass" ],
+    "title": "WebApiContrib.Core.Formatter.PlainText",
+    "iconUrl": "https://avatars1.githubusercontent.com/u/1561645?s=140",
+    "projectUrl": "https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.PlainText",
+    "licenseUrl": "https://github.com/WebApiContrib/WebAPIContrib.Core/blob/master/LICENSE",
+    "requireLicenseAcceptance": false,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/WebApiContrib/WebAPIContrib.Core.git"
+    }
+  },
   "dependencies": {
     "Microsoft.AspNetCore.Mvc.Core": "1.0.0"
   },
   "frameworks": {
-    "net451":  {},
+    "net451": { },
     "netstandard1.6": {
       "imports": "dnxcore50"
     }
