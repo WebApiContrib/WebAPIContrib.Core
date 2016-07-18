@@ -38,7 +38,7 @@ A project allowing you to create Razor web pages without any controller/action i
 ---
 
 ### Contributing
-If you would like to contribute, feel free to fork the projects or get in touch with the mailing list: https://groups.google.com/group/webapicontrib or on [Slack](https://webapicontrib.azurewebsites.net). Also make sure to look at the [contributing guidelines](https://github.com/WebApiContrib/WebAPIContrib.Core/blob/master/README.md).
+If you would like to contribute, feel free to fork the projects or get in touch with the mailing list: https://groups.google.com/group/webapicontrib or on [Slack](https://webapicontrib.azurewebsites.net). Also make sure to look at the [contributing guidelines](https://github.com/WebApiContrib/WebAPIContrib.Core/blob/master/CONTRIBUTING.md).
 
 ### Want to transfer your project to WebApiContrib?
 
