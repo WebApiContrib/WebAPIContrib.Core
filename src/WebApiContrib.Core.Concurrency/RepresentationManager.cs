@@ -1,20 +1,4 @@
-﻿#region copyright
-// Copyright 2016 WebApiContrib
-// 
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-// 
-//     http://www.apache.org/licenses/LICENSE-2.0
-// 
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-#endregion
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
@@ -46,18 +30,12 @@ namespace WebApiContrib.Core.Concurrency
     internal class RepresentationManager : IRepresentationManager
     {
         private readonly IConcurrencyManager _concurrencyManager;
-
-        #region Constructor
-
+             
         public RepresentationManager(IConcurrencyManager concurrencyManager)
         {
             _concurrencyManager = concurrencyManager;
         }
-
-        #endregion
-
-        #region Public methods
-
+        
         public async Task AddOrUpdateRepresentationAsync(
             Controller controller, 
             string representationId)
@@ -192,10 +170,6 @@ namespace WebApiContrib.Core.Concurrency
             return await ContinueExecution(concatenatedEtags, modifiedSince, representationId, checkDateCallback, checkEtagCorrectCallback);
         }
 
-        #endregion
-
-        #region Private methods
-
         private async Task<bool> ContinueExecution(
             string concatenatedEtags,
             string modifiedDate,
@@ -255,7 +229,5 @@ namespace WebApiContrib.Core.Concurrency
             controller.SetEtag(concurrentObject.Etag);
             controller.SetLastModifiedDate(concurrentObject.DateTime.ToUniversalTime().ToString("R"));
         }
-
-        #endregion
     }
 }
