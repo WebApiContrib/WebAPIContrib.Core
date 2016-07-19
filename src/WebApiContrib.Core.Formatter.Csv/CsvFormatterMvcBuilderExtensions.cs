@@ -6,8 +6,6 @@ namespace WebApiContrib.Core.Formatter.Csv
 {
     public static class CsvFormatterMvcBuilderExtensions
     {
-        #region Public static methods
-
         public static IMvcBuilder AddCsvSerializerFormatters(this IMvcBuilder builder)
         {
             if (builder == null)
@@ -43,7 +41,5 @@ namespace WebApiContrib.Core.Formatter.Csv
 
             return builder;
         }
-
-        #endregion
     }
 }

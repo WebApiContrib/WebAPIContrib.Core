@@ -1,20 +1,4 @@
-﻿#region copyright
-// Copyright 2016 WebApiContrib
-// 
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-// 
-//     http://www.apache.org/licenses/LICENSE-2.0
-// 
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-#endregion
-
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Newtonsoft.Json;
@@ -32,9 +16,7 @@ namespace WebApiContrib.Core.Formatter.Bson
         private readonly JsonSerializerSettings _jsonSerializerSettings;
 
         private JsonSerializer _serializer;
-
-        #region Constructor
-
+        
         public BsonOutputFormatter(JsonSerializerSettings serializerSettings)
         {
             if (serializerSettings == null)
@@ -48,11 +30,6 @@ namespace WebApiContrib.Core.Formatter.Bson
             SupportedEncodings.Add(Encoding.Unicode);
             SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/bson"));
         }
-
-        #endregion
-
-        #region Public methods
-
         public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
         {
             if (context == null)
@@ -73,11 +50,7 @@ namespace WebApiContrib.Core.Formatter.Bson
                 bsonWriter.Flush();
             }
         }
-
-        #endregion
-
-        #region Private methods
-
+        
         private JsonSerializer CreateJsonSerializer()
         {
             if (_serializer == null)
@@ -87,7 +60,5 @@ namespace WebApiContrib.Core.Formatter.Bson
 
             return _serializer;
         }
-
-        #endregion
     }
 }
