@@ -1,45 +1,35 @@
-#r "packages/FAKE.Dotnet/tools/Fake.Dotnet.dll"
 #r "packages/FAKE/tools/FakeLib.dll"
 open Fake
-open Fake.Dotnet 
+open Fake.DotNetCli
 
 Target "Clean" (fun _ ->
     !! "artifacts" ++ "src/*/bin" ++ "test/*/bin"
         |> DeleteDirs
 )
 
-Target "PrepareDotnetCli" (fun _ ->
-    let sdkVersion = GlobalJsonSdk "global.json"
-    let setOptions (options: DotNetCliInstallOptions) = 
-        { options with 
-            Version = Version sdkVersion
-            InstallerBranch = "rel/1.0.0-preview2"
-            Channel = Channel "preview"
-            AlwaysDownload = false
-        }    
+Target "Build" (fun _ ->
+    DotNetCli.Restore id
 
-    DotnetCliInstall setOptions
+    !! "src/**/project.json"
+    |> DotNetCli.Build id
 )
 
-Target "RestorePackage" (fun _ ->
-    DotnetRestore id (currentDirectory @@ "src")
+Target "Test" (fun _ ->
+    !! "tests/**/project.json"
+    |> DotNetCli.Test id
 )
 
-Target "BuildProjects" (fun _ ->
-      !! "src/*/project.json" 
-      |> Seq.iter(fun proj ->  
-          DotnetRestore id proj
-          DotnetPack (fun c -> 
-              { c with 
-                  Configuration = Release;                    
-                  OutputPath = Some (currentDirectory @@ "artifacts")
-              }) proj
-      )
+Target "Pack" (fun _ ->
+    !! "src/**/project.json"
+    |> DotNetCli.Pack
+      (fun p -> 
+         { p with 
+            Configuration = "Release"
+            OutputPath = "artifacts" })
 )
 
 "Clean"
-      ==> "PrepareDotnetCli"
-      ==> "RestorePackage"
-      ==> "BuildProjects"
+      ==> "Build"
+      ==> "Pack"
 
-Run "BuildProjects"
+Run "Pack"
