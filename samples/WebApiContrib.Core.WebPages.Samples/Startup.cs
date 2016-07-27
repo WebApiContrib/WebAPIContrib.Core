@@ -19,6 +19,7 @@ namespace WebApiContrib.Core.WebPages.Samples
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseStaticFiles();
             app.UseWebPages();
         }
     }
