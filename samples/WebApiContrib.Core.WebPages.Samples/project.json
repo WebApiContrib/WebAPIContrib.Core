@@ -1,4 +1,5 @@
 ﻿{
+  "webroot": "wwwroot",
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
@@ -19,7 +20,8 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "WebApiContrib.Core.WebPages": "*"
+    "WebApiContrib.Core.WebPages": "*",
+    "WebApiContrib.Core.TagHelpers.Markdown": "*"
   },
 
   "tools": {
