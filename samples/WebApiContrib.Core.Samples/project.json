@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
@@ -23,7 +23,8 @@
     "WebApiContrib.Core.Formatter.PlainText": "*",
     "WebApiContrib.Core.Formatter.Jsonp": "*",
     "WebApiContrib.Core.TagHelpers.Markdown": "*",
-    "WebApiContrib.Core": "*"
+    "WebApiContrib.Core": "*",
+    "WebApiContrib.Core.Razor": "1.0.0-*"
   },
 
   "tools": {

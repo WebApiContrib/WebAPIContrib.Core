@@ -7,6 +7,7 @@ using WebApiContrib.Core.Formatter.Csv;
 using WebApiContrib.Core.Formatter.Jsonp;
 using WebApiContrib.Core.Formatter.PlainText;
 using WebApiContrib.Core.Samples.Controllers;
+using WebApiContrib.Core.Razor;
 
 namespace WebApiContrib.Core.Samples
 {
@@ -29,9 +30,11 @@ namespace WebApiContrib.Core.Samples
             services.AddMvc(o =>
             {
                 o.AddJsonpOutputFormatter();
-                o.UseFromBodyBinding(controllerPredicate: c => c.ControllerType.AsType() == typeof(BindingController));
+                o.UseFromBodyBinding(controllerPredicate: c => c.ControllerType.AsType() == typeof (BindingController));
             }).AddCsvSerializerFormatters()
-              .AddPlainTextFormatters();
+                .AddPlainTextFormatters();
+
+            services.EnableAddTagHelperAssemblyGlobbing();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

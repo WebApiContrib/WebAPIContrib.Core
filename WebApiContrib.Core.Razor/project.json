@@ -1,0 +1,27 @@
+{
+  "description": "WebApiContrib.Core.Razor Class Library",
+  "dependencies": {
+    "Microsoft.AspNetCore.Mvc.Razor": "1.0.0",
+    "Microsoft.AspNetCore.Razor": "1.0.0",
+    "Microsoft.AspNetCore.Razor.Runtime": "1.0.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0"
+  },
+  "packOptions": {
+    "tags": [ "" ],
+    "licenseUrl": "",
+    "projectUrl": ""
+  },
+  "tooling": {
+    "defaultNamespace": "WebApiContrib.Core.Razor"
+  },
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    },
+    "net451": {
+      "frameworkAssemblies": {
+        "System.Runtime": ""
+      }
+    }
+  }
+}
