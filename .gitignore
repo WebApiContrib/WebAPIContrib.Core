@@ -252,3 +252,4 @@ paket-files/
 .idea/
 *.sln.iml
 /WebApiContrib.Core.Razor/Properties/launchSettings.json
+.DS_Store
