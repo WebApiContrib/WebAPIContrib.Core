@@ -2,10 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WebApiContrib.Core.WebPages
@@ -50,7 +47,7 @@ namespace WebApiContrib.Core.WebPages
                     return;
                 }
 
-                var contents = _renderer.RenderViewToString(path);
+                var contents = await _renderer.RenderViewToString(path);
                 await context.HttpContext.Response.WriteAsync(contents);
             }
         }
