@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace WebApiContrib.Core.WebPages
 {
@@ -28,7 +28,7 @@ namespace WebApiContrib.Core.WebPages
             _serviceProvider = serviceProvider;
         }
 
-        public string RenderViewToString(string path)
+        public async Task<string> RenderViewToString(string path)
         {
             var actionContext = GetActionContext();
             try
@@ -54,7 +54,7 @@ namespace WebApiContrib.Core.WebPages
                         output,
                         new HtmlHelperOptions());
 
-                    view.RenderAsync(viewContext).GetAwaiter().GetResult();
+                    await view.RenderAsync(viewContext).ConfigureAwait(false);
                     return output.ToString();
                 }
             }
