@@ -31,6 +31,7 @@ A project allowing you to create Razor web pages without any controller/action i
 
 ## Other
 
+* [WebApiContrib.Core.Razor](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Razor) - Razor add ons and extensions
 * [WebApiContrib.Core.Concurrency](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Concurrency)
 * [WebApiContrib.Core.Concurrency.Redis](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Concurrency.Redis)
 * [WebApiContrib.Core.Concurrency.SqlServer](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Concurrency.SqlServer)
