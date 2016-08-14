@@ -68,7 +68,7 @@ namespace WebApiContrib.Core.Formatter.Csv
             if (type.GetGenericArguments().Length > 0)
             {
                 itemType = type.GetGenericArguments()[0];
-                list = (IList)Activator.CreateInstance(itemType);
+                list = (IList)Activator.CreateInstance(type);
             }
             else
             {
