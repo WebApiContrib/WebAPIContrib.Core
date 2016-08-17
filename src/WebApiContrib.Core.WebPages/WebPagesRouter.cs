@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
-using Microsoft.Extensions.FileProviders;
 
 namespace WebApiContrib.Core.WebPages
 {
@@ -52,8 +52,12 @@ namespace WebApiContrib.Core.WebPages
                     return;
                 }
 
-                var contents = await _renderer.RenderViewToString(path);
-                await context.HttpContext.Response.WriteAsync(contents);
+                var content = await _renderer.RenderViewToString(path);
+                var contentBytes = Encoding.UTF8.GetBytes(content);
+
+                context.HttpContext.Response.ContentType = "text/html";
+                context.HttpContext.Response.Headers["Content-Length"] = contentBytes.Length.ToString();
+                await context.HttpContext.Response.WriteAsync(content);
             }
         }
     }
