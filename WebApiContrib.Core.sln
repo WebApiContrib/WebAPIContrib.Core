@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
@@ -50,6 +50,8 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.WebPages.Samples", "samples\WebApiContrib.Core.WebPages.Samples\WebApiContrib.Core.WebPages.Samples.xproj", "{F9AE291E-A6BD-4F53-A73F-678FE0D5BF72}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Razor", "src\WebApiContrib.Core.Razor\WebApiContrib.Core.Razor.xproj", "{3265E2B5-6679-49F0-8983-B120DE9C8C16}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Versioning", "src\WebApiContrib.Core.Versioning\WebApiContrib.Core.Versioning.xproj", "{3C24815E-A771-4AAC-BB4B-9C1E8A176899}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +131,10 @@ Global
 		{3265E2B5-6679-49F0-8983-B120DE9C8C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3265E2B5-6679-49F0-8983-B120DE9C8C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3265E2B5-6679-49F0-8983-B120DE9C8C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C24815E-A771-4AAC-BB4B-9C1E8A176899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C24815E-A771-4AAC-BB4B-9C1E8A176899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C24815E-A771-4AAC-BB4B-9C1E8A176899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C24815E-A771-4AAC-BB4B-9C1E8A176899}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -154,5 +160,6 @@ Global
 		{720B3330-2C57-4D67-9D84-5DC76412F169} = {5898776F-DBF8-4C30-85A3-66401B12016F}
 		{F9AE291E-A6BD-4F53-A73F-678FE0D5BF72} = {EDF687E4-3843-4FB0-9CDC-775E3594D384}
 		{3265E2B5-6679-49F0-8983-B120DE9C8C16} = {5898776F-DBF8-4C30-85A3-66401B12016F}
+		{3C24815E-A771-4AAC-BB4B-9C1E8A176899} = {5898776F-DBF8-4C30-85A3-66401B12016F}
 	EndGlobalSection
 EndGlobal

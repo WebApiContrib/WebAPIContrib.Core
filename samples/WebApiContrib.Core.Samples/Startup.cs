@@ -8,6 +8,8 @@ using WebApiContrib.Core.Formatter.Jsonp;
 using WebApiContrib.Core.Formatter.PlainText;
 using WebApiContrib.Core.Samples.Controllers;
 using WebApiContrib.Core.Razor;
+using WebApiContrib.Core.Samples.Model;
+using WebApiContrib.Core.Versioning;
 
 namespace WebApiContrib.Core.Samples
 {
@@ -27,12 +29,15 @@ namespace WebApiContrib.Core.Samples
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IModelMapper<PersonModel>, PersonModelMapper>();
+
             services.AddMvc(o =>
             {
                 o.AddJsonpOutputFormatter();
                 o.UseFromBodyBinding(controllerPredicate: c => c.ControllerType.AsType() == typeof (BindingController));
             }).AddCsvSerializerFormatters()
-                .AddPlainTextFormatters();
+                .AddPlainTextFormatters()
+                .AddVersionNegotiation();
 
             services.EnableAddTagHelperAssemblyGlobbing();
         }
