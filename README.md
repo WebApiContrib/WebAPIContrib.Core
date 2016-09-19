@@ -11,6 +11,7 @@ WebAPIContrib.Core is a collection of open source projects, add-ons and extensio
 * [WebApiContrib.Core](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core) [![Nuget](http://img.shields.io/nuget/v/WebApiContrib.Core.svg?maxAge=10800)](https://www.nuget.org/packages/WebApiContrib.Core/)
   * `GlobalRoutePrefixConvention` - `IApplicationModelConvention` allowing you to set a global route prefix, which is then combined into all actions
   * `FromBodyApplicationModelConvention` - `IApplicationModelConvention` allowing you to globally apply body binding source to action parameters. You can also provide predicates to filter on specific controllers, actions or parameters
+  * `RequiredFromQueryAttribute` allowing you to mark specific action parameters as mandatory query strings
   * `OverridableFilterProvider` - allows you to override filters from higher scope (i.e. global filters) on lower scope (i.e. controller filters)
   * `ValidationAttribute` - an action filter returning 400 response in case there are any model state errors
 
