@@ -19,12 +19,13 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "WebApiContrib.Core.Formatter.Csv": "*",
-    "WebApiContrib.Core.Formatter.PlainText": "*",
-    "WebApiContrib.Core.Formatter.Jsonp": "*",
-    "WebApiContrib.Core.TagHelpers.Markdown": "*",
-    "WebApiContrib.Core": "*",
-    "WebApiContrib.Core.Razor": "1.0.0-*"
+    "WebApiContrib.Core.Formatter.Csv": { "target": "project" },
+    "WebApiContrib.Core.Formatter.PlainText": { "target": "project" },
+    "WebApiContrib.Core.Formatter.Jsonp": { "target": "project" },
+    "WebApiContrib.Core.TagHelpers.Markdown": { "target": "project" },
+    "WebApiContrib.Core": { "target": "project" },
+    "WebApiContrib.Core.Razor": { "target": "project" },
+    "WebApiContrib.Core.Versioning": { "target": "project" }
   },
 
   "tools": {
