@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
@@ -72,7 +73,9 @@ namespace WebApiContrib.Core.Versioning
         {
             var mapperType = typeof(IModelMapper<>).MakeGenericType(itemType);
 
-            var method = mapperType.GetMethod(nameof(IModelMapper<string>.Map));
+            var mapperTypeInfo = mapperType.GetTypeInfo();
+
+            var method = mapperTypeInfo.GetMethod(nameof(IModelMapper<string>.Map));
 
             object mapper;
 
@@ -110,7 +113,9 @@ namespace WebApiContrib.Core.Versioning
 
             var mapperType = typeof(IModelMapper<>).MakeGenericType(valueType);
 
-            var method = mapperType.GetMethod(nameof(IModelMapper<string>.Map));
+            var mapperTypeInfo = mapperType.GetTypeInfo();
+
+            var method = mapperTypeInfo.GetMethod(nameof(IModelMapper<string>.Map));
 
             object mapper;
 

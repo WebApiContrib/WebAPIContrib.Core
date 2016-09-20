@@ -1,4 +1,6 @@
-﻿namespace WebApiContrib.Core.Versioning
+﻿using System;
+
+namespace WebApiContrib.Core.Versioning
 {
     public class VersionNegotiationOptions
     {
@@ -28,5 +30,29 @@
         /// The default is <c>true</c>.
         /// </remarks>
         public bool ThrowOnMissingMapper { get; set; }
+
+        internal Type StrategyType { get; set; }
+
+        internal Action<object> ConfigureStrategy { get; set; }
+
+        public VersionNegotiationOptions UseStrategy<TStrategy>()
+            where TStrategy : IVersioningStrategy
+        {
+            return UseStrategy<TStrategy>(strategy => { });
+        }
+
+        public VersionNegotiationOptions UseStrategy<TStrategy>(Action<TStrategy> configure)
+            where TStrategy : IVersioningStrategy
+        {
+            if (configure == null)
+            {
+                throw new ArgumentNullException(nameof(configure));
+            }
+
+            StrategyType = typeof(TStrategy);
+            ConfigureStrategy = strategy => configure((TStrategy) strategy);
+
+            return this;
+        }
     }
 }

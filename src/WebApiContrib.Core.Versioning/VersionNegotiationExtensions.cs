@@ -8,7 +8,7 @@ namespace WebApiContrib.Core.Versioning
     public static class VersionNegotiationExtensions
     {
         /// <summary>
-        /// Adds version negotiation using the <see cref="DefaultVersioningStrategy"/>.
+        /// Adds version negotiation.
         /// </summary>
         public static IMvcBuilder AddVersionNegotiation(this IMvcBuilder builder)
         {
@@ -16,41 +16,21 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation using the <see cref="DefaultVersioningStrategy"/>.
+        /// Adds version negotiation.
         /// </summary>
-        public static IMvcBuilder AddVersionNegotiation(this IMvcBuilder builder,
-            Action<VersionNegotiationOptions> configure)
-        {
-            return builder.AddVersionNegotiation<DefaultVersioningStrategy>(configure);
-        }
-
-        /// <summary>
-        /// Adds version negotiation using the <typeparamref cref="TStrategy"/>.
-        /// </summary>
-        public static IMvcBuilder AddVersionNegotiation<TStrategy>(this IMvcBuilder builder)
-            where TStrategy : class, IVersioningStrategy
-        {
-            return builder.AddVersionNegotiation<TStrategy>(options => { });
-        }
-
-        /// <summary>
-        /// Adds version negotiation using the <typeparamref cref="TStrategy"/>.
-        /// </summary>
-        public static IMvcBuilder AddVersionNegotiation<TStrategy>(this IMvcBuilder builder,
-            Action<VersionNegotiationOptions> configure)
-            where TStrategy : class, IVersioningStrategy
+        public static IMvcBuilder AddVersionNegotiation(this IMvcBuilder builder, Action<VersionNegotiationOptions> configure)
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Services.AddVersionNegotiation<TStrategy>(configure);
+            builder.Services.AddVersionNegotiation(configure);
             return builder;
         }
 
         /// <summary>
-        /// Adds version negotiation using the <see cref="DefaultVersioningStrategy"/>.
+        /// Adds version negotiation.
         /// </summary>
         public static IMvcCoreBuilder AddVersionNegotiation(this IMvcCoreBuilder builder)
         {
@@ -58,40 +38,21 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation using the <see cref="DefaultVersioningStrategy"/>.
+        /// Adds version negotiation.
         /// </summary>
-        public static IMvcCoreBuilder AddVersionNegotiation(this IMvcCoreBuilder builder,
-            Action<VersionNegotiationOptions> configure)
-        {
-            return builder.AddVersionNegotiation<DefaultVersioningStrategy>(configure);
-        }
-
-        /// <summary>
-        /// Adds version negotiation using the <typeparamref cref="TStrategy"/>.
-        /// </summary>
-        public static IMvcCoreBuilder AddVersionNegotiation<TStrategy>(this IMvcCoreBuilder builder)
-            where TStrategy : class, IVersioningStrategy
-        {
-            return builder.AddVersionNegotiation<TStrategy>(options => { });
-        }
-
-        /// <summary>
-        /// Adds version negotiation using the <typeparamref cref="TStrategy"/>.
-        /// </summary>
-        public static IMvcCoreBuilder AddVersionNegotiation<TStrategy>(this IMvcCoreBuilder builder, Action<VersionNegotiationOptions> configure)
-            where TStrategy : class, IVersioningStrategy
+        public static IMvcCoreBuilder AddVersionNegotiation(this IMvcCoreBuilder builder, Action<VersionNegotiationOptions> configure)
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Services.AddVersionNegotiation<TStrategy>(configure);
+            builder.Services.AddVersionNegotiation(configure);
             return builder;
         }
 
         /// <summary>
-        /// Adds version negotiation using the <see cref="DefaultVersioningStrategy"/>.
+        /// Adds version negotiation.
         /// </summary>
         public static IServiceCollection AddVersionNegotiation(this IServiceCollection services)
         {
@@ -99,27 +60,9 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation using the <see cref="DefaultVersioningStrategy"/>.
+        /// Adds version negotiation.
         /// </summary>
         public static IServiceCollection AddVersionNegotiation(this IServiceCollection services, Action<VersionNegotiationOptions> configure)
-        {
-            return services.AddVersionNegotiation<DefaultVersioningStrategy>(configure);
-        }
-
-        /// <summary>
-        /// Adds version negotiation using the <typeparamref cref="TStrategy"/>.
-        /// </summary>
-        public static IServiceCollection AddVersionNegotiation<TStrategy>(this IServiceCollection services)
-            where TStrategy : class, IVersioningStrategy
-        {
-            return services.AddVersionNegotiation<TStrategy>(options => { });
-        }
-
-        /// <summary>
-        /// Adds version negotiation using the <typeparamref cref="TStrategy"/>.
-        /// </summary>
-        public static IServiceCollection AddVersionNegotiation<TStrategy>(this IServiceCollection services, Action<VersionNegotiationOptions> configure)
-            where TStrategy : class, IVersioningStrategy
         {
             if (services == null)
             {
@@ -133,8 +76,22 @@ namespace WebApiContrib.Core.Versioning
 
             return services
                 .Configure(configure)
-                .AddSingleton<IVersioningStrategy, TStrategy>()
-                .AddTransient<IConfigureOptions<MvcOptions>, ConfigureMvcOptions>();
+                .AddTransient<IConfigureOptions<MvcOptions>, ConfigureMvcOptions>()
+                .AddScoped(GetConfiguredVersionStrategy);
+        }
+
+        private static IVersioningStrategy GetConfiguredVersionStrategy(IServiceProvider provider)
+        {
+            var options = provider.GetRequiredService<IOptions<VersionNegotiationOptions>>();
+
+            // We use ActivatorUtilities.CreateInstance to create the type,
+            // but get its constructor arguments from the provider. This allows
+            // you to inject whatever services you need in the versioning strategy.
+            var strategy = (IVersioningStrategy) ActivatorUtilities.CreateInstance(provider, options.Value.StrategyType);
+
+            options.Value.ConfigureStrategy(strategy);
+
+            return strategy;
         }
 
         /// <summary>
@@ -155,6 +112,12 @@ namespace WebApiContrib.Core.Versioning
 
             public void Configure(MvcOptions options)
             {
+                if (Options.Value.StrategyType == null)
+                {
+                    // If a strategy type hasn't been set, use DefaultVersioningStrategy.
+                    Options.Value.UseStrategy<DefaultVersioningStrategy>();
+                }
+
                 options.Filters.Add(new VersioningResultFilter(ServiceProvider, Options));
             }
         }

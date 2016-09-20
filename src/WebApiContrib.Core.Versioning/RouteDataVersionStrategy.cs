@@ -10,6 +10,8 @@ namespace WebApiContrib.Core.Versioning
     /// </summary>
     public class RouteDataVersionStrategy : IVersioningStrategy
     {
+        public string RouteValueKey { get; set; } = "version";
+
         /// <inheritdoc />
         public int? GetVersion(HttpContext context, RouteData routeData)
         {
@@ -21,7 +23,7 @@ namespace WebApiContrib.Core.Versioning
             var routeValues = routeData.Values;
 
             object versionObject;
-            if (!routeValues.TryGetValue("version", out versionObject))
+            if (!routeValues.TryGetValue(RouteValueKey, out versionObject))
             {
                 return null;
             }

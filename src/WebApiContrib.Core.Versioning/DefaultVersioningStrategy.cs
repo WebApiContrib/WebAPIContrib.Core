@@ -18,6 +18,8 @@ namespace WebApiContrib.Core.Versioning
     {
         private static readonly char[] DotSeparator = {'.'};
 
+        public string ParameterName { get; set; } = "version";
+
         /// <inheritdoc />
         protected override int? GetVersion(MediaTypeHeaderValue acceptHeader)
         {
@@ -35,7 +37,7 @@ namespace WebApiContrib.Core.Versioning
 
             int? version;
 
-            if (TryGetParameterVersion(acceptHeader, out version))
+            if (TryGetParameterVersion(acceptHeader, ParameterName, out version))
             {
                 return version;
             }
@@ -60,11 +62,11 @@ namespace WebApiContrib.Core.Versioning
             return subType;
         }
 
-        private static bool TryGetParameterVersion(MediaTypeHeaderValue acceptHeader, out int? version)
+        private static bool TryGetParameterVersion(MediaTypeHeaderValue acceptHeader, string parameterName, out int? version)
         {
             foreach (var parameter in acceptHeader.Parameters)
             {
-                if (parameter.Name.Equals("version", StringComparison.OrdinalIgnoreCase))
+                if (parameter.Name.Equals(parameterName, StringComparison.OrdinalIgnoreCase))
                 {
                     if (ParsingUtility.TryParseVersion(parameter.Value, out version))
                     {
