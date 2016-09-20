@@ -19,12 +19,9 @@ namespace WebApiContrib.Core.Constraints
 
         public bool Accept(ActionConstraintContext context)
         {
-            for (var i = 0; i < _parameter.Length; i++)
+            if (!context.RouteContext.HttpContext.Request.Query.ContainsKey(_parameter))
             {
-                if (!context.RouteContext.HttpContext.Request.Query.ContainsKey(_parameter))
-                {
-                    return false;
-                }
+                return false;
             }
 
             return true;
