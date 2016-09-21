@@ -13,7 +13,7 @@ namespace WebApiContrib.Core.Versioning
         public string RouteValueKey { get; set; } = "version";
 
         /// <inheritdoc />
-        public int? GetVersion(HttpContext context, RouteData routeData)
+        int? IVersionStrategy.GetVersion(HttpContext context, RouteData routeData)
         {
             if (routeData == null)
             {

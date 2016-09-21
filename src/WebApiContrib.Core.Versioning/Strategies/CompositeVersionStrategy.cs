@@ -11,7 +11,7 @@ namespace WebApiContrib.Core.Versioning
             VersionStrategies = versionStrategies;
         }
 
-        public IEnumerable<IVersionStrategy> VersionStrategies { get; }
+        private IEnumerable<IVersionStrategy> VersionStrategies { get; }
 
         public int? GetVersion(HttpContext context, RouteData routeData)
         {

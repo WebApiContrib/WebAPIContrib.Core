@@ -9,7 +9,7 @@ namespace WebApiContrib.Core.Versioning
     {
         public string HeaderName { get; set; } = "Api-Version";
 
-        public int? GetVersion(HttpContext context, RouteData routeData)
+        int? IVersionStrategy.GetVersion(HttpContext context, RouteData routeData)
         {
             if (context == null)
             {
