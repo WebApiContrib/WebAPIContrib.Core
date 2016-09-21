@@ -12,14 +12,14 @@
             return options.UseStrategy<DefaultVersionStrategy>(x => x.ParameterName = parameterName);
         }
 
-        public static VersionNegotiationOptions UseRouteDataStrategy(this VersionNegotiationOptions options)
+        public static VersionNegotiationOptions UseRouteValueVersionStrategy(this VersionNegotiationOptions options)
         {
-            return options.UseStrategy<RouteDataVersionStrategy>();
+            return options.UseStrategy<RouteValueVersionStrategy>();
         }
 
-        public static VersionNegotiationOptions UseRouteDataStrategy(this VersionNegotiationOptions options, string routeValueKey)
+        public static VersionNegotiationOptions UseRouteValueVersionStrategy(this VersionNegotiationOptions options, string routeValueKey)
         {
-            return options.UseStrategy<RouteDataVersionStrategy>(x => x.RouteValueKey = routeValueKey);
+            return options.UseStrategy<RouteValueVersionStrategy>(x => x.RouteValueKey = routeValueKey);
         }
 
         public static VersionNegotiationOptions UseCustomHeaderStrategy(this VersionNegotiationOptions options)
