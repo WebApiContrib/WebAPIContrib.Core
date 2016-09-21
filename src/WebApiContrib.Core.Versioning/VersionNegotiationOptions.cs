@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WebApiContrib.Core.Versioning
 {
@@ -31,27 +32,27 @@ namespace WebApiContrib.Core.Versioning
         /// </remarks>
         public bool ThrowOnMissingMapper { get; set; }
 
-        internal Type StrategyType { get; set; }
+        internal List<Type> StrategyTypes { get; set; }
 
-        internal Action<object> ConfigureStrategy { get; set; }
-
-        public VersionNegotiationOptions UseStrategy<TStrategy>()
-            where TStrategy : IVersioningStrategy
-        {
-            return UseStrategy<TStrategy>(strategy => { });
-        }
+        internal Dictionary<Type, Action<object>> ConfigureStrategy { get; set; }
 
         public VersionNegotiationOptions UseStrategy<TStrategy>(Action<TStrategy> configure)
-            where TStrategy : IVersioningStrategy
+            where TStrategy : IVersionStrategy
         {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
             }
 
-            StrategyType = typeof(TStrategy);
-            ConfigureStrategy = strategy => configure((TStrategy) strategy);
+            ConfigureStrategy[typeof(TStrategy)] = strategy => configure((TStrategy) strategy);
 
+            return UseStrategy<TStrategy>();
+        }
+
+        public VersionNegotiationOptions UseStrategy<TStrategy>()
+            where TStrategy : IVersionStrategy
+        {
+            StrategyTypes.Add(typeof(TStrategy));
             return this;
         }
     }

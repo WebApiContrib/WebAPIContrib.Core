@@ -14,7 +14,7 @@ namespace WebApiContrib.Core.Versioning
     /// 2. Using a facet-based sub-type with the version as the last facet; <c>application/vnd.my-app.v2</c>
     /// </para>
     /// </summary>
-    public class DefaultVersioningStrategy : AcceptHeaderVersionStrategy
+    public class DefaultVersionStrategy : AcceptHeaderVersionStrategy
     {
         private static readonly char[] DotSeparator = {'.'};
 

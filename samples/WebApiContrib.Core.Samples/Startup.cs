@@ -38,7 +38,7 @@ namespace WebApiContrib.Core.Samples
             }).AddCsvSerializerFormatters()
                 .AddPlainTextFormatters()
                 .AddVersionNegotiation(x =>
-                    x.UseStrategy<DefaultVersioningStrategy>(y =>
+                    x.UseStrategy<DefaultVersionStrategy>(y =>
                         y.ParameterName = "apiVersion"));
 
             services.EnableAddTagHelperAssemblyGlobbing();

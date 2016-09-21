@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -80,18 +81,32 @@ namespace WebApiContrib.Core.Versioning
                 .AddScoped(GetConfiguredVersionStrategy);
         }
 
-        private static IVersioningStrategy GetConfiguredVersionStrategy(IServiceProvider provider)
+        private static IVersionStrategy GetConfiguredVersionStrategy(IServiceProvider provider)
         {
             var options = provider.GetRequiredService<IOptions<VersionNegotiationOptions>>();
 
-            // We use ActivatorUtilities.CreateInstance to create the type,
-            // but get its constructor arguments from the provider. This allows
-            // you to inject whatever services you need in the versioning strategy.
-            var strategy = (IVersioningStrategy) ActivatorUtilities.CreateInstance(provider, options.Value.StrategyType);
+            var strategies = GetVersionStrategies(provider, options);
 
-            options.Value.ConfigureStrategy(strategy);
+            return new CompositeVersionStrategy(strategies);
+        }
 
-            return strategy;
+        private static IEnumerable<IVersionStrategy> GetVersionStrategies(IServiceProvider provider, IOptions<VersionNegotiationOptions> options)
+        {
+            foreach (var strategyType in options.Value.StrategyTypes)
+            {
+                // We use ActivatorUtilities.CreateInstance to create the type,
+                // but get its constructor arguments from the provider. This allows
+                // you to inject whatever services you need in the versioning strategy.
+                var strategy = (IVersionStrategy) ActivatorUtilities.CreateInstance(provider, strategyType);
+
+                Action<object> configure;
+                if (options.Value.ConfigureStrategy.TryGetValue(strategyType, out configure))
+                {
+                    configure(strategy);
+                }
+
+                yield return strategy;
+            }
         }
 
         /// <summary>
@@ -112,10 +127,10 @@ namespace WebApiContrib.Core.Versioning
 
             public void Configure(MvcOptions options)
             {
-                if (Options.Value.StrategyType == null)
+                if (Options.Value.StrategyTypes.Count == 0)
                 {
-                    // If a strategy type hasn't been set, use DefaultVersioningStrategy.
-                    Options.Value.UseStrategy<DefaultVersioningStrategy>();
+                    // If a strategy type hasn't been set, use DefaultVersionStrategy.
+                    Options.Value.UseStrategy<DefaultVersionStrategy>();
                 }
 
                 options.Filters.Add(new VersioningResultFilter(ServiceProvider, Options));

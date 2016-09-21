@@ -6,7 +6,7 @@ namespace WebApiContrib.Core.Versioning
     /// <summary>
     /// The interface for a versioning strategy for HTTP requests.
     /// </summary>
-    public interface IVersioningStrategy
+    public interface IVersionStrategy
     {
         /// <summary>
         /// Gets the currently requested resource version based on

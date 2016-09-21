@@ -46,7 +46,7 @@ namespace WebApiContrib.Core.Versioning
                 return;
             }
 
-            var strategy = ServiceProvider.GetRequiredService<IVersioningStrategy>();
+            var strategy = ServiceProvider.GetRequiredService<IVersionStrategy>();
 
             var version = strategy.GetVersion(context.HttpContext, context.RouteData);
 
