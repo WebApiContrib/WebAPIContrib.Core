@@ -21,5 +21,15 @@
         {
             return options.UseStrategy<RouteDataVersionStrategy>(x => x.RouteValueKey = routeValueKey);
         }
+
+        public static VersionNegotiationOptions UseCustomHeaderStrategy(this VersionNegotiationOptions options)
+        {
+            return options.UseStrategy<CustomHeaderVersionStrategy>();
+        }
+
+        public static VersionNegotiationOptions UseCustomHeaderStrategy(this VersionNegotiationOptions options, string headerName)
+        {
+            return options.UseStrategy<CustomHeaderVersionStrategy>(x => x.HeaderName = headerName);
+        }
     }
 }
