@@ -37,9 +37,7 @@ namespace WebApiContrib.Core.Samples
                 o.UseFromBodyBinding(controllerPredicate: c => c.ControllerType.AsType() == typeof (BindingController));
             }).AddCsvSerializerFormatters()
                 .AddPlainTextFormatters()
-                .AddVersionNegotiation(x =>
-                    x.UseStrategy<DefaultVersionStrategy>(y =>
-                        y.ParameterName = "apiVersion"));
+                .AddVersionNegotiation(x => x.UseDefaultStrategy("apiVersion"));
 
             services.EnableAddTagHelperAssemblyGlobbing();
         }
