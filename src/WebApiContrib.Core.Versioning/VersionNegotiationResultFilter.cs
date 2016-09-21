@@ -11,14 +11,14 @@ namespace WebApiContrib.Core.Versioning
     /// <summary>
     /// A filter to negotiate resource version representations based on different version strategies.
     /// </summary>
-    public class VersioningResultFilter : IResultFilter
+    public class VersionNegotiationResultFilter : IResultFilter
     {
         /// <summary>
-        /// Creates a new instance of <see cref="VersioningResultFilter"/>.
+        /// Creates a new instance of <see cref="VersionNegotiationResultFilter"/>.
         /// </summary>
         /// <param name="serviceProvider">The service provider to get strategies and mappers from.</param>
         /// <param name="options">The versioning options.</param>
-        public VersioningResultFilter(IServiceProvider serviceProvider, IOptions<VersionNegotiationOptions> options)
+        public VersionNegotiationResultFilter(IServiceProvider serviceProvider, IOptions<VersionNegotiationOptions> options)
         {
             if (serviceProvider == null)
             {

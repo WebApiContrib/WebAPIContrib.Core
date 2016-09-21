@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace WebApiContrib.Core.Versioning
 {
     /// <summary>
-    /// Options for the <see cref="VersioningResultFilter"/>.
+    /// Options for the <see cref="VersionNegotiationResultFilter"/>.
     /// </summary>
     public class VersionNegotiationOptions
     {

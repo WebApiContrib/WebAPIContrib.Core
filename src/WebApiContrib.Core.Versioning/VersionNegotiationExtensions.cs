@@ -117,7 +117,7 @@ namespace WebApiContrib.Core.Versioning
 
         /// <summary>
         /// We use this class in order to get an instance of <see cref="IServiceProvider"/>
-        /// that we can pass to the <see cref="VersioningResultFilter"/>.
+        /// that we can pass to the <see cref="VersionNegotiationResultFilter"/>.
         /// </summary>
         private class ConfigureMvcOptions : IConfigureOptions<MvcOptions>
         {
@@ -139,7 +139,7 @@ namespace WebApiContrib.Core.Versioning
                     Options.Value.UseStrategy<AcceptHeaderParameterVersionStrategy>();
                 }
 
-                options.Filters.Add(new VersioningResultFilter(ServiceProvider, Options));
+                options.Filters.Add(new VersionNegotiationResultFilter(ServiceProvider, Options));
             }
         }
     }
