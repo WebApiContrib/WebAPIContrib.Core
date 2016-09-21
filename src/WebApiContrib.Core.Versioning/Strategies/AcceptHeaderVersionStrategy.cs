@@ -41,6 +41,18 @@ namespace WebApiContrib.Core.Versioning
             return null;
         }
 
+        protected static string StripSuffix(string subType)
+        {
+            var suffixSeparatorIndex = subType.IndexOf('+');
+
+            if (suffixSeparatorIndex >= 0)
+            {
+                return subType.Substring(0, suffixSeparatorIndex);
+            }
+
+            return subType;
+        }
+
         /// <summary>
         /// Gets the currently requested resource version based on the given <see cref="MediaTypeHeaderValue"/>.
         /// </summary>

@@ -2,22 +2,27 @@
 {
     public static class VersionNegotiationOptionsExtensions
     {
-        public static VersionNegotiationOptions UseDefaultStrategy(this VersionNegotiationOptions options)
+        public static VersionNegotiationOptions UseAcceptHeaderParameterStrategy(this VersionNegotiationOptions options)
         {
-            return options.UseStrategy<DefaultVersionStrategy>();
+            return options.UseStrategy<AcceptHeaderParameterVersionStrategy>();
         }
 
-        public static VersionNegotiationOptions UseDefaultStrategy(this VersionNegotiationOptions options, string parameterName)
+        public static VersionNegotiationOptions UseAcceptHeaderParameterStrategy(this VersionNegotiationOptions options, string parameterName)
         {
-            return options.UseStrategy<DefaultVersionStrategy>(x => x.ParameterName = parameterName);
+            return options.UseStrategy<AcceptHeaderParameterVersionStrategy>(x => x.ParameterName = parameterName);
         }
 
-        public static VersionNegotiationOptions UseRouteValueVersionStrategy(this VersionNegotiationOptions options)
+        public static VersionNegotiationOptions UseAcceptHeaderFacetStrategy(this VersionNegotiationOptions options)
+        {
+            return options.UseStrategy<AcceptHeaderFacetVersionStrategy>();
+        }
+
+        public static VersionNegotiationOptions UseRouteValueStrategy(this VersionNegotiationOptions options)
         {
             return options.UseStrategy<RouteValueVersionStrategy>();
         }
 
-        public static VersionNegotiationOptions UseRouteValueVersionStrategy(this VersionNegotiationOptions options, string routeValueKey)
+        public static VersionNegotiationOptions UseRouteValueStrategy(this VersionNegotiationOptions options, string routeValueKey)
         {
             return options.UseStrategy<RouteValueVersionStrategy>(x => x.RouteValueKey = routeValueKey);
         }
