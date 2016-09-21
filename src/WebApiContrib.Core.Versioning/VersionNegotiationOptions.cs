@@ -3,8 +3,14 @@ using System.Collections.Generic;
 
 namespace WebApiContrib.Core.Versioning
 {
+    /// <summary>
+    /// Options for the <see cref="VersioningResultFilter"/>.
+    /// </summary>
     public class VersionNegotiationOptions
     {
+        /// <summary>
+        /// Creates a new instance of <see cref="VersionNegotiationOptions"/>.
+        /// </summary>
         public VersionNegotiationOptions()
         {
             RequireVersionedObjectResult = true;
@@ -36,6 +42,12 @@ namespace WebApiContrib.Core.Versioning
 
         internal Dictionary<Type, Action<object>> ConfigureStrategy { get; set; }
 
+        /// <summary>
+        /// Uses the specified <typeparamref name="TStrategy"/> to determine
+        /// resource versions, configured by the <paramref name="configure"/> delegate.
+        /// </summary>
+        /// <typeparam name="TStrategy">The strategy type to use.</typeparam>
+        /// <param name="configure">The configuration delegate.</param>
         public VersionNegotiationOptions UseStrategy<TStrategy>(Action<TStrategy> configure)
             where TStrategy : IVersionStrategy
         {
@@ -49,6 +61,10 @@ namespace WebApiContrib.Core.Versioning
             return UseStrategy<TStrategy>();
         }
 
+        /// <summary>
+        /// Uses the specified <typeparamref name="TStrategy"/> to determine resource versions.
+        /// </summary>
+        /// <typeparam name="TStrategy">The strategy type to use.</typeparam>
         public VersionNegotiationOptions UseStrategy<TStrategy>()
             where TStrategy : IVersionStrategy
         {

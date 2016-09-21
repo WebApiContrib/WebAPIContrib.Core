@@ -7,7 +7,7 @@ using Microsoft.Net.Http.Headers;
 namespace WebApiContrib.Core.Versioning
 {
     /// <summary>
-    /// A convenience base class for <c>Accept</c> header-based version strategies.
+    /// A convenience base class for <c>Accept</c>-header based version strategies.
     /// </summary>
     public abstract class AcceptHeaderVersionStrategy : IVersionStrategy
     {

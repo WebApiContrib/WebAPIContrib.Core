@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Routing;
 namespace WebApiContrib.Core.Versioning
 {
     /// <summary>
-    /// This versioning strategy gets its version from the resource URI.
-    /// It picks up the version from a captured route value, called <c>version</c>.
+    /// This versioning strategy gets its version from the
+    /// resource URI, using a captured route value.
     /// </summary>
     public class RouteValueVersionStrategy : IVersionStrategy
     {

@@ -4,17 +4,17 @@ using Microsoft.Net.Http.Headers;
 namespace WebApiContrib.Core.Versioning
 {
     /// <summary>
-    /// <para>
-    /// The default versioning strategy.
-    /// </para>
-    /// <para>
-    /// This strategy gets the version number from the <c>Accept</c> header in one of two ways:
-    /// 1. Using a <c>version</c> parameter; <c>application/vnd.my-app; version=2</c>
-    /// 2. Using a facet-based sub-type with the version as the last facet; <c>application/vnd.my-app.v2</c>
-    /// </para>
+    /// This version strategy gets its version from the <c>Accept</c>-header, using a parameter.
+    /// The parameter name can be configured using the <see cref="ParameterName"/> property.
     /// </summary>
     public class AcceptHeaderParameterVersionStrategy : AcceptHeaderVersionStrategy
     {
+        /// <summary>
+        /// Gets or sets the parameter name to use for determining the version.
+        /// </summary>
+        /// <remarks>
+        /// The default value is <c>version</c>.
+        /// </remarks>
         public string ParameterName { get; set; } = "version";
 
         /// <inheritdoc />

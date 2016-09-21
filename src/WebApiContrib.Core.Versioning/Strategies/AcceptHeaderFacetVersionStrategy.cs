@@ -4,6 +4,9 @@ using Microsoft.Net.Http.Headers;
 
 namespace WebApiContrib.Core.Versioning
 {
+    /// <summary>
+    /// This version strategy gets its version from the <c>Accept</c>-header, using a faceted sub-type.
+    /// </summary>
     public class AcceptHeaderFacetVersionStrategy : AcceptHeaderVersionStrategy
     {
         private static readonly char[] DotSeparator = {'.'};
