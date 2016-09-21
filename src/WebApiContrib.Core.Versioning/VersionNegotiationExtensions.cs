@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -81,7 +81,7 @@ namespace WebApiContrib.Core.Versioning
                 .AddScoped(GetConfiguredVersionStrategy);
         }
 
-        private static IVersioningStrategy GetConfiguredVersionStrategy(IServiceProvider provider)
+        private static IVersionStrategy GetConfiguredVersionStrategy(IServiceProvider provider)
         {
             var options = provider.GetRequiredService<IOptions<VersionNegotiationOptions>>();
 
@@ -90,14 +90,14 @@ namespace WebApiContrib.Core.Versioning
             return new CompositeVersionStrategy(strategies);
         }
 
-        private static IEnumerable<IVersioningStrategy> GetVersionStrategies(IServiceProvider provider, IOptions<VersionNegotiationOptions> options)
+        private static IEnumerable<IVersionStrategy> GetVersionStrategies(IServiceProvider provider, IOptions<VersionNegotiationOptions> options)
         {
             foreach (var strategyType in options.Value.StrategyTypes)
             {
                 // We use ActivatorUtilities.CreateInstance to create the type,
                 // but get its constructor arguments from the provider. This allows
                 // you to inject whatever services you need in the versioning strategy.
-                var strategy = (IVersioningStrategy) ActivatorUtilities.CreateInstance(provider, strategyType);
+                var strategy = (IVersionStrategy) ActivatorUtilities.CreateInstance(provider, strategyType);
 
                 Action<object> configure;
                 if (options.Value.ConfigureStrategy.TryGetValue(strategyType, out configure))
@@ -129,8 +129,8 @@ namespace WebApiContrib.Core.Versioning
             {
                 if (Options.Value.StrategyTypes.Count == 0)
                 {
-                    // If a strategy type hasn't been set, use DefaultVersioningStrategy.
-                    Options.Value.UseStrategy<DefaultVersioningStrategy>();
+                    // If a strategy type hasn't been set, use DefaultVersionStrategy.
+                    Options.Value.UseStrategy<DefaultVersionStrategy>();
                 }
 
                 options.Filters.Add(new VersioningResultFilter(ServiceProvider, Options));

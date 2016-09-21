@@ -9,7 +9,7 @@ namespace WebApiContrib.Core.Versioning
     /// <summary>
     /// A convenience base class for <c>Accept</c> header-based version strategies.
     /// </summary>
-    public abstract class AcceptHeaderVersionStrategy : IVersioningStrategy
+    public abstract class AcceptHeaderVersionStrategy : IVersionStrategy
     {
         /// <inheritdoc />
         public int? GetVersion(HttpContext context, RouteData routeData)

@@ -8,7 +8,7 @@ namespace WebApiContrib.Core.Versioning
     /// This versioning strategy gets its version from the resource URI.
     /// It picks up the version from a captured route value, called <c>version</c>.
     /// </summary>
-    public class RouteDataVersionStrategy : IVersioningStrategy
+    public class RouteDataVersionStrategy : IVersionStrategy
     {
         public string RouteValueKey { get; set; } = "version";
 

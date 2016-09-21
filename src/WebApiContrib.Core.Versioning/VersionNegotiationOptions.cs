@@ -37,7 +37,7 @@ namespace WebApiContrib.Core.Versioning
         internal Dictionary<Type, Action<object>> ConfigureStrategy { get; set; }
 
         public VersionNegotiationOptions UseStrategy<TStrategy>(Action<TStrategy> configure)
-            where TStrategy : IVersioningStrategy
+            where TStrategy : IVersionStrategy
         {
             if (configure == null)
             {
@@ -50,7 +50,7 @@ namespace WebApiContrib.Core.Versioning
         }
 
         public VersionNegotiationOptions UseStrategy<TStrategy>()
-            where TStrategy : IVersioningStrategy
+            where TStrategy : IVersionStrategy
         {
             StrategyTypes.Add(typeof(TStrategy));
             return this;

@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace WebApiContrib.Core.Versioning
 {
-    internal class CompositeVersionStrategy : IVersioningStrategy
+    internal class CompositeVersionStrategy : IVersionStrategy
     {
-        public CompositeVersionStrategy(IEnumerable<IVersioningStrategy> versionStrategies)
+        public CompositeVersionStrategy(IEnumerable<IVersionStrategy> versionStrategies)
         {
             VersionStrategies = versionStrategies;
         }
 
-        public IEnumerable<IVersioningStrategy> VersionStrategies { get; }
+        public IEnumerable<IVersionStrategy> VersionStrategies { get; }
 
         public int? GetVersion(HttpContext context, RouteData routeData)
         {
