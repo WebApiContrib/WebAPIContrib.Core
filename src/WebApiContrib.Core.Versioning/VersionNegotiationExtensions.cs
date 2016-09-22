@@ -9,7 +9,7 @@ namespace WebApiContrib.Core.Versioning
     public static class VersionNegotiationExtensions
     {
         /// <summary>
-        /// Adds version negotiation.
+        /// Adds version negotiation using <see cref="AcceptHeaderParameterVersionStrategy"/>.
         /// </summary>
         public static IMvcBuilder AddVersionNegotiation(this IMvcBuilder builder)
         {
@@ -17,8 +17,10 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation.
+        /// Adds version negotiation, configured by the specified <see cref="configure"/> delegate.
         /// </summary>
+        /// <param name="builder">The MVC builder.</param>
+        /// <param name="configure">The configuration delegate.</param>
         public static IMvcBuilder AddVersionNegotiation(this IMvcBuilder builder, Action<VersionNegotiationOptions> configure)
         {
             if (builder == null)
@@ -31,7 +33,7 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation.
+        /// Adds version negotiation using <see cref="AcceptHeaderParameterVersionStrategy"/>.
         /// </summary>
         public static IMvcCoreBuilder AddVersionNegotiation(this IMvcCoreBuilder builder)
         {
@@ -39,8 +41,10 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation.
+        /// Adds version negotiation, configured by the specified <see cref="configure"/> delegate.
         /// </summary>
+        /// <param name="builder">The MVC builder.</param>
+        /// <param name="configure">The configuration delegate.</param>
         public static IMvcCoreBuilder AddVersionNegotiation(this IMvcCoreBuilder builder, Action<VersionNegotiationOptions> configure)
         {
             if (builder == null)
@@ -53,7 +57,7 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation.
+        /// Adds version negotiation using <see cref="AcceptHeaderParameterVersionStrategy"/>.
         /// </summary>
         public static IServiceCollection AddVersionNegotiation(this IServiceCollection services)
         {
@@ -61,8 +65,10 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation.
+        /// Adds version negotiation, configured by the specified <see cref="configure"/> delegate.
         /// </summary>
+        /// <param name="services">The service collection.</param>
+        /// <param name="configure">The configuration delegate.</param>
         public static IServiceCollection AddVersionNegotiation(this IServiceCollection services, Action<VersionNegotiationOptions> configure)
         {
             if (services == null)
@@ -111,7 +117,7 @@ namespace WebApiContrib.Core.Versioning
 
         /// <summary>
         /// We use this class in order to get an instance of <see cref="IServiceProvider"/>
-        /// that we can pass to the <see cref="VersioningResultFilter"/>.
+        /// that we can pass to the <see cref="VersionNegotiationResultFilter"/>.
         /// </summary>
         private class ConfigureMvcOptions : IConfigureOptions<MvcOptions>
         {
@@ -129,11 +135,11 @@ namespace WebApiContrib.Core.Versioning
             {
                 if (Options.Value.StrategyTypes.Count == 0)
                 {
-                    // If a strategy type hasn't been set, use DefaultVersionStrategy.
-                    Options.Value.UseStrategy<DefaultVersionStrategy>();
+                    // If a strategy type hasn't been set, use AcceptHeaderParameterVersionStrategy.
+                    Options.Value.UseStrategy<AcceptHeaderParameterVersionStrategy>();
                 }
 
-                options.Filters.Add(new VersioningResultFilter(ServiceProvider, Options));
+                options.Filters.Add(new VersionNegotiationResultFilter(ServiceProvider, Options));
             }
         }
     }

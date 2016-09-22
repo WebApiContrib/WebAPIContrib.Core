@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Routing;
 namespace WebApiContrib.Core.Versioning
 {
     /// <summary>
-    /// This versioning strategy gets its version from the resource URI.
-    /// It picks up the version from a captured route value, called <c>version</c>.
+    /// This versioning strategy gets its version from the
+    /// resource URI, using a captured route value.
     /// </summary>
-    public class RouteDataVersionStrategy : IVersionStrategy
+    public class RouteValueVersionStrategy : IVersionStrategy
     {
         public string RouteValueKey { get; set; } = "version";
 
         /// <inheritdoc />
-        public int? GetVersion(HttpContext context, RouteData routeData)
+        int? IVersionStrategy.GetVersion(HttpContext context, RouteData routeData)
         {
             if (routeData == null)
             {

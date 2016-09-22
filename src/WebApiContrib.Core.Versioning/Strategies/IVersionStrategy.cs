@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Routing;
 namespace WebApiContrib.Core.Versioning
 {
     /// <summary>
-    /// The interface for a versioning strategy for HTTP requests.
+    /// The interface for a version strategy for HTTP requests.
     /// </summary>
     public interface IVersionStrategy
     {

@@ -1,7 +1,7 @@
 ﻿namespace WebApiContrib.Core.Versioning
 {
     /// <summary>
-    /// The interface for mapping an model to a versioned representation.
+    /// The interface for mapping a <typeparamref name="TModel"/> instance to a versioned representation.
     /// </summary>
     /// <typeparam name="TModel">The model type to map.</typeparam>
     public interface IModelMapper<in TModel>

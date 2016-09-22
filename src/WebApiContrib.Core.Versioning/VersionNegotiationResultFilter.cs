@@ -8,9 +8,17 @@ using Microsoft.Extensions.Options;
 
 namespace WebApiContrib.Core.Versioning
 {
-    public class VersioningResultFilter : IResultFilter
+    /// <summary>
+    /// A filter to negotiate resource version representations based on different version strategies.
+    /// </summary>
+    public class VersionNegotiationResultFilter : IResultFilter
     {
-        public VersioningResultFilter(IServiceProvider serviceProvider, IOptions<VersionNegotiationOptions> options)
+        /// <summary>
+        /// Creates a new instance of <see cref="VersionNegotiationResultFilter"/>.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider to get strategies and mappers from.</param>
+        /// <param name="options">The versioning options.</param>
+        public VersionNegotiationResultFilter(IServiceProvider serviceProvider, IOptions<VersionNegotiationOptions> options)
         {
             if (serviceProvider == null)
             {
@@ -30,6 +38,7 @@ namespace WebApiContrib.Core.Versioning
 
         private IOptions<VersionNegotiationOptions> Options { get; }
 
+        /// <inheritdoc />
         public void OnResultExecuting(ResultExecutingContext context)
         {
             if (context == null)
@@ -53,6 +62,7 @@ namespace WebApiContrib.Core.Versioning
             context.Result = MapResult(result, version);
         }
 
+        /// <inheritdoc />
         public void OnResultExecuted(ResultExecutedContext context)
         {
             // Meh. Not used.
