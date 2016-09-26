@@ -9,6 +9,11 @@ namespace WebApiContrib.Core
 {
     public static class MvcOptionsExtensions
     {
+        public static void UseGlobalRoutePrefix(this MvcOptions opts, string routeTemplate)
+        {
+            opts.Conventions.Insert(0, new GlobalRoutePrefixConvention(new RouteAttribute(routeTemplate)));
+        }
+
         public static void UseGlobalRoutePrefix(this MvcOptions opts, IRouteTemplateProvider routeAttribute)
         {
             opts.Conventions.Insert(0, new GlobalRoutePrefixConvention(routeAttribute));
