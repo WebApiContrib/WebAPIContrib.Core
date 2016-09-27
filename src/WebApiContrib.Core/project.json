@@ -4,7 +4,7 @@
   "authors": [ "filipw", "WebApiContrib Contributors" ],
   "packOptions": {
     "summary": "Community Contributions for ASP.NET Core.",
-    "tags": [ "ASP.NET Core", "webapicontrib", "api", "aspnetcore", "mvc", "rotuing", "convention" ],
+    "tags": [ "ASP.NET Core", "webapicontrib", "api", "aspnetcore", "mvc", "routing", "convention" ],
     "owners": [ "filipw", "panesofglass" ],
     "title": "WebApiContrib.Core",
     "iconUrl": "https://avatars1.githubusercontent.com/u/1561645?s=140",
