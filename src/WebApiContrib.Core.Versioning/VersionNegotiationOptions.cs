@@ -16,6 +16,8 @@ namespace WebApiContrib.Core.Versioning
             RequireVersionedObjectResult = true;
             ThrowOnMissingMapper = true;
             EmitVaryHeader = false;
+            ConfigureStrategy = new Dictionary<Type, Action<object>>();
+            StrategyTypes = new List<Type>();
         }
 
         /// <summary>
