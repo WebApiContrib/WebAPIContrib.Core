@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0",
+  "version": "1.0.1-*",
   "description": "An ASP.NET Core library allowing you to define HTTP API versioning strategies.",
   "authors": [ "khellang", "WebApiContrib Contributors" ],
   "packOptions": {
