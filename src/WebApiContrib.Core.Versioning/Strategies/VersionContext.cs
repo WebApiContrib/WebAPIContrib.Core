@@ -1,15 +1,16 @@
 ﻿namespace WebApiContrib.Core.Versioning
 {
-    public class VersionContext
+    public struct VersionResult
     {
-        public int? Version { get; }
+        public int Version { get; }
+
         public string VaryOn { get; }
 
-        public VersionContext(int? version) : this(version, null)
+        public VersionResult(int version) : this(version, null)
         {
         }
 
-        public VersionContext(int? version, string varyOn)
+        public VersionResult(int version, string varyOn)
         {
             Version = version;
             VaryOn = varyOn;

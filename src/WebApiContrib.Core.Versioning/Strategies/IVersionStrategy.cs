@@ -15,6 +15,6 @@ namespace WebApiContrib.Core.Versioning
         /// <param name="context">The <see cref="HttpContext"/> of the current request.</param>
         /// <param name="routeData">The <see cref="RouteData"/>of the current request.</param>
         /// <returns>A version integer, or <c>null</c> if a version cannot be determined.</returns>
-        VersionContext GetVersion(HttpContext context, RouteData routeData);
+        VersionResult? GetVersion(HttpContext context, RouteData routeData);
     }
 }

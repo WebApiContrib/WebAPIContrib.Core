@@ -57,14 +57,14 @@ namespace WebApiContrib.Core.Versioning
 
             var strategy = ServiceProvider.GetRequiredService<IVersionStrategy>();
 
-            var versionContext = strategy.GetVersion(context.HttpContext, context.RouteData);
-            if (versionContext?.Version != null)
+            var versionResult = strategy.GetVersion(context.HttpContext, context.RouteData);
+            if (versionResult.HasValue)
             {
-                context.Result = MapResult(result, versionContext.Version);
+                context.Result = MapResult(result, versionResult.Value.Version);
 
-                if (Options.Value.EmitVaryHeader && versionContext.VaryOn != null)
+                if (Options.Value.EmitVaryHeader && versionResult.Value.VaryOn != null)
                 {
-                    context.HttpContext.Response.Headers.Add("Vary", versionContext.VaryOn);
+                    context.HttpContext.Response.Headers.Add("Vary", versionResult.Value.VaryOn);
                 }
             }
         }

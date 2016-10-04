@@ -13,7 +13,7 @@ namespace WebApiContrib.Core.Versioning
 
         private IEnumerable<IVersionStrategy> VersionStrategies { get; }
 
-        public VersionContext GetVersion(HttpContext context, RouteData routeData)
+        public VersionResult? GetVersion(HttpContext context, RouteData routeData)
         {
             foreach (var strategy in VersionStrategies)
             {

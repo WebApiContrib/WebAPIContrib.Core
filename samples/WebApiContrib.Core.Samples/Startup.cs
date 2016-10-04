@@ -39,7 +39,6 @@ namespace WebApiContrib.Core.Samples
                 .AddPlainTextFormatters()
                 .AddVersionNegotiation(opt =>
                 {
-                    opt.EmitVaryHeader = true;
                     opt.UseAcceptHeaderParameterStrategy("apiVersion")
                         .UseAcceptHeaderFacetStrategy()
                         .UseRouteValueStrategy("version")

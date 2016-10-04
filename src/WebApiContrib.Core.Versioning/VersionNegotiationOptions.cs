@@ -15,7 +15,7 @@ namespace WebApiContrib.Core.Versioning
         {
             RequireVersionedObjectResult = true;
             ThrowOnMissingMapper = true;
-            EmitVaryHeader = false;
+            EmitVaryHeader = true;
             ConfigureStrategy = new Dictionary<Type, Action<object>>();
             StrategyTypes = new List<Type>();
         }
@@ -36,7 +36,7 @@ namespace WebApiContrib.Core.Versioning
         /// relevant for the applied versioning strategy
         /// </summary>
         /// <remarks>
-        /// The default is <c>false</c>.
+        /// The default is <c>true</c>.
         /// </remarks>
         public bool EmitVaryHeader { get; set; }
 
