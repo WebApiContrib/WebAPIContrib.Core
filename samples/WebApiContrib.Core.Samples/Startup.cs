@@ -32,16 +32,18 @@ namespace WebApiContrib.Core.Samples
             services.AddSingleton<IModelMapper<PersonModel>, PersonModelMapper>();
 
             services.AddMvc(o =>
-            {
-                o.AddJsonpOutputFormatter();
-                o.UseFromBodyBinding(controllerPredicate: c => c.ControllerType.AsType() == typeof (BindingController));
-            }).AddCsvSerializerFormatters()
+                {
+                    o.AddJsonpOutputFormatter();
+                    o.UseFromBodyBinding(controllerPredicate: c => c.ControllerType.AsType() == typeof(BindingController));
+                }).AddCsvSerializerFormatters()
                 .AddPlainTextFormatters()
-                .AddVersionNegotiation(x => x
-                    .UseAcceptHeaderParameterStrategy("apiVersion")
-                    .UseAcceptHeaderFacetStrategy()
-                    .UseRouteValueStrategy("version")
-                    .UseCustomHeaderStrategy("X-API-Version"));
+                .AddVersionNegotiation(opt =>
+                {
+                    opt.UseAcceptHeaderParameterStrategy("apiVersion")
+                        .UseAcceptHeaderFacetStrategy()
+                        .UseRouteValueStrategy("version")
+                        .UseCustomHeaderStrategy("X-API-Version");
+                });
 
             services.EnableAddTagHelperAssemblyGlobbing();
         }

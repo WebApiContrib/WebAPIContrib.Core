@@ -2,11 +2,11 @@
 {
     internal static class ParsingUtility
     {
-        public static bool TryParseVersion(string value, out int? version)
+        public static bool TryParseVersion(string value, out int version)
         {
             if (string.IsNullOrEmpty(value))
             {
-                version = null;
+                version = 0;
                 return false;
             }
 
@@ -22,7 +22,7 @@
                 return true;
             }
 
-            version = null;
+            version = 0;
             return false;
         }
     }

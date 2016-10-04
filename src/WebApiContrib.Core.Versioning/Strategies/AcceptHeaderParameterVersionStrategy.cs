@@ -32,7 +32,7 @@ namespace WebApiContrib.Core.Versioning
                 return null;
             }
 
-            int? version;
+            int version;
             if (TryGetParameterVersion(acceptHeader, ParameterName, out version))
             {
                 return version;
@@ -41,7 +41,7 @@ namespace WebApiContrib.Core.Versioning
             return null;
         }
 
-        private static bool TryGetParameterVersion(MediaTypeHeaderValue acceptHeader, string parameterName, out int? version)
+        private static bool TryGetParameterVersion(MediaTypeHeaderValue acceptHeader, string parameterName, out int version)
         {
             foreach (var parameter in acceptHeader.Parameters)
             {
@@ -54,7 +54,7 @@ namespace WebApiContrib.Core.Versioning
                 }
             }
 
-            version = null;
+            version = 0;
             return false;
         }
     }

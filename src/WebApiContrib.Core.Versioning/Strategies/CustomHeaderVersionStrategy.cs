@@ -20,7 +20,7 @@ namespace WebApiContrib.Core.Versioning
         public string HeaderName { get; set; } = "Api-Version";
 
         /// <inheritdoc />
-        int? IVersionStrategy.GetVersion(HttpContext context, RouteData routeData)
+        VersionResult? IVersionStrategy.GetVersion(HttpContext context, RouteData routeData)
         {
             if (context == null)
             {
@@ -32,10 +32,10 @@ namespace WebApiContrib.Core.Versioning
             StringValues header;
             if (headers.TryGetValue(HeaderName, out header))
             {
-                int? version;
+                int version;
                 if (ParsingUtility.TryParseVersion(header.ToString(), out version))
                 {
-                    return version;
+                    return new VersionResult(version, HeaderName); ;
                 }
             }
 

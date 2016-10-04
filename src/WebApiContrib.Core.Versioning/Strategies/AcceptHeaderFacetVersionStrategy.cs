@@ -26,7 +26,7 @@ namespace WebApiContrib.Core.Versioning
                 return null;
             }
 
-            int? version;
+            int version;
             if (TryGetFacetVersion(subType, out version))
             {
                 return version;
@@ -35,7 +35,7 @@ namespace WebApiContrib.Core.Versioning
             return null;
         }
 
-        private static bool TryGetFacetVersion(string subType, out int? version)
+        private static bool TryGetFacetVersion(string subType, out int version)
         {
             var facetSeparatorIndex = subType.IndexOf('.');
 
@@ -52,7 +52,7 @@ namespace WebApiContrib.Core.Versioning
                 }
             }
 
-            version = null;
+            version = 0;
             return false;
         }
     }

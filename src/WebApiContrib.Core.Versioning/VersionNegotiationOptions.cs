@@ -15,6 +15,9 @@ namespace WebApiContrib.Core.Versioning
         {
             RequireVersionedObjectResult = true;
             ThrowOnMissingMapper = true;
+            EmitVaryHeader = true;
+            ConfigureStrategy = new Dictionary<Type, Action<object>>();
+            StrategyTypes = new List<Type>();
         }
 
         /// <summary>
@@ -27,6 +30,15 @@ namespace WebApiContrib.Core.Versioning
         /// The default is <c>true</c>.
         /// </remarks>
         public bool RequireVersionedObjectResult { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether the response will contain a Vary HTTP header
+        /// relevant for the applied versioning strategy
+        /// </summary>
+        /// <remarks>
+        /// The default is <c>true</c>.
+        /// </remarks>
+        public bool EmitVaryHeader { get; set; }
 
         /// <summary>
         /// Gets or sets whether the version negotiation filter will throw a

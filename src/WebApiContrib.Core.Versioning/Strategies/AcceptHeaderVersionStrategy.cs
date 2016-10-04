@@ -12,7 +12,7 @@ namespace WebApiContrib.Core.Versioning
     public abstract class AcceptHeaderVersionStrategy : IVersionStrategy
     {
         /// <inheritdoc />
-        int? IVersionStrategy.GetVersion(HttpContext context, RouteData routeData)
+        VersionResult? IVersionStrategy.GetVersion(HttpContext context, RouteData routeData)
         {
             if (context == null)
             {
@@ -34,7 +34,7 @@ namespace WebApiContrib.Core.Versioning
 
                 if (version.HasValue)
                 {
-                    return version.Value;
+                    return new VersionResult(version.Value, "Accept");
                 }
             }
 
