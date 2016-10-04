@@ -13,7 +13,7 @@
         public VersionResult(int version, string varyOn)
         {
             Version = version;
-            VaryOn = varyOn;
+            VaryOn = varyOn ?? string.Empty;
         }
     }
 }

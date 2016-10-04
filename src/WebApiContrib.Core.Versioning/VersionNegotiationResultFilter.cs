@@ -62,7 +62,7 @@ namespace WebApiContrib.Core.Versioning
             {
                 context.Result = MapResult(result, versionResult.Value.Version);
 
-                if (Options.Value.EmitVaryHeader && versionResult.Value.VaryOn != null)
+                if (Options.Value.EmitVaryHeader && !string.IsNullOrEmpty(versionResult.Value.VaryOn))
                 {
                     context.HttpContext.Response.Headers.Add("Vary", versionResult.Value.VaryOn);
                 }

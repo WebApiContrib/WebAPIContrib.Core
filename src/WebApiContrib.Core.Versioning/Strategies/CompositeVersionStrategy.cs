@@ -19,7 +19,7 @@ namespace WebApiContrib.Core.Versioning
             {
                 var version = strategy.GetVersion(context, routeData);
 
-                if (version != null)
+                if (version.HasValue)
                 {
                     return version;
                 }
