@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.1-*",
+  "version": "1.0.2-*",
   "description": "An ASP.NET Core library allowing you to define HTTP API versioning strategies.",
   "authors": [ "khellang", "WebApiContrib Contributors" ],
   "packOptions": {
@@ -16,7 +16,11 @@
       "url": "https://github.com/WebApiContrib/WebAPIContrib.Core.git"
     }
   },
-
+   
+  "buildOptions": {
+    "xmlDoc": true
+  },
+   
   "dependencies": {
     "Microsoft.AspNetCore.Mvc.Core": "1.0.0"
   },
