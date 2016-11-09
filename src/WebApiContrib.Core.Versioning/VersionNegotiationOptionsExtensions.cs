@@ -103,5 +103,35 @@ namespace WebApiContrib.Core.Versioning
 
             return options.UseStrategy<CustomHeaderVersionStrategy>(x => x.HeaderName = headerName);
         }
+
+        public static VersionNegotiationOptions UseQueryStringParameter(this VersionNegotiationOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            return options.UseStrategy<QueryStringVersionStrategy>();
+        }
+
+        public static VersionNegotiationOptions UseQueryStringParameter(this VersionNegotiationOptions options, string parameterName)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            if (parameterName == null)
+            {
+                throw new ArgumentNullException(nameof(parameterName));
+            }
+
+            if (parameterName.Length == 0)
+            {
+                throw new ArgumentException($"{nameof(parameterName)} must not be empty.", nameof(parameterName));
+            }
+
+            return options.UseStrategy<QueryStringVersionStrategy>(x => x.ParameterName = parameterName);
+        }
     }
 }

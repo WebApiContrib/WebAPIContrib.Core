@@ -42,7 +42,8 @@ namespace WebApiContrib.Core.Samples
                     opt.UseAcceptHeaderParameterStrategy("apiVersion")
                         .UseAcceptHeaderFacetStrategy()
                         .UseRouteValueStrategy("version")
-                        .UseCustomHeaderStrategy("X-API-Version");
+                        .UseCustomHeaderStrategy("X-API-Version")
+                        .UseQueryStringParameter("version");
                 });
 
             services.EnableAddTagHelperAssemblyGlobbing();

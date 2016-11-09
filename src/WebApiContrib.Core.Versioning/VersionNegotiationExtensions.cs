@@ -136,7 +136,7 @@ namespace WebApiContrib.Core.Versioning
                 if (Options.Value.StrategyTypes.Count == 0)
                 {
                     // If a strategy type hasn't been set, use AcceptHeaderParameterVersionStrategy.
-                    Options.Value.UseStrategy<AcceptHeaderParameterVersionStrategy>();
+                    Options.Value.UseAcceptHeaderParameterStrategy();
                 }
 
                 options.Filters.Add(new VersionNegotiationResultFilter(ServiceProvider, Options));
