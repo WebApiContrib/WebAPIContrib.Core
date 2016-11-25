@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "ASP.NET Core InputFormatter, OutputFormatter for IList CSV data",
     "authors": [ "damienbod", "WebApiContrib Contributors" ],
     "packOptions": {
