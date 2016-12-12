@@ -18,14 +18,14 @@ namespace WebApiContrib.Core.WebPages
     {
         private readonly IRazorViewEngine _viewEngine;
         private readonly ITempDataProvider _tempDataProvider;
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public RazorViewToStringRenderer(IRazorViewEngine viewEngine, ITempDataProvider tempDataProvider,
-            IServiceProvider serviceProvider)
+            IHttpContextAccessor httpContextAccessor)
         {
             _viewEngine = viewEngine;
             _tempDataProvider = tempDataProvider;
-            _serviceProvider = serviceProvider;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<string> RenderViewToString(string path)
@@ -67,8 +67,7 @@ namespace WebApiContrib.Core.WebPages
 
         private ActionContext GetActionContext()
         {
-            var httpContext = new DefaultHttpContext {RequestServices = _serviceProvider};
-            return new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            return new ActionContext(_httpContextAccessor.HttpContext, _httpContextAccessor.HttpContext.GetRouteData() ?? new RouteData(), new ActionDescriptor());
         }
     }
 }

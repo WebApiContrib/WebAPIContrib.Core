@@ -35,6 +35,7 @@ namespace WebApiContrib.Core.WebPages
             services.AddSingleton<WebPagesOptions>(webPagesOptions);
             services.AddSingleton<RazorViewToStringRenderer>();
             services.AddSingleton<WebPagesRouter>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
     }
 }
