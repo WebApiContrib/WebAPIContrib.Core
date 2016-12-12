@@ -67,7 +67,7 @@ namespace WebApiContrib.Core.WebPages
 
         private ActionContext GetActionContext()
         {
-            return new ActionContext(_httpContextAccessor.HttpContext, _httpContextAccessor.HttpContext.GetRouteData(), new ActionDescriptor());
+            return new ActionContext(_httpContextAccessor.HttpContext, _httpContextAccessor.HttpContext.GetRouteData() ?? new RouteData(), new ActionDescriptor());
         }
     }
 }
