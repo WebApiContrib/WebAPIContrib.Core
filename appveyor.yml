@@ -2,7 +2,7 @@ version: 1.0.{build}
 configuration: Release
 before_build:
 - ps: >-
-    (new-object net.webclient).DownloadFile('https://download.microsoft.com/download/4/6/1/46116DFF-29F9-4FF8-94BF-F9BE05BE263B/packages/DotNetCore.1.0.0.RC2-SDK.Preview1-x64.exe','core.exe')
+    (new-object net.webclient).DownloadFile('https://dotnetcli.blob.core.windows.net/dotnet/preview/Installers/Latest/dotnet-win-x64.latest.exe','core.exe')
 
     core.exe /install /quiet /norestart
 
