@@ -1,12 +1,8 @@
-version: 1.0.{build}
-configuration: Release
+image: Visual Studio 2017 RC
+init:
+- git config --global core.autocrlf true
 before_build:
-- ps: >-
-    (new-object net.webclient).DownloadFile('https://dotnetcli.blob.core.windows.net/dotnet/preview/Installers/Latest/dotnet-win-x64.latest.exe','core.exe')
-
-    core.exe /install /quiet /norestart
-
-    dotnet restore
+- appveyor-retry dotnet restore -v Minimal
 build_script:
 - cmd: dotnet build src\WebApiContrib.Core.Concurrency
 test_script:
