@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Community Contributions for ASP.NET Core. Add-ons and extensions to help improve your work with ASP.NET Core and ASP.NET Core MVC.</Description>
+    <Authors>filipw;WebApiContrib Contributors</Authors>
+    <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
+    <AssemblyName>WebApiContrib.Core</AssemblyName>
+    <PackageId>WebApiContrib.Core</PackageId>
+    <PackageTags>ASP.NET Core;webapicontrib;api;aspnetcore;mvc;routing;convention</PackageTags>
+    <PackageIconUrl>https://avatars1.githubusercontent.com/u/1561645?s=140</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/WebApiContrib/WebAPIContrib.Core</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/WebApiContrib/WebAPIContrib.Core/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/WebApiContrib/WebAPIContrib.Core.git</RepositoryUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>
