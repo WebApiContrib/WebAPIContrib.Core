@@ -11,4 +11,5 @@ build_script:
 before_build:
 - appveyor-retry dotnet restore -v Minimal
 test_script:
-- dotnet test tests\WebApiContrib.Core.Concurrency.Tests
+- cd tests/WebApiContrib.Core.Concurrency.Tests
+- dotnet test
