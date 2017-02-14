@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:22769/",
+      "applicationUrl": "http://localhost:22770/",
       "sslPort": 0
     }
   },
@@ -15,11 +15,8 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "WebApiContrib.Core.Integration.Tests": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+    "WebApiContrib.Core.Formatter.Integration.Tests": {
+      "commandName": "Project"
     }
   }
 }

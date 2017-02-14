@@ -1,7 +1,6 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26206.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Core", "01. Core", "{5898776F-DBF8-4C30-85A3-66401B12016F}"
 EndProject
@@ -11,47 +10,47 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Unit Tests", "01. Unit 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Integration Tests", "02. Integration Tests", "{A98104E8-D149-44EA-AE61-8E2A350B6D91}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Concurrency", "src\WebApiContrib.Core.Concurrency\WebApiContrib.Core.Concurrency.xproj", "{8EA9F43D-3B41-40A4-88D7-68AF33F90C55}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Concurrency.Tests", "tests\WebApiContrib.Core.Concurrency.Tests\WebApiContrib.Core.Concurrency.Tests.xproj", "{FCB0F13A-B412-4340-B077-D3E7A60A9DD7}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Concurrency.Integration.Tests", "tests\WebApiContrib.Core.Concurrency.Integration.Tests\WebApiContrib.Core.Concurrency.Integration.Tests.xproj", "{04380244-C141-4760-AD83-5854E728C21F}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Concurrency.Redis", "src\WebApiContrib.Core.Concurrency.Redis\WebApiContrib.Core.Concurrency.Redis.xproj", "{8571D8F9-0847-46C8-A794-845B331982B7}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03. ThirdParties", "03. ThirdParties", "{FA211DF3-D9A7-431A-B239-8B448021CEBA}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.Extensions.Caching.Redis", "other\Microsoft.Extensions.Caching.Redis\Microsoft.Extensions.Caching.Redis.xproj", "{02E23070-947C-4438-8E50-CC2456D237BA}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Concurrency.SqlServer", "src\WebApiContrib.Core.Concurrency.SqlServer\WebApiContrib.Core.Concurrency.SqlServer.xproj", "{3751E3BA-0333-4240-899F-2607FB83AB0D}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Formatter.Bson", "src\WebApiContrib.Core.Formatter.Bson\WebApiContrib.Core.Formatter.Bson.xproj", "{1AEA74F2-9B85-48EB-B52F-71C3A2B22F4C}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Formatter.Integration.Tests", "tests\WebApiContrib.Core.Formatter.Integration.Tests\WebApiContrib.Core.Formatter.Integration.Tests.xproj", "{1E281A68-6516-43F0-B444-93EF34D8A02D}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core", "src\WebApiContrib.Core\WebApiContrib.Core.xproj", "{701AE438-3E82-463F-8C9B-FE5DE7D2A7B1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{EDF687E4-3843-4FB0-9CDC-775E3594D384}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Formatter.Csv", "src\WebApiContrib.Core.Formatter.Csv\WebApiContrib.Core.Formatter.Csv.xproj", "{CD70A2EC-5A70-4C34-9B89-328F906BEE2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Concurrency", "src\WebApiContrib.Core.Concurrency\WebApiContrib.Core.Concurrency.csproj", "{8EA9F43D-3B41-40A4-88D7-68AF33F90C55}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Samples", "samples\WebApiContrib.Core.Samples\WebApiContrib.Core.Samples.xproj", "{8179D011-CED0-40FB-98FA-86326A0F8055}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Concurrency.Tests", "tests\WebApiContrib.Core.Concurrency.Tests\WebApiContrib.Core.Concurrency.Tests.csproj", "{FCB0F13A-B412-4340-B077-D3E7A60A9DD7}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Formatter.PlainText", "src\WebApiContrib.Core.Formatter.PlainText\WebApiContrib.Core.Formatter.PlainText.xproj", "{31DA6013-7513-41FC-A5FE-0FB444FBAB9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Concurrency.Integration.Tests", "tests\WebApiContrib.Core.Concurrency.Integration.Tests\WebApiContrib.Core.Concurrency.Integration.Tests.csproj", "{04380244-C141-4760-AD83-5854E728C21F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.TagHelpers.Markdown", "src\WebApiContrib.Core.TagHelpers.Markdown\WebApiContrib.Core.TagHelpers.Markdown.xproj", "{3EBC421E-AFA7-47F8-B508-80948BBC448A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Concurrency.Redis", "src\WebApiContrib.Core.Concurrency.Redis\WebApiContrib.Core.Concurrency.Redis.csproj", "{8571D8F9-0847-46C8-A794-845B331982B7}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Formatter.Jsonp", "src\WebApiContrib.Core.Formatter.Jsonp\WebApiContrib.Core.Formatter.Jsonp.xproj", "{CD1A5F8F-8468-4EF1-8B3C-EF05420F43EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Caching.Redis", "other\Microsoft.Extensions.Caching.Redis\Microsoft.Extensions.Caching.Redis.csproj", "{02E23070-947C-4438-8E50-CC2456D237BA}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Samples.Formatter.Jsonp.JQueryClient", "samples\WebApiContrib.Core.Samples.Formatter.Jsonp.JQueryClient\WebApiContrib.Core.Samples.Formatter.Jsonp.JQueryClient.xproj", "{5A3DF1EA-4553-4370-8CD2-6C341CA80755}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Concurrency.SqlServer", "src\WebApiContrib.Core.Concurrency.SqlServer\WebApiContrib.Core.Concurrency.SqlServer.csproj", "{3751E3BA-0333-4240-899F-2607FB83AB0D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.WebPages", "src\WebApiContrib.Core.WebPages\WebApiContrib.Core.WebPages.xproj", "{720B3330-2C57-4D67-9D84-5DC76412F169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Formatter.Bson", "src\WebApiContrib.Core.Formatter.Bson\WebApiContrib.Core.Formatter.Bson.csproj", "{1AEA74F2-9B85-48EB-B52F-71C3A2B22F4C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.WebPages.Samples", "samples\WebApiContrib.Core.WebPages.Samples\WebApiContrib.Core.WebPages.Samples.xproj", "{F9AE291E-A6BD-4F53-A73F-678FE0D5BF72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Formatter.Integration.Tests", "tests\WebApiContrib.Core.Formatter.Integration.Tests\WebApiContrib.Core.Formatter.Integration.Tests.csproj", "{1E281A68-6516-43F0-B444-93EF34D8A02D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Razor", "src\WebApiContrib.Core.Razor\WebApiContrib.Core.Razor.xproj", "{3265E2B5-6679-49F0-8983-B120DE9C8C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core", "src\WebApiContrib.Core\WebApiContrib.Core.csproj", "{701AE438-3E82-463F-8C9B-FE5DE7D2A7B1}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiContrib.Core.Versioning", "src\WebApiContrib.Core.Versioning\WebApiContrib.Core.Versioning.xproj", "{3C24815E-A771-4AAC-BB4B-9C1E8A176899}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Formatter.Csv", "src\WebApiContrib.Core.Formatter.Csv\WebApiContrib.Core.Formatter.Csv.csproj", "{CD70A2EC-5A70-4C34-9B89-328F906BEE2B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Samples", "samples\WebApiContrib.Core.Samples\WebApiContrib.Core.Samples.csproj", "{8179D011-CED0-40FB-98FA-86326A0F8055}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Formatter.PlainText", "src\WebApiContrib.Core.Formatter.PlainText\WebApiContrib.Core.Formatter.PlainText.csproj", "{31DA6013-7513-41FC-A5FE-0FB444FBAB9C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.TagHelpers.Markdown", "src\WebApiContrib.Core.TagHelpers.Markdown\WebApiContrib.Core.TagHelpers.Markdown.csproj", "{3EBC421E-AFA7-47F8-B508-80948BBC448A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Formatter.Jsonp", "src\WebApiContrib.Core.Formatter.Jsonp\WebApiContrib.Core.Formatter.Jsonp.csproj", "{CD1A5F8F-8468-4EF1-8B3C-EF05420F43EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Samples.Formatter.Jsonp.JQueryClient", "samples\WebApiContrib.Core.Samples.Formatter.Jsonp.JQueryClient\WebApiContrib.Core.Samples.Formatter.Jsonp.JQueryClient.csproj", "{5A3DF1EA-4553-4370-8CD2-6C341CA80755}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.WebPages", "src\WebApiContrib.Core.WebPages\WebApiContrib.Core.WebPages.csproj", "{720B3330-2C57-4D67-9D84-5DC76412F169}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.WebPages.Samples", "samples\WebApiContrib.Core.WebPages.Samples\WebApiContrib.Core.WebPages.Samples.csproj", "{F9AE291E-A6BD-4F53-A73F-678FE0D5BF72}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Razor", "src\WebApiContrib.Core.Razor\WebApiContrib.Core.Razor.csproj", "{3265E2B5-6679-49F0-8983-B120DE9C8C16}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Versioning", "src\WebApiContrib.Core.Versioning\WebApiContrib.Core.Versioning.csproj", "{3C24815E-A771-4AAC-BB4B-9C1E8A176899}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
