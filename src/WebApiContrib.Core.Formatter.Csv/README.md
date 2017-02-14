@@ -4,6 +4,7 @@ WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/
 
 # History
 
+2017.02.14: update to csproj
 2016.06.22: project init
 
 # Documentation
