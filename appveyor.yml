@@ -8,8 +8,6 @@ install:
 build_script:
 - dotnet build
 - dotnet build src\WebApiContrib.Core.Concurrency
-init:
-- git config --global core.autocrlf true
 before_build:
 - appveyor-retry dotnet restore -v Minimal
 test_script:
