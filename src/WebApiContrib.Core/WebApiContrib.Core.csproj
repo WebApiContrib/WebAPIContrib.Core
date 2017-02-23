@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <Description>Community Contributions for ASP.NET Core. Add-ons and extensions to help improve your work with ASP.NET Core and ASP.NET Core MVC.</Description>
+    <VersionPrefix>1.1.0</VersionPrefix>
     <Authors>filipw;WebApiContrib Contributors</Authors>
     <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
     <AssemblyName>WebApiContrib.Core</AssemblyName>
