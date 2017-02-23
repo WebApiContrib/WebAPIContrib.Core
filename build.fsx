@@ -28,8 +28,8 @@ Target "Pack" (fun _ ->
             OutputPath = "../../artifacts" })
 )
 
-//"Clean"
-//      ==> "Build"
-//      ==> "Pack"
+"Clean"
+      ==> "Build"
+      ==> "Pack"
 
 Run "Pack"
