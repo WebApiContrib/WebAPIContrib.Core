@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>An ASP.NET Core library allowing you to define HTTP API versioning strategies.</Description>
-    <VersionPrefix>1.0.2</VersionPrefix>
+    <VersionPrefix>1.1.0</VersionPrefix>
     <Authors>khellang;WebApiContrib Contributors</Authors>
     <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
