@@ -10,26 +10,26 @@ Target "Clean" (fun _ ->
 Target "Build" (fun _ ->
     DotNetCli.Restore id
 
-    !! "src/**/project.json"
+    !! "**/*.csproj"
     |> DotNetCli.Build id
 )
 
 Target "Test" (fun _ ->
-    !! "tests/**/project.json"
+    !! "tests/**/*.csproj"
     |> DotNetCli.Test id
 )
 
 Target "Pack" (fun _ ->
-    !! "src/**/project.json"
+    !! "src/**/*.csproj"
     |> DotNetCli.Pack
       (fun p -> 
          { p with 
             Configuration = "Release"
-            OutputPath = "artifacts" })
+            OutputPath = "../../artifacts" })
 )
 
-"Clean"
-      ==> "Build"
-      ==> "Pack"
+//"Clean"
+//      ==> "Build"
+//      ==> "Pack"
 
 Run "Pack"
