@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApiContrib.Core.Versioning
 {
@@ -68,7 +69,7 @@ namespace WebApiContrib.Core.Versioning
 
             if (Options.Value.EmitVaryHeader && !string.IsNullOrEmpty(versionResult.Value.VaryOn))
             {
-                context.HttpContext.Response.Headers.Add("Vary", versionResult.Value.VaryOn);
+                context.HttpContext.Response.Headers.Append("Vary", versionResult.Value.VaryOn);
             }
         }
 
