@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace WebApiContrib.Core
 {
-
     public static class HttpRequestExtensions
     {
         public static bool IsAjaxRequest(this HttpRequest request)
