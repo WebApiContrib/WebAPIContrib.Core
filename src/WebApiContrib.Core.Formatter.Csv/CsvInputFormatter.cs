@@ -18,6 +18,8 @@ namespace WebApiContrib.Core.Formatter.Csv
 
         public CsvInputFormatter(CsvFormatterOptions csvFormatterOptions)
         {
+            SupportedMediaTypes.Add(Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Parse("text/csv"));
+
             if (csvFormatterOptions == null)
             {
                 throw new ArgumentNullException(nameof(csvFormatterOptions));
