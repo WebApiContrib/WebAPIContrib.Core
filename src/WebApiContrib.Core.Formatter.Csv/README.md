@@ -134,12 +134,14 @@ The custom formatters can also be configured directly. The Content-Type 'text/cs
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddMvc(options =>
-    {
-        options.InputFormatters.Add(new CsvInputFormatter());
-        options.OutputFormatters.Add(new CsvOutputFormatter());
-        options.FormatterMappings.SetMediaTypeMappingForFormat("csv", MediaTypeHeaderValue.Parse("text/csv"));
-    });
+	var csvFormatterOptions = new CsvFormatterOptions();
+
+	services.AddMvc(options =>
+	{
+		options.InputFormatters.Add(new CsvInputFormatter(csvFormatterOptions));
+		options.OutputFormatters.Add(new CsvOutputFormatter(csvFormatterOptions));
+		options.FormatterMappings.SetMediaTypeMappingForFormat("csv", MediaTypeHeaderValue.Parse("text/csv"));
+	});
 }
 ```
 
