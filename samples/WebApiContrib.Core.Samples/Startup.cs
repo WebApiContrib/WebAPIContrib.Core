@@ -10,6 +10,9 @@ using WebApiContrib.Core.Samples.Controllers;
 using WebApiContrib.Core.Razor;
 using WebApiContrib.Core.Samples.Model;
 using WebApiContrib.Core.Versioning;
+using Microsoft.AspNetCore.Server.Kestrel;
+using WebApiContrib.Core.Samples.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApiContrib.Core.Samples
 {
@@ -53,6 +56,28 @@ namespace WebApiContrib.Core.Samples
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseBranchWithServices<KestrelServer>("/hi-branch",
+                s => s.AddTransient<IGreetService, HiService>(),
+                a =>
+                {
+                    a.Run(async c =>
+                    {
+                        var service = c.RequestServices.GetRequiredService<IGreetService>();
+                        await c.Response.WriteAsync(service.Greet());
+                    });
+                });
+
+            app.UseBranchWithServices<KestrelServer>("/welcome-branch",
+                s => s.AddTransient<IGreetService, WelcomeService>(),
+                a =>
+                {
+                    a.Run(async c =>
+                    {
+                        var service = c.RequestServices.GetRequiredService<IGreetService>();
+                        await c.Response.WriteAsync(service.Greet());
+                    });
+                });
 
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
