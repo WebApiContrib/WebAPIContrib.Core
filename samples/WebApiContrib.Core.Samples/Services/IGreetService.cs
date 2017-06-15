@@ -9,20 +9,4 @@ namespace WebApiContrib.Core.Samples.Services
     {
         string Greet();
     }
-
-    public class WelcomeService : IGreetService
-    {
-        public string Greet()
-        {
-            return "Welcome!";
-        }
-    }
-
-    public class HiService : IGreetService
-    {
-        public string Greet()
-        {
-            return "Hi!";
-        }
-    }
 }
