@@ -13,19 +13,18 @@ namespace WebApiContrib.Core.Filters
         {
             if (!AllowNull)
             {
-                var nullArguments = actionContext.ActionArguments.Where(x => x.Value == null);
+                var nullArguments = actionContext.ActionArguments
+                    .Where(arg => arg.Value == null)
+                    .Select(arg => new Error
+                    {
+                        Name = arg.Key,
+                        Message = "Value cannot be null."
+                    }).ToArray();
+
                 if (nullArguments.Any())
                 {
-                    var errors = new List<Error>();
-                    foreach(var nullArgument in nullArguments)
-                    {
-                        errors.Add(new Error
-                        {
-                            Name = nullArgument.Key,
-                            Message = "Value cannot be null."
-                        });
-                    }
-                    actionContext.Result = new BadRequestObjectResult(errors);
+                    actionContext.Result = new BadRequestObjectResult(nullArguments);
+                    return;
                 }
             }
 
