@@ -7,7 +7,7 @@ namespace WebApiContrib.Core.Filters
 {
     public class ValidationAttribute : ActionFilterAttribute
     {
-        public bool AllowNull { get; }
+        public bool AllowNull { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext actionContext)
         {
