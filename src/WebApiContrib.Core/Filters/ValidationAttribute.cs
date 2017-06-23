@@ -7,11 +7,11 @@ namespace WebApiContrib.Core.Filters
 {
     public class ValidationAttribute : ActionFilterAttribute
     {
-        public bool AllowNull { get; set; }
+        public bool AllowNulls { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext actionContext)
         {
-            if (!AllowNull)
+            if (!AllowNulls)
             {
                 var nullArguments = actionContext.ActionArguments
                     .Where(arg => arg.Value == null)
