@@ -10,7 +10,7 @@ namespace WebApiContrib.Core
 {
     public static class ParallelApplicationPipelinesExtensions
     {
-           public static IApplicationBuilder UseBranchWithServices<TServer>(this IApplicationBuilder app, PathString path, 
+        public static IApplicationBuilder UseBranchWithServices<TServer>(this IApplicationBuilder app, PathString path, 
             Action<IServiceCollection> servicesConfiguration, Action<IApplicationBuilder> appBuilderConfiguration) where TServer : class, IServer
         {
             var webHost = new WebHostBuilder().
