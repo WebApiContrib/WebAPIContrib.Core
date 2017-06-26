@@ -16,23 +16,28 @@ namespace WebApiContrib.Core.Formatter.Csv
             return AddMessagePackFormatters(builder, messagePackFormatterOptions: null);
         }
 
-        public static IMvcBuilder AddMessagePackFormatters( this IMvcBuilder builder, MessagePackFormatterOptions messagePackFormatterOptions)
+        public static IMvcBuilder AddMessagePackFormatters(this IMvcBuilder builder, MessagePackFormatterOptions messagePackFormatterOptions)
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.AddFormatterMappings(m => m.SetMediaTypeMappingForFormat("mp", new MediaTypeHeaderValue("application/x-msgpack")));
-
             if (messagePackFormatterOptions == null)
             {
                 messagePackFormatterOptions = new MessagePackFormatterOptions();
             }
 
+            foreach (var extension in messagePackFormatterOptions.SupportedExtensions)
+            {
+                foreach (var contentType in messagePackFormatterOptions.SupportedContentTypes)
+                {
+                    builder.AddFormatterMappings(m => m.SetMediaTypeMappingForFormat(extension, new MediaTypeHeaderValue(contentType)));
+                }
+            }
+
             builder.AddMvcOptions(options => options.InputFormatters.Add(new MessagePackInputFormatter(messagePackFormatterOptions)));
             builder.AddMvcOptions(options => options.OutputFormatters.Add(new MessagePackOutputFormatter(messagePackFormatterOptions)));
-
 
             return builder;
         }

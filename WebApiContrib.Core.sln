@@ -54,6 +54,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Versioni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Core.Formatter.MessagePack", "src\WebApiContrib.Core.Formatter.MessagePack\WebApiContrib.Core.Formatter.MessagePack.csproj", "{C5FC3D1B-B331-427C-949B-790A3B66948A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Core.MessagePack.Tests", "tests\WebApiContrib.Core.MessagePack.Tests\WebApiContrib.Core.MessagePack.Tests.csproj", "{A93815F3-F713-4648-8AE3-A6676F66523A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -140,6 +142,10 @@ Global
 		{C5FC3D1B-B331-427C-949B-790A3B66948A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5FC3D1B-B331-427C-949B-790A3B66948A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5FC3D1B-B331-427C-949B-790A3B66948A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A93815F3-F713-4648-8AE3-A6676F66523A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A93815F3-F713-4648-8AE3-A6676F66523A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A93815F3-F713-4648-8AE3-A6676F66523A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A93815F3-F713-4648-8AE3-A6676F66523A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -167,5 +173,6 @@ Global
 		{3265E2B5-6679-49F0-8983-B120DE9C8C16} = {5898776F-DBF8-4C30-85A3-66401B12016F}
 		{3C24815E-A771-4AAC-BB4B-9C1E8A176899} = {5898776F-DBF8-4C30-85A3-66401B12016F}
 		{C5FC3D1B-B331-427C-949B-790A3B66948A} = {5898776F-DBF8-4C30-85A3-66401B12016F}
+		{A93815F3-F713-4648-8AE3-A6676F66523A} = {A7A8D928-30D6-4497-8B7D-F233B79A2917}
 	EndGlobalSection
 EndGlobal

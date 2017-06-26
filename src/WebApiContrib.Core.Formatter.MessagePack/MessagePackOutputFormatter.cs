@@ -17,8 +17,11 @@ namespace WebApiContrib.Core.Formatter.Csv
 
         public MessagePackOutputFormatter(MessagePackFormatterOptions messagePackFormatterOptions)
         {
-            SupportedMediaTypes.Add(new MediaTypeHeaderValue(("application/x-msgpack")));
             _options = messagePackFormatterOptions ?? throw new ArgumentNullException(nameof(messagePackFormatterOptions));
+            foreach (var contentType in messagePackFormatterOptions.SupportedContentTypes)
+            {
+                SupportedMediaTypes.Add(new MediaTypeHeaderValue(contentType));
+            }
         }
 
         public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context)

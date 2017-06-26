@@ -16,8 +16,11 @@ namespace WebApiContrib.Core.Formatter.Csv
 
         public MessagePackInputFormatter(MessagePackFormatterOptions messagePackFormatterOptions)
         {
-            SupportedMediaTypes.Add(new MediaTypeHeaderValue(("application/x-msgpack")));
             _options = messagePackFormatterOptions ?? throw new ArgumentNullException(nameof(messagePackFormatterOptions));
+            foreach (var contentType in messagePackFormatterOptions.SupportedContentTypes)
+            {
+                SupportedMediaTypes.Add(new MediaTypeHeaderValue(contentType));
+            }
         }
 
         public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
