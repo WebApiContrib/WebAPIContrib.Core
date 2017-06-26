@@ -26,6 +26,11 @@ namespace WebApiContrib.Core.Formatter.Csv
 
         public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             MessagePackSerializer.NonGeneric.Serialize(context.ObjectType, context.HttpContext.Response.Body, context.Object, _options.FormatterResolver);
             return Task.FromResult(0);
         }

@@ -10,5 +10,7 @@ namespace WebApiContrib.Core.Formatter.Csv
         public HashSet<string> SupportedContentTypes { get; set; } = new HashSet<string> { "application/x-msgpack" };
 
         public HashSet<string> SupportedExtensions { get; set; } = new HashSet<string> { "mp" };
+
+        public bool SuppressReadBufferring { get; set; } = false;
     }
 }

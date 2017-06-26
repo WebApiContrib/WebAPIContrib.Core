@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using MessagePack;
+using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Threading;
 
 namespace WebApiContrib.Core.Formatter.Csv
 {
@@ -23,15 +26,36 @@ namespace WebApiContrib.Core.Formatter.Csv
             }
         }
 
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
+        public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             var request = context.HttpContext.Request;
+
+            if (!request.Body.CanSeek && !_options.SuppressReadBufferring)
+            {
+                BufferingHelper.EnableRewind(request);
+
+                await request.Body.DrainAsync(CancellationToken.None);
+                request.Body.Seek(0L, SeekOrigin.Begin);
+            }
+
             var result = MessagePackSerializer.NonGeneric.Deserialize(context.ModelType, request.Body, _options.FormatterResolver);
-            return InputFormatterResult.SuccessAsync(result);
+            var formatterResult = await InputFormatterResult.SuccessAsync(result);
+
+            return formatterResult;
         }
 
         public override bool CanRead(InputFormatterContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             if (context.ModelType == null)
             {
                 throw new ArgumentException("Model Type cannnot be null");
