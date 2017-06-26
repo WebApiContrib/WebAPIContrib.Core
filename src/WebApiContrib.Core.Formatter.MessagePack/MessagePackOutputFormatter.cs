@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using MessagePack;
 using Microsoft.Net.Http.Headers;
 
-namespace WebApiContrib.Core.Formatter.Csv
+namespace WebApiContrib.Core.Formatter.MessagePack
 {
     public class MessagePackOutputFormatter : OutputFormatter
     {

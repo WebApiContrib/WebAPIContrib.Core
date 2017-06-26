@@ -2,7 +2,7 @@
 using System;
 using Microsoft.Net.Http.Headers;
 
-namespace WebApiContrib.Core.Formatter.Csv
+namespace WebApiContrib.Core.Formatter.MessagePack
 {
     public static class MessagePackFormatterMvcBuilderExtensions
     {
@@ -13,20 +13,52 @@ namespace WebApiContrib.Core.Formatter.Csv
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            return AddMessagePackFormatters(builder, messagePackFormatterOptions: null);
+            return AddMessagePackFormatters(builder, messagePackFormatterOptionsConfiguration: null);
         }
 
-        public static IMvcBuilder AddMessagePackFormatters(this IMvcBuilder builder, MessagePackFormatterOptions messagePackFormatterOptions)
+        public static IMvcCoreBuilder AddMessagePackFormatters(this IMvcCoreBuilder builder)
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            if (messagePackFormatterOptions == null)
+            return AddMessagePackFormatters(builder, messagePackFormatterOptionsConfiguration: null);
+        }
+
+        public static IMvcBuilder AddMessagePackFormatters(this IMvcBuilder builder, Action<MessagePackFormatterOptions> messagePackFormatterOptionsConfiguration)
+        {
+            if (builder == null)
             {
-                messagePackFormatterOptions = new MessagePackFormatterOptions();
+                throw new ArgumentNullException(nameof(builder));
             }
+
+            var messagePackFormatterOptions = new MessagePackFormatterOptions();
+            messagePackFormatterOptionsConfiguration?.Invoke(messagePackFormatterOptions);
+
+            foreach (var extension in messagePackFormatterOptions.SupportedExtensions)
+            {
+                foreach (var contentType in messagePackFormatterOptions.SupportedContentTypes)
+                {
+                    builder.AddFormatterMappings(m => m.SetMediaTypeMappingForFormat(extension, new MediaTypeHeaderValue(contentType)));
+                }
+            }
+
+            builder.AddMvcOptions(options => options.InputFormatters.Add(new MessagePackInputFormatter(messagePackFormatterOptions)));
+            builder.AddMvcOptions(options => options.OutputFormatters.Add(new MessagePackOutputFormatter(messagePackFormatterOptions)));
+
+            return builder;
+        }
+
+        public static IMvcCoreBuilder AddMessagePackFormatters(this IMvcCoreBuilder builder, Action<MessagePackFormatterOptions> messagePackFormatterOptionsConfiguration)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            var messagePackFormatterOptions = new MessagePackFormatterOptions();
+            messagePackFormatterOptionsConfiguration?.Invoke(messagePackFormatterOptions);
 
             foreach (var extension in messagePackFormatterOptions.SupportedExtensions)
             {

@@ -2,33 +2,35 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Http;
+using WebApiContrib.Core.Formatter.MessagePack;
+using MessagePack.Resolvers;
 
 namespace WebApiContrib.Core.MessagePack.Tests
 {
     public class Startup
     {
-        public IConfigurationRoot Configuration { get; private set; }
+        public IConfigurationRoot Configuration { get; }
 
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
-        void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
+            services.
+                AddMvcCore().
+                AddJsonFormatters().
+                AddMessagePackFormatters();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.Run(async c =>
-            {
-                await c.Response.WriteAsync("hello");
-            });
+            app.UseMvc();
         }
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Threading;
 
-namespace WebApiContrib.Core.Formatter.Csv
+namespace WebApiContrib.Core.Formatter.MessagePack
 {
     public class MessagePackInputFormatter : InputFormatter
     {
