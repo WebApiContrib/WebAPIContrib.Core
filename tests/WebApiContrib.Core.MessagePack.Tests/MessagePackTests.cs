@@ -14,6 +14,7 @@ using Xunit;
 
 namespace WebApiContrib.Core.MessagePack.Tests
 {
+    // note: the JSON tests are here to verify that the two formatters do not conflict with each other
     public class MessagePackTests
     {
         private TestServer _server;
@@ -58,6 +59,30 @@ namespace WebApiContrib.Core.MessagePack.Tests
         }
 
         [Fact]
+        public async Task Post_MessagePack_Header()
+        {
+            var client = _server.CreateClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/books");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-msgpack"));
+
+            var book = new Book
+            {
+                Author = "Tim Parks",
+                Title = "Italian Ways: On and off the Rails from Milan to Palermo"
+            };
+
+            request.Content = new ByteArrayContent(MessagePackSerializer.Serialize<Book>(book, ContractlessStandardResolver.Instance));
+            var result = await client.SendAsync(request);
+
+            var echo = MessagePackSerializer.Deserialize<Book>(await result.Content.ReadAsStreamAsync(), ContractlessStandardResolver.Instance);
+
+            Assert.NotNull(book);
+            Assert.Equal(book.Author, echo.Author);
+            Assert.Equal(book.Title, echo.Title);
+        }
+
+        [Fact]
         public async Task GetCollection_JSON_Header()
         {
             var client = _server.CreateClient();
@@ -88,6 +113,30 @@ namespace WebApiContrib.Core.MessagePack.Tests
             Assert.NotNull(book);
             Assert.Equal(Book.Data[0].Author, book.Author);
             Assert.Equal(Book.Data[0].Title, book.Title);
+        }
+
+        [Fact]
+        public async Task Post_JSON_Header()
+        {
+            var client = _server.CreateClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/books");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var book = new Book
+            {
+                Author = "Tim Parks",
+                Title = "Italian Ways: On and off the Rails from Milan to Palermo"
+            };
+
+            request.Content = new StringContent(JsonConvert.SerializeObject(book));
+            var result = await client.SendAsync(request);
+
+            var echo = JsonConvert.DeserializeObject<Book>(await result.Content.ReadAsStringAsync());
+
+            Assert.NotNull(book);
+            Assert.Equal(book.Author, echo.Author);
+            Assert.Equal(book.Title, echo.Title);
         }
     }
 }

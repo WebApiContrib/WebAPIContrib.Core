@@ -23,6 +23,12 @@ namespace WebApiContrib.Core.MessagePack.Tests
 
             return Ok(null);
         }
+
+        [HttpPost]
+        public IActionResult Post([FromBody]Book book)
+        {
+            return Ok(book);
+        }
     }
 
     public class Book
