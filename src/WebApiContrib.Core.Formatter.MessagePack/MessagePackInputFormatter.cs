@@ -35,7 +35,7 @@ namespace WebApiContrib.Core.Formatter.MessagePack
 
             var request = context.HttpContext.Request;
 
-            if (!request.Body.CanSeek && !_options.SuppressReadBufferring)
+            if (!request.Body.CanSeek && !_options.SuppressReadBuffering)
             {
                 BufferingHelper.EnableRewind(request);
 
