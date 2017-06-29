@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using ProtoBuf;
 
 namespace WebApiContrib.Core.Protobuf.Tests
 {
@@ -31,6 +32,7 @@ namespace WebApiContrib.Core.Protobuf.Tests
         }
     }
 
+    [ProtoContract]
     public class Book
     {
         public static Book[] Data = new[]
@@ -39,8 +41,10 @@ namespace WebApiContrib.Core.Protobuf.Tests
                 new Book { Title = "Hockey Towns", Author = "Ron MacLean"},
             };
 
+        [ProtoMember(1)]
         public string Title { get; set; }
 
+        [ProtoMember(2)]
         public string Author { get; set; }
     }
 }
