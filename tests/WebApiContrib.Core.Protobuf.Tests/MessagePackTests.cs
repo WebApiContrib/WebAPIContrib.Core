@@ -1,23 +1,20 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace WebApiContrib.Core.Protobuf.Tests
 {
     // note: the JSON tests are here to verify that the two formatters do not conflict with each other
-    public class MessagePackTests
+    public class ProtobufTests
     {
         private TestServer _server;
 
-        public MessagePackTests()
+        public ProtobufTests()
         {
             _server = new TestServer(new WebHostBuilder()
                     .UseContentRoot(Directory.GetCurrentDirectory())
@@ -25,14 +22,14 @@ namespace WebApiContrib.Core.Protobuf.Tests
         }
 
         [Fact]
-        public async Task GetCollection_MessagePack_Header()
+        public async Task GetCollection_Protobuf_Header()
         {
             var client = _server.CreateClient();
 
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/books");
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-msgpack"));
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));
             var result = await client.SendAsync(request);
-            var books = MessagePackSerializer.Deserialize<Book[]>(await result.Content.ReadAsStreamAsync(), ContractlessStandardResolver.Instance);
+            var books = ProtoBuf.Serializer.Deserialize<Book[]>(await result.Content.ReadAsStreamAsync());
 
             Assert.Equal(2, books.Length);
             Assert.Equal(Book.Data[0].Author, books[0].Author);
@@ -42,14 +39,14 @@ namespace WebApiContrib.Core.Protobuf.Tests
         }
 
         [Fact]
-        public async Task GetById_MessagePack_Header()
+        public async Task GetById_Protobuf_Header()
         {
             var client = _server.CreateClient();
 
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/books/1");
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-msgpack"));
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));
             var result = await client.SendAsync(request);
-            var book = MessagePackSerializer.Deserialize<Book>(await result.Content.ReadAsStreamAsync(), ContractlessStandardResolver.Instance);
+            var book = ProtoBuf.Serializer.Deserialize<Book>(await result.Content.ReadAsStreamAsync());
 
             Assert.NotNull(book);
             Assert.Equal(Book.Data[0].Author, book.Author);
@@ -57,12 +54,12 @@ namespace WebApiContrib.Core.Protobuf.Tests
         }
 
         [Fact]
-        public async Task Post_MessagePack_Header()
+        public async Task Post_Protobuf_Header()
         {
             var client = _server.CreateClient();
 
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/books");
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-msgpack"));
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-protobuf"));
 
             var book = new Book
             {
@@ -70,10 +67,15 @@ namespace WebApiContrib.Core.Protobuf.Tests
                 Title = "Italian Ways: On and off the Rails from Milan to Palermo"
             };
 
-            request.Content = new ByteArrayContent(MessagePackSerializer.Serialize<Book>(book, ContractlessStandardResolver.Instance));
+            MemoryStream stream = new MemoryStream();
+            ProtoBuf.Serializer.Serialize<Book>(stream, book);
+
+            HttpContent data = new StreamContent(stream);
+
+            request.Content = data;
             var result = await client.SendAsync(request);
 
-            var echo = MessagePackSerializer.Deserialize<Book>(await result.Content.ReadAsStreamAsync(), ContractlessStandardResolver.Instance);
+            var echo = ProtoBuf.Serializer.Deserialize<Book>(await result.Content.ReadAsStreamAsync());
 
             Assert.NotNull(book);
             Assert.Equal(book.Author, echo.Author);
