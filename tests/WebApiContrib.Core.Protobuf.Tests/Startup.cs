@@ -21,9 +21,9 @@ namespace WebApiContrib.Core.Protobuf.Tests
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.
-                AddMvcCore().
-                AddJsonFormatters().AddProtobufFormatters();
+            services.AddMvcCore()
+                .AddJsonFormatters()
+                .AddProtobufFormatters();
         }
 
         public void Configure(IApplicationBuilder app)
