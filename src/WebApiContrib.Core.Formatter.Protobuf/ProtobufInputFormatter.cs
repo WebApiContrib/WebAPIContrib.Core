@@ -1,14 +1,24 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using ProtoBuf.Meta;
 
-namespace AspNetCoreProtobuf.Formatters
+namespace WebApiContrib.Core.Formatter.Protobuf
 {
     public class ProtobufInputFormatter : InputFormatter
     {
+        private readonly ProtobufFormatterOptions _options;
+
+        public ProtobufInputFormatter(ProtobufFormatterOptions protobufFormatterOptions)
+        {
+            _options = protobufFormatterOptions ?? throw new ArgumentNullException(nameof(protobufFormatterOptions));
+            foreach (var contentType in protobufFormatterOptions.SupportedContentTypes)
+            {
+                SupportedMediaTypes.Add(new MediaTypeHeaderValue(contentType));
+            }
+        }
+
         private static Lazy<RuntimeTypeModel> model = new Lazy<RuntimeTypeModel>(CreateTypeModel);
 
         public static RuntimeTypeModel Model
@@ -32,7 +42,6 @@ namespace AspNetCoreProtobuf.Formatters
         {
             return true;
         }
-
 
         private static RuntimeTypeModel CreateTypeModel()
         {

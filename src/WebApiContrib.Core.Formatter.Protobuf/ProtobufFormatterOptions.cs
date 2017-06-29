@@ -1,17 +1,16 @@
-﻿using MessagePack;
-using MessagePack.Resolvers;
+﻿
 using System.Collections.Generic;
 
-namespace WebApiContrib.Core.Formatter.MessagePack
+namespace WebApiContrib.Core.Formatter.Protobuf
 {
-    public class MessagePackFormatterOptions
+    public class ProtobufFormatterOptions
     {
-        public IFormatterResolver FormatterResolver { get; set; } = ContractlessStandardResolver.Instance;
+        //public IFormatterResolver FormatterResolver { get; set; } = ContractlessStandardResolver.Instance;
 
-        public HashSet<string> SupportedContentTypes { get; set; } = new HashSet<string> { "application/x-msgpack", "application/msgpack" };
+        public HashSet<string> SupportedContentTypes { get; set; } = new HashSet<string> { "application/x-protobuf", "application/x-protobuf" };
 
-        public HashSet<string> SupportedExtensions { get; set; } = new HashSet<string> { "mp" };
+        public HashSet<string> SupportedExtensions { get; set; } = new HashSet<string> { "proto" };
 
-        public bool SuppressReadBuffering { get; set; } = false;
+       public bool SuppressReadBuffering { get; set; } = false;
     }
 }

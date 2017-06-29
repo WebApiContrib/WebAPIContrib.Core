@@ -1,6 +1,4 @@
-﻿using MessagePack;
-using MessagePack.Resolvers;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using System;
@@ -12,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace WebApiContrib.Core.MessagePack.Tests
+namespace WebApiContrib.Core.Protobuf.Tests
 {
     // note: the JSON tests are here to verify that the two formatters do not conflict with each other
     public class MessagePackTests

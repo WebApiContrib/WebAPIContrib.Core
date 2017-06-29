@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace WebApiContrib.Core.MessagePack.Tests
+namespace WebApiContrib.Core.Protobuf.Tests
 {
     [Route("api/books")]
     public class BooksController : ControllerBase

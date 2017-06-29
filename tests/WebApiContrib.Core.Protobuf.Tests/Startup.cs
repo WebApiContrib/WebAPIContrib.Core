@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebApiContrib.Core.Formatter.MessagePack;
-using MessagePack.Resolvers;
+using WebApiContrib.Core.Formatter.Protobuf;
 
-namespace WebApiContrib.Core.MessagePack.Tests
+namespace WebApiContrib.Core.Protobuf.Tests
 {
     public class Startup
     {
@@ -24,8 +23,7 @@ namespace WebApiContrib.Core.MessagePack.Tests
         {
             services.
                 AddMvcCore().
-                AddJsonFormatters().
-                AddMessagePackFormatters();
+                AddJsonFormatters().AddProtobufFormatters();
         }
 
         public void Configure(IApplicationBuilder app)

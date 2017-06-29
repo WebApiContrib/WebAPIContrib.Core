@@ -5,18 +5,11 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using ProtoBuf.Meta;
 
-namespace AspNetCoreProtobuf.Formatters
+namespace WebApiContrib.Core.Formatter.Protobuf
 {
     public class ProtobufOutputFormatter :  OutputFormatter
     {
-        private static Lazy<RuntimeTypeModel> model = new Lazy<RuntimeTypeModel>(CreateTypeModel);
-
-        public string ContentType { get; private set; }
-
-        public static RuntimeTypeModel Model
-        {
-            get { return model.Value; }
-        }
+        private readonly ProtobufFormatterOptions _options;
 
         public ProtobufOutputFormatter()
         {
@@ -24,6 +17,24 @@ namespace AspNetCoreProtobuf.Formatters
             SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/x-protobuf"));
 
             //SupportedEncodings.Add(Encoding.GetEncoding("utf-8"));
+        }
+
+        public ProtobufOutputFormatter(ProtobufFormatterOptions protobufFormatterOptions)
+        {
+            _options = protobufFormatterOptions ?? throw new ArgumentNullException(nameof(protobufFormatterOptions));
+            foreach (var contentType in protobufFormatterOptions.SupportedContentTypes)
+            {
+                SupportedMediaTypes.Add(new MediaTypeHeaderValue(contentType));
+            }
+        }
+
+        private static Lazy<RuntimeTypeModel> model = new Lazy<RuntimeTypeModel>(CreateTypeModel);
+
+        public string ContentType { get; private set; }
+
+        public static RuntimeTypeModel Model
+        {
+            get { return model.Value; }
         }
 
         private static RuntimeTypeModel CreateTypeModel()

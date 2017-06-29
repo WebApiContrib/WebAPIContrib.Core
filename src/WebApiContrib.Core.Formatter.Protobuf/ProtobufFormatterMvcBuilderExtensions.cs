@@ -26,19 +26,19 @@ namespace WebApiContrib.Core.Formatter.Protobuf
             return AddProtobufFormatters(builder, protobufFormatterOptionsConfiguration: null);
         }
 
-        public static IMvcBuilder AddMessagePackFormatters(this IMvcBuilder builder, Action<ProtobufFormatterOptions> protobufFormatterOptionsConfiguration)
+        public static IMvcBuilder AddProtobufFormatters(this IMvcBuilder builder, Action<ProtobufFormatterOptions> protobufFormatterOptionsConfiguration)
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            var messagePackFormatterOptions = new ProtobufFormatterOptions();
-            protobuformatterOptionsConfiguration?.Invoke(messagePackFormatterOptions);
+            var protobufFormatterOptions = new ProtobufFormatterOptions();
+            protobufFormatterOptionsConfiguration?.Invoke(protobufFormatterOptions);
 
             foreach (var extension in protobufFormatterOptions.SupportedExtensions)
             {
-                foreach (var contentType in messagePackFormatterOptions.SupportedContentTypes)
+                foreach (var contentType in protobufFormatterOptions.SupportedContentTypes)
                 {
                     builder.AddFormatterMappings(m => m.SetMediaTypeMappingForFormat(extension, new MediaTypeHeaderValue(contentType)));
                 }
@@ -57,8 +57,8 @@ namespace WebApiContrib.Core.Formatter.Protobuf
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            var messagePackFormatterOptions = new ProtobufFormatterOptions();
-            protobufFormatterOptionsConfiguration?.Invoke(messagePackFormatterOptions);
+            var protobufFormatterOptions = new ProtobufFormatterOptions();
+            protobufFormatterOptionsConfiguration?.Invoke(protobufFormatterOptions);
 
             foreach (var extension in protobufFormatterOptions.SupportedExtensions)
             {
