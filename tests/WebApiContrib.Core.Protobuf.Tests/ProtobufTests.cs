@@ -103,6 +103,20 @@ namespace WebApiContrib.Core.Protobuf.Tests
         }
 
         [Fact]
+        public async Task GetById_X__Google_Protobuf_Header()
+        {
+            var client = _server.CreateClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/books/1");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-google-protobuf"));
+            var result = await client.SendAsync(request);
+            var book = ProtoBuf.Serializer.Deserialize<Book>(await result.Content.ReadAsStreamAsync());
+
+            Assert.NotNull(book);
+            Assert.Equal(Book.Data[0].Author, book.Author);
+            Assert.Equal(Book.Data[0].Title, book.Title);
+        }
+        [Fact]
         public async Task Post_X_Protobuf_Header()
         {
             var client = _server.CreateClient();
