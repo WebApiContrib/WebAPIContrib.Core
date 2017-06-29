@@ -11,16 +11,9 @@ namespace WebApiContrib.Core.Formatter.Protobuf
     {
         private readonly ProtobufFormatterOptions _options;
 
-        public ProtobufOutputFormatter()
-        {
-            ContentType = "application/x-protobuf";
-            SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/x-protobuf"));
-
-            //SupportedEncodings.Add(Encoding.GetEncoding("utf-8"));
-        }
-
         public ProtobufOutputFormatter(ProtobufFormatterOptions protobufFormatterOptions)
         {
+            ContentType = "application/x-protobuf";
             _options = protobufFormatterOptions ?? throw new ArgumentNullException(nameof(protobufFormatterOptions));
             foreach (var contentType in protobufFormatterOptions.SupportedContentTypes)
             {
