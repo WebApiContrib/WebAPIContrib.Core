@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Core", "01. Core", "{5898776F-DBF8-4C30-85A3-66401B12016F}"
 EndProject
@@ -52,9 +52,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Razor", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Versioning", "src\WebApiContrib.Core.Versioning\WebApiContrib.Core.Versioning.csproj", "{3C24815E-A771-4AAC-BB4B-9C1E8A176899}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Core.Formatter.MessagePack", "src\WebApiContrib.Core.Formatter.MessagePack\WebApiContrib.Core.Formatter.MessagePack.csproj", "{C5FC3D1B-B331-427C-949B-790A3B66948A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Formatter.MessagePack", "src\WebApiContrib.Core.Formatter.MessagePack\WebApiContrib.Core.Formatter.MessagePack.csproj", "{C5FC3D1B-B331-427C-949B-790A3B66948A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Core.MessagePack.Tests", "tests\WebApiContrib.Core.MessagePack.Tests\WebApiContrib.Core.MessagePack.Tests.csproj", "{A93815F3-F713-4648-8AE3-A6676F66523A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.MessagePack.Tests", "tests\WebApiContrib.Core.MessagePack.Tests\WebApiContrib.Core.MessagePack.Tests.csproj", "{A93815F3-F713-4648-8AE3-A6676F66523A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Formatter.Protobuf", "src\WebApiContrib.Core.Formatter.Protobuf\WebApiContrib.Core.Formatter.Protobuf.csproj", "{2D6C001F-2154-4385-A112-DE2B1AC23220}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Protobuf.Tests", "tests\WebApiContrib.Core.Protobuf.Tests\WebApiContrib.Core.Protobuf.Tests.csproj", "{DA5532DB-81C4-4F39-B6F2-164ECA46292B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -146,6 +150,14 @@ Global
 		{A93815F3-F713-4648-8AE3-A6676F66523A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A93815F3-F713-4648-8AE3-A6676F66523A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A93815F3-F713-4648-8AE3-A6676F66523A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D6C001F-2154-4385-A112-DE2B1AC23220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D6C001F-2154-4385-A112-DE2B1AC23220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D6C001F-2154-4385-A112-DE2B1AC23220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D6C001F-2154-4385-A112-DE2B1AC23220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA5532DB-81C4-4F39-B6F2-164ECA46292B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA5532DB-81C4-4F39-B6F2-164ECA46292B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA5532DB-81C4-4F39-B6F2-164ECA46292B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA5532DB-81C4-4F39-B6F2-164ECA46292B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -174,5 +186,7 @@ Global
 		{3C24815E-A771-4AAC-BB4B-9C1E8A176899} = {5898776F-DBF8-4C30-85A3-66401B12016F}
 		{C5FC3D1B-B331-427C-949B-790A3B66948A} = {5898776F-DBF8-4C30-85A3-66401B12016F}
 		{A93815F3-F713-4648-8AE3-A6676F66523A} = {A7A8D928-30D6-4497-8B7D-F233B79A2917}
+		{2D6C001F-2154-4385-A112-DE2B1AC23220} = {5898776F-DBF8-4C30-85A3-66401B12016F}
+		{DA5532DB-81C4-4F39-B6F2-164ECA46292B} = {A7A8D928-30D6-4497-8B7D-F233B79A2917}
 	EndGlobalSection
 EndGlobal
