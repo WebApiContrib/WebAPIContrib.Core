@@ -129,7 +129,7 @@ namespace WebApiContrib.Core.MessagePack.Tests
                 Title = "Italian Ways: On and off the Rails from Milan to Palermo"
             };
 
-            request.Content = new StringContent(JsonConvert.SerializeObject(book));
+            request.Content = new StringContent(JsonConvert.SerializeObject(book),Encoding.UTF8, "application/json");
             var result = await client.SendAsync(request);
 
             var echo = JsonConvert.DeserializeObject<Book>(await result.Content.ReadAsStringAsync());

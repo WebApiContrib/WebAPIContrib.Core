@@ -15,5 +15,7 @@ test_script:
 - dotnet test
 - cd ../../tests/WebApiContrib.Core.Protobuf.Tests
 - dotnet test
+- cd ../../tests/WebApiContrib.Core.MessagePack.Tests
+- dotnet test
 - cd ../../tests/WebApiContrib.Core.Yaml.Tests
 - dotnet test
