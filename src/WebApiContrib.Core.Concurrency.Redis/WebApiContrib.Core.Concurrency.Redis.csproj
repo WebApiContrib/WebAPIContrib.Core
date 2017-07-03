@@ -9,7 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\other\Microsoft.Extensions.Caching.Redis\Microsoft.Extensions.Caching.Redis.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="1.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WebApiContrib.Core.Concurrency\WebApiContrib.Core.Concurrency.csproj" />
   </ItemGroup>
 

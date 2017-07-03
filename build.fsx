@@ -32,4 +32,4 @@ Target "Pack" (fun _ ->
       ==> "Build"
       ==> "Pack"
 
-Run "Pack"
+RunTargetOrDefault "Pack"
