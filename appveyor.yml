@@ -6,16 +6,8 @@ install:
   - dotnet --version
   - dotnet restore
 build_script:
-- dotnet build
-- dotnet build src\WebApiContrib.Core.Concurrency
+- build.bat Build
 before_build:
 - appveyor-retry dotnet restore -v Minimal
 test_script:
-- cd tests/WebApiContrib.Core.Concurrency.Tests
-- dotnet test
-- cd ../../tests/WebApiContrib.Core.Protobuf.Tests
-- dotnet test
-- cd ../../tests/WebApiContrib.Core.MessagePack.Tests
-- dotnet test
-- cd ../../tests/WebApiContrib.Core.Yaml.Tests
-- dotnet test
+- build.bat Test
