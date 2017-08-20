@@ -30,7 +30,6 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
     <PackageReference Include="System.Dynamic.Runtime" Version="4.0.11-*" />
     <PackageReference Include="System.Private.DataContractSerialization" Version="4.1.1-*" />
-    <PackageReference Include="System.Net.Http" Version="4.1.1" />
   </ItemGroup>
 
 </Project>
