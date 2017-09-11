@@ -10,9 +10,9 @@ using WebApiContrib.Core.Samples.Controllers;
 using WebApiContrib.Core.Razor;
 using WebApiContrib.Core.Samples.Model;
 using WebApiContrib.Core.Versioning;
-using Microsoft.AspNetCore.Server.Kestrel;
 using WebApiContrib.Core.Samples.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace WebApiContrib.Core.Samples
 {
