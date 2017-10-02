@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WebApiContrib.Core.Internal;
+using WebApiContrib.Core.Filters;
+using Microsoft.AspNetCore.Mvc.Internal;
+using System.Net.Http;
 
 namespace WebApiContrib.Core.Binding
 {
@@ -16,7 +20,7 @@ namespace WebApiContrib.Core.Binding
         {
         }
 
-        public FromBodyApplicationModelConvention(Func<ControllerModel, bool> controllerPredicate, 
+        public FromBodyApplicationModelConvention(Func<ControllerModel, bool> controllerPredicate,
             Func<ActionModel, bool> actionPredicate, Func<ParameterModel, bool> parameterPredicate)
         {
             _controllerPredicate = controllerPredicate ?? (c => true);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using WebApiContrib.Core.Filters;
 
 namespace WebApiContrib.Core.Constraints
 {
