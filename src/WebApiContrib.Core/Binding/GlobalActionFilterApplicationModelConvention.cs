@@ -15,18 +15,13 @@ namespace WebApiContrib.Core.Binding
         private readonly Func<ActionModel, bool> _actionPredicate;
         private readonly Func<SelectorModel, bool> _selectorPredicate;
 
-        public GlobalActionFilterApplicationModelConvention(ActionFilterAttribute filter)
-            : this(null, null, null)
-        {
-            _filter = filter;
-        }
-
         public GlobalActionFilterApplicationModelConvention(
-            Func<ControllerModel, bool> controllerPredicate, Func<ActionModel, bool> actionPredicate, Func<SelectorModel, bool> selectorPredicate)
+            Func<ControllerModel, bool> controllerPredicate, Func<ActionModel, bool> actionPredicate, Func<SelectorModel, bool> selectorPredicate, ActionFilterAttribute filter)
         {
-            _controllerPredicate = controllerPredicate ?? c => true;
-            _actionPredicate = actionPredicate ?? a => true;
-            _selectorPredicate = selectorPredicate ?? s => true;
+            _controllerPredicate = controllerPredicate ?? (c => true);
+            _actionPredicate = actionPredicate ?? (a => true);
+            _selectorPredicate = selectorPredicate ?? (s => true);
+            _filter = filter;
         }
 
         public void Apply(ApplicationModel application)
@@ -41,12 +36,6 @@ namespace WebApiContrib.Core.Binding
                     }
                 }
             }
-        }
-
-        private bool IsGetOrHeadRequest(SelectorModel selector)
-        {
-            return selector.ActionConstraints.OfType<HttpMethodActionConstraint>().Any(c => c.HttpMethods.Contains(HttpMethod.Get.Method))
-                            || selector.ActionConstraints.OfType<HttpMethodActionConstraint>().Any(c => c.HttpMethods.Contains(HttpMethod.Head.Method));
         }
     }
 }
