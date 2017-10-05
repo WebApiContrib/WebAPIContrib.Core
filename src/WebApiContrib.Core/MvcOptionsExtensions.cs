@@ -33,8 +33,8 @@ namespace WebApiContrib.Core
         /// <summary>
         /// Registers a Validation action filter as application model convention, which applies this filter to POST, PUT, and DELETE actions.
         /// </summary>
-        /// <param name="controllerPredicate">A controller predicate for further configuration.</param>
-        /// <param name="actionPredicate">An action predicate for further configuration.</param>
+        /// <param name="controllerPredicate">A controller predicate for more granular application of the filter.</param>
+        /// <param name="actionPredicate">An action predicate for more granular application of the filter.</param>
         public static void UseValidationFilter(this MvcOptions opts, Func<ControllerModel, bool> controllerPredicate = null, Func<ActionModel, bool> actionPredicate = null)
     => UseValidationFilter(opts, new ValidationAttribute(), controllerPredicate, actionPredicate);
 
@@ -42,16 +42,14 @@ namespace WebApiContrib.Core
         /// Registers a Validation action filter as application model convention, which applies this filter to POST, PUT, and DELETE actions.
         /// </summary>
         /// <param name="filter">A filter of type ValidationAttribute.</param>
-        /// <param name="controllerPredicate">A controller predicate for further configuration.</param>
-        /// <param name="actionPredicate">An action predicate for further configuration.</param>
+        /// <param name="controllerPredicate">A controller predicate for more granular application of the filter.</param>
+        /// <param name="actionPredicate">An action predicate for more granular application of the filter.</param>
         public static void UseValidationFilter(this MvcOptions opts, ValidationAttribute filter, Func<ControllerModel, bool> controllerPredicate = null, Func<ActionModel, bool> actionPredicate = null)
         {
             // Exclude GET and HEAD actions
-            Func<SelectorModel, bool> selectorPredicate = (s =>
+            Func<SelectorModel, bool> selectorPredicate = s =>
             s.ActionConstraints.OfType<HttpMethodActionConstraint>().Any(c => !c.HttpMethods.Contains(HttpMethod.Get.Method)
-     || !c.HttpMethods.Contains(HttpMethod.Head.Method)));
-
-            if (filter.GetType() != typeof(ValidationAttribute)) throw new ArgumentException($"Do not use this method to add other action filters than Validation action filters. Use the '{nameof(AddGlobalFilter)}' extension method for other action filter registrations.");
+     || !c.HttpMethods.Contains(HttpMethod.Head.Method));
 
             AddGlobalFilter(opts, filter, controllerPredicate, actionPredicate, selectorPredicate);
         }
@@ -59,10 +57,10 @@ namespace WebApiContrib.Core
         /// <summary>
         /// Registers a filter as global application model convention.
         /// </summary>
-        /// <param name="filter">A filter of type IFilterMetadata.</param>
-        /// <param name="controllerPredicate">A controller predicate for further configuration.</param>
-        /// <param name="actionPredicate">An action predicate for further configuration.</param>
-        /// <param name="selectorPredicate">A selector predicate for further configuration.</param>
+        /// <param name="filter">A custom filter to register.</param>
+        /// <param name="controllerPredicate">A controller predicate for more granular application of the filter.</param>
+        /// <param name="actionPredicate">An action predicate for more granular application of the filter.</param>
+        /// <param name="selectorPredicate">A selector predicate for more granular application of the filter.</param>
         public static void AddGlobalFilter(this MvcOptions opts, IFilterMetadata filter, Func<ControllerModel, bool> controllerPredicate = null, Func<ActionModel, bool> actionPredicate = null,
             Func<SelectorModel, bool> selectorPredicate = null)
         {
