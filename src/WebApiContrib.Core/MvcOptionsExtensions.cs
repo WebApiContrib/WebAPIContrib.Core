@@ -57,16 +57,16 @@ namespace WebApiContrib.Core
         }
 
         /// <summary>
-        /// Registers an action filter as global application model convention.
+        /// Registers a filter as global application model convention.
         /// </summary>
-        /// <param name="filter">An action filter.</param>
+        /// <param name="filter">A filter of type IFilterMetadata.</param>
         /// <param name="controllerPredicate">A controller predicate for further configuration.</param>
         /// <param name="actionPredicate">An action predicate for further configuration.</param>
         /// <param name="selectorPredicate">A selector predicate for further configuration.</param>
-        public static void AddGlobalFilter(this MvcOptions opts, ActionFilterAttribute filter, Func<ControllerModel, bool> controllerPredicate = null, Func<ActionModel, bool> actionPredicate = null,
+        public static void AddGlobalFilter(this MvcOptions opts, IFilterMetadata filter, Func<ControllerModel, bool> controllerPredicate = null, Func<ActionModel, bool> actionPredicate = null,
             Func<SelectorModel, bool> selectorPredicate = null)
         {
-            opts.Conventions.Insert(0, new GlobalActionFilterApplicationModelConvention(controllerPredicate, actionPredicate, selectorPredicate, filter));
+            opts.Conventions.Insert(0, new GlobalFilterApplicationModelConvention(controllerPredicate, actionPredicate, selectorPredicate, filter));
         }
     }
 }

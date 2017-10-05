@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using WebApiContrib.Core.Filters;
-using Microsoft.AspNetCore.Mvc.Internal;
-using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace WebApiContrib.Core.Binding
 {
-    public class GlobalActionFilterApplicationModelConvention : IApplicationModelConvention
+    public class GlobalFilterApplicationModelConvention : IApplicationModelConvention
     {
-        private readonly ActionFilterAttribute _filter;
+        private readonly IFilterMetadata _filter;
         private readonly Func<ControllerModel, bool> _controllerPredicate;
         private readonly Func<ActionModel, bool> _actionPredicate;
         private readonly Func<SelectorModel, bool> _selectorPredicate;
 
-        public GlobalActionFilterApplicationModelConvention(
-            Func<ControllerModel, bool> controllerPredicate, Func<ActionModel, bool> actionPredicate, Func<SelectorModel, bool> selectorPredicate, ActionFilterAttribute filter)
+        public GlobalFilterApplicationModelConvention(
+            Func<ControllerModel, bool> controllerPredicate, Func<ActionModel, bool> actionPredicate, Func<SelectorModel, bool> selectorPredicate, IFilterMetadata filter)
         {
             _controllerPredicate = controllerPredicate ?? (c => true);
             _actionPredicate = actionPredicate ?? (a => true);
