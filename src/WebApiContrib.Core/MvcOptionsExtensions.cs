@@ -30,24 +30,20 @@ namespace WebApiContrib.Core
             opts.Conventions.Insert(0, new FromBodyApplicationModelConvention(controllerPredicate, actionPredicate, parameterPredicate));
         }
 
-        public static void UseValidationFilter(this MvcOptions opts, ActionFilterAttribute filter = null, Func<ControllerModel, bool> controllerPredicate = null, Func<ActionModel, bool> actionPredicate = null,
-            Func<SelectorModel, bool> selectorPredicate = null)
-        {
-            selectorPredicate = s =>
-            {
-                return s.ActionConstraints.OfType<HttpMethodActionConstraint>().Any(c => !c.HttpMethods.Contains(HttpMethod.Get.Method)
-                || !c.HttpMethods.Contains(HttpMethod.Head.Method));
-            };
+        public static void UseValidationFilter(this MvcOptions opts, Func<ControllerModel, bool> controllerPredicate = null, Func<ActionModel, bool> actionPredicate = null)
+    => UseValidationFilter(opts, new ValidationAttribute(), controllerPredicate, actionPredicate);
 
-            if (filter == null)
-            {
-                filter = new ValidationAttribute();
-            }
+        public static void UseValidationFilter(this MvcOptions opts, ActionFilterAttribute filter, Func<ControllerModel, bool> controllerPredicate = null, Func<ActionModel, bool> actionPredicate = null)
+        {
+            // Exclude GET and HEAD actions
+            Func<SelectorModel, bool> selectorPredicate = (s =>
+            s.ActionConstraints.OfType<HttpMethodActionConstraint>().Any(c => !c.HttpMethods.Contains(HttpMethod.Get.Method)
+     || !c.HttpMethods.Contains(HttpMethod.Head.Method)));
 
             AddGlobalFilter(opts, filter, controllerPredicate, actionPredicate, selectorPredicate);
         }
 
-        public static void AddGlobalFilter(this MvcOptions opts, ActionFilterAttribute filter, Func<ControllerModel, bool> controllerPredicate = null, Func<ActionModel, bool> actionPredicate = null, 
+        public static void AddGlobalFilter(this MvcOptions opts, ActionFilterAttribute filter, Func<ControllerModel, bool> controllerPredicate = null, Func<ActionModel, bool> actionPredicate = null,
             Func<SelectorModel, bool> selectorPredicate = null)
         {
             opts.Conventions.Insert(0, new GlobalActionFilterApplicationModelConvention(controllerPredicate, actionPredicate, selectorPredicate, filter));
