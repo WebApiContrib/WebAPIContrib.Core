@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
+using System.Text;
 
 namespace WebApiContrib.Core.Formatter.Csv
 {
@@ -83,8 +84,7 @@ namespace WebApiContrib.Core.Formatter.Csv
                 list = (IList)Activator.CreateInstance(constructedListType);
             }
 
-
-            var reader = new StreamReader(stream);
+            var reader = new StreamReader(stream, Encoding.GetEncoding(_options.Encoding));
 
             bool skipFirstLine = _options.UseSingleLineHeaderInCsv;
             while (!reader.EndOfStream)
