@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <Description>ASP.NET Core InputFormatter, OutputFormatter for IList CSV data</Description>
-    <VersionPrefix>2.0.1</VersionPrefix>
+    <VersionPrefix>2.0.2</VersionPrefix>
     <Authors>damienbod;WebApiContrib Contributors</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>WebApiContrib.Core.Formatter.Csv</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Csv</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;CSV;Content-Type;aspnetcore</PackageTags>
-    <PackageReleaseNotes>bug fix: missing SupportedMediaTypes for input formatter</PackageReleaseNotes>
+    <PackageReleaseNotes>added support for encoding, default = ISO-8859-1</PackageReleaseNotes>
     <PackageIconUrl>https://avatars1.githubusercontent.com/u/1561645?s=140</PackageIconUrl>
     <PackageProjectUrl>https://github.com/damienbod/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Csv</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
@@ -16,9 +16,10 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <Version>2.0.1</Version>
-    <AssemblyVersion>2.0.1</AssemblyVersion>
-    <FileVersion>2.0.1</FileVersion>
+    <Version>2.0.2</Version>
+    <AssemblyVersion>2.0.2</AssemblyVersion>
+    <FileVersion>2.0.2</FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
