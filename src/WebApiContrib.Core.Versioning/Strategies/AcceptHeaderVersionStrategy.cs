@@ -42,6 +42,9 @@ namespace WebApiContrib.Core.Versioning
             return null;
         }
 
+        /// <summary>
+        /// Strips an existing structured syntax suffix from a media type.
+        /// </summary>
         protected static StringSegment StripSuffix(StringSegment subType)
         {
             var suffixSeparatorIndex = subType.IndexOf('+');

@@ -7,6 +7,9 @@ using Microsoft.Extensions.Options;
 
 namespace WebApiContrib.Core.Versioning
 {
+    /// <summary>
+    /// Various extension methods to add version negotiation to MVC.
+    /// </summary>
     public static class VersionNegotiationExtensions
     {
         /// <summary>
@@ -18,7 +21,7 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation, configured by the specified <see cref="configure"/> delegate.
+        /// Adds version negotiation, configured by the specified <paramref name="configure"/> delegate.
         /// </summary>
         /// <param name="builder">The MVC builder.</param>
         /// <param name="configure">The configuration delegate.</param>
@@ -42,7 +45,7 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation, configured by the specified <see cref="configure"/> delegate.
+        /// Adds version negotiation, configured by the specified <paramref name="configure"/> delegate.
         /// </summary>
         /// <param name="builder">The MVC builder.</param>
         /// <param name="configure">The configuration delegate.</param>
@@ -66,7 +69,7 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation, configured by the specified <see cref="configure"/> delegate.
+        /// Adds version negotiation, configured by the specified <paramref name="configure"/> delegate.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <param name="configure">The configuration delegate.</param>

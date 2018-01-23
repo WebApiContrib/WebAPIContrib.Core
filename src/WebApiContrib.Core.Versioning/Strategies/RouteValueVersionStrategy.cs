@@ -10,6 +10,9 @@ namespace WebApiContrib.Core.Versioning
     /// </summary>
     public class RouteValueVersionStrategy : IVersionStrategy
     {
+        /// <summary>
+        /// The name of the route value to check.
+        /// </summary>
         public string RouteValueKey { get; set; } = "version";
 
         /// <inheritdoc />
