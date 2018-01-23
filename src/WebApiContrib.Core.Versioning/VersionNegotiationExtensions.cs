@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 namespace WebApiContrib.Core.Versioning
 {
+    /// <summary>
+    /// Various extension methods to add version negotiation to MVC.
+    /// </summary>
     public static class VersionNegotiationExtensions
     {
         /// <summary>
@@ -17,7 +21,7 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation, configured by the specified <see cref="configure"/> delegate.
+        /// Adds version negotiation, configured by the specified <paramref name="configure"/> delegate.
         /// </summary>
         /// <param name="builder">The MVC builder.</param>
         /// <param name="configure">The configuration delegate.</param>
@@ -41,7 +45,7 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation, configured by the specified <see cref="configure"/> delegate.
+        /// Adds version negotiation, configured by the specified <paramref name="configure"/> delegate.
         /// </summary>
         /// <param name="builder">The MVC builder.</param>
         /// <param name="configure">The configuration delegate.</param>
@@ -65,7 +69,7 @@ namespace WebApiContrib.Core.Versioning
         }
 
         /// <summary>
-        /// Adds version negotiation, configured by the specified <see cref="configure"/> delegate.
+        /// Adds version negotiation, configured by the specified <paramref name="configure"/> delegate.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <param name="configure">The configuration delegate.</param>
@@ -91,7 +95,7 @@ namespace WebApiContrib.Core.Versioning
         {
             var options = provider.GetRequiredService<IOptions<VersionNegotiationOptions>>();
 
-            var strategies = GetVersionStrategies(provider, options);
+            var strategies = GetVersionStrategies(provider, options).ToList();
 
             return new CompositeVersionStrategy(strategies);
         }
@@ -105,8 +109,7 @@ namespace WebApiContrib.Core.Versioning
                 // you to inject whatever services you need in the versioning strategy.
                 var strategy = (IVersionStrategy) ActivatorUtilities.CreateInstance(provider, strategyType);
 
-                Action<object> configure;
-                if (options.Value.ConfigureStrategy.TryGetValue(strategyType, out configure))
+                if (options.Value.ConfigureStrategy.TryGetValue(strategyType, out var configure))
                 {
                     configure(strategy);
                 }

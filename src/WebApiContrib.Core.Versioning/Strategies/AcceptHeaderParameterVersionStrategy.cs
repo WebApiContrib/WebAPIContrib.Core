@@ -25,15 +25,7 @@ namespace WebApiContrib.Core.Versioning
                 throw new ArgumentNullException(nameof(acceptHeader));
             }
 
-            var subType = StripSuffix(acceptHeader.SubType);
-
-            if (string.IsNullOrEmpty(subType))
-            {
-                return null;
-            }
-
-            int version;
-            if (TryGetParameterVersion(acceptHeader, ParameterName, out version))
+            if (TryGetParameterVersion(acceptHeader, ParameterName, out var version))
             {
                 return version;
             }

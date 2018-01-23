@@ -1,25 +1,22 @@
-﻿namespace WebApiContrib.Core.Versioning
+﻿using Microsoft.Extensions.Primitives;
+
+namespace WebApiContrib.Core.Versioning
 {
     internal static class ParsingUtility
     {
-        public static bool TryParseVersion(string value, out int version)
+        public static bool TryParseVersion(StringSegment value, out int version)
         {
-            if (string.IsNullOrEmpty(value))
+            if (value.HasValue)
             {
-                version = 0;
-                return false;
-            }
+                if (value[0] == 'v' || value[0] == 'V')
+                {
+                    value = value.Subsegment(1);
+                }
 
-            if (value[0] == 'v' || value[0] == 'V')
-            {
-                value = value.Substring(1);
-            }
-
-            int intVersion;
-            if (int.TryParse(value, out intVersion))
-            {
-                version = intVersion;
-                return true;
+                if (int.TryParse(value.Value, out version))
+                {
+                    return true;
+                }
             }
 
             version = 0;

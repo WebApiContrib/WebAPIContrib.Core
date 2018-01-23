@@ -29,13 +29,13 @@ namespace WebApiContrib.Core.Versioning
 
             var headers = context.Request.Headers;
 
-            StringValues header;
-            if (headers.TryGetValue(HeaderName, out header))
+            if (headers.TryGetValue(HeaderName, out var header))
             {
-                int version;
-                if (ParsingUtility.TryParseVersion(header.ToString(), out version))
+                var headerString = header.ToString();
+
+                if (ParsingUtility.TryParseVersion(headerString, out var version))
                 {
-                    return new VersionResult(version, HeaderName); ;
+                    return new VersionResult(version, HeaderName);
                 }
             }
 

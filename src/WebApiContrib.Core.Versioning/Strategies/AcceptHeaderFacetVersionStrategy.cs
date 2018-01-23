@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 
 namespace WebApiContrib.Core.Versioning
@@ -21,7 +22,7 @@ namespace WebApiContrib.Core.Versioning
 
             var subType = StripSuffix(acceptHeader.SubType);
 
-            if (string.IsNullOrEmpty(subType))
+            if (!subType.HasValue)
             {
                 return null;
             }
@@ -35,7 +36,7 @@ namespace WebApiContrib.Core.Versioning
             return null;
         }
 
-        private static bool TryGetFacetVersion(string subType, out int version)
+        private static bool TryGetFacetVersion(StringSegment subType, out int version)
         {
             var facetSeparatorIndex = subType.IndexOf('.');
 

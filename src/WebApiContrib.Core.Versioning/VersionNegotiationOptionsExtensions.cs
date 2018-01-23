@@ -2,8 +2,14 @@
 
 namespace WebApiContrib.Core.Versioning
 {
+    /// <summary>
+    /// Various extension methods for adding and configuring version negotiation strategies.
+    /// </summary>
     public static class VersionNegotiationOptionsExtensions
     {
+        /// <summary>
+        /// Adds version negotiation based on the default <c>Accept</c>-header parameter.
+        /// </summary>
         public static VersionNegotiationOptions UseAcceptHeaderParameterStrategy(this VersionNegotiationOptions options)
         {
             if (options == null)
@@ -14,6 +20,9 @@ namespace WebApiContrib.Core.Versioning
             return options.UseStrategy<AcceptHeaderParameterVersionStrategy>();
         }
 
+        /// <summary>
+        /// Adds version negotiation based on the specified <c>Accept</c>-header <paramref name="parameterName"/>.
+        /// </summary>
         public static VersionNegotiationOptions UseAcceptHeaderParameterStrategy(this VersionNegotiationOptions options, string parameterName)
         {
             if (options == null)
@@ -34,6 +43,9 @@ namespace WebApiContrib.Core.Versioning
             return options.UseStrategy<AcceptHeaderParameterVersionStrategy>(x => x.ParameterName = parameterName);
         }
 
+        /// <summary>
+        /// Adds version negotiation based on an <c>Accept</c>-header facet, i.e. vnd.github.v3.
+        /// </summary>
         public static VersionNegotiationOptions UseAcceptHeaderFacetStrategy(this VersionNegotiationOptions options)
         {
             if (options == null)
@@ -44,6 +56,9 @@ namespace WebApiContrib.Core.Versioning
             return options.UseStrategy<AcceptHeaderFacetVersionStrategy>();
         }
 
+        /// <summary>
+        /// Adds version negotiation based on the default route value.
+        /// </summary>
         public static VersionNegotiationOptions UseRouteValueStrategy(this VersionNegotiationOptions options)
         {
             if (options == null)
@@ -54,6 +69,9 @@ namespace WebApiContrib.Core.Versioning
             return options.UseStrategy<RouteValueVersionStrategy>();
         }
 
+        /// <summary>
+        /// Adds version negotiation based on the specified <paramref name="routeValueKey"/>.
+        /// </summary>
         public static VersionNegotiationOptions UseRouteValueStrategy(this VersionNegotiationOptions options, string routeValueKey)
         {
             if (options == null)
@@ -74,6 +92,9 @@ namespace WebApiContrib.Core.Versioning
             return options.UseStrategy<RouteValueVersionStrategy>(x => x.RouteValueKey = routeValueKey);
         }
 
+        /// <summary>
+        /// Adds version negotiation based on the default custom header.
+        /// </summary>
         public static VersionNegotiationOptions UseCustomHeaderStrategy(this VersionNegotiationOptions options)
         {
             if (options == null)
@@ -84,6 +105,9 @@ namespace WebApiContrib.Core.Versioning
             return options.UseStrategy<CustomHeaderVersionStrategy>();
         }
 
+        /// <summary>
+        /// Adds version negotiation based on the specified custom <paramref name="headerName"/>.
+        /// </summary>
         public static VersionNegotiationOptions UseCustomHeaderStrategy(this VersionNegotiationOptions options, string headerName)
         {
             if (options == null)
@@ -104,6 +128,9 @@ namespace WebApiContrib.Core.Versioning
             return options.UseStrategy<CustomHeaderVersionStrategy>(x => x.HeaderName = headerName);
         }
 
+        /// <summary>
+        /// Adds version negotiation based on the default query string parameter.
+        /// </summary>
         public static VersionNegotiationOptions UseQueryStringParameter(this VersionNegotiationOptions options)
         {
             if (options == null)
@@ -114,6 +141,9 @@ namespace WebApiContrib.Core.Versioning
             return options.UseStrategy<QueryStringVersionStrategy>();
         }
 
+        /// <summary>
+        /// Adds version negotiation based on the specified query string <paramref name="parameterName"/>.
+        /// </summary>
         public static VersionNegotiationOptions UseQueryStringParameter(this VersionNegotiationOptions options, string parameterName)
         {
             if (options == null)

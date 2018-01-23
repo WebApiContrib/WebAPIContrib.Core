@@ -21,18 +21,8 @@ namespace WebApiContrib.Core.Versioning
         /// <param name="options">The versioning options.</param>
         public VersionNegotiationResultFilter(IServiceProvider serviceProvider, IOptions<VersionNegotiationOptions> options)
         {
-            if (serviceProvider == null)
-            {
-                throw new ArgumentNullException(nameof(serviceProvider));
-            }
-
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
-            ServiceProvider = serviceProvider;
-            Options = options;
+            ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            Options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
         private IServiceProvider ServiceProvider { get; }
@@ -81,13 +71,9 @@ namespace WebApiContrib.Core.Versioning
 
         private IActionResult MapResult(ObjectResult result, int? version)
         {
-            Type itemType;
-            if (TryGetCollectionType(result.Value, out itemType))
-            {
-                return MapCollectionResult(result, version, itemType);
-            }
-
-            return MapSingleResult(result, version);
+            return TryGetCollectionType(result.Value, out var itemType)
+                ? MapCollectionResult(result, version, itemType)
+                : MapSingleResult(result, version);
         }
 
         private IActionResult MapCollectionResult(ObjectResult result, int? version, Type itemType)
@@ -171,8 +157,7 @@ namespace WebApiContrib.Core.Versioning
                     return true;
                 }
 
-                Type[] typeArguments;
-                if (type.IsAssignableToGenericTypeDefinition(typeof(IEnumerable<>), out typeArguments))
+                if (type.IsAssignableToGenericTypeDefinition(typeof(IEnumerable<>), out var typeArguments))
                 {
                     itemType = typeArguments[0];
                     return true;
