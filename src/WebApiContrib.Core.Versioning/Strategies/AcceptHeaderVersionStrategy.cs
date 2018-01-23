@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 
 namespace WebApiContrib.Core.Versioning
@@ -41,13 +42,13 @@ namespace WebApiContrib.Core.Versioning
             return null;
         }
 
-        protected static string StripSuffix(string subType)
+        protected static StringSegment StripSuffix(StringSegment subType)
         {
             var suffixSeparatorIndex = subType.IndexOf('+');
 
             if (suffixSeparatorIndex >= 0)
             {
-                return subType.Substring(0, suffixSeparatorIndex);
+                return subType.Subsegment(0, suffixSeparatorIndex);
             }
 
             return subType;
