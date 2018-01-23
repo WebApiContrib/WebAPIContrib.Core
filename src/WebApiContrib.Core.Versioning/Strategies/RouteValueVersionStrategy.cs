@@ -22,16 +22,14 @@ namespace WebApiContrib.Core.Versioning
 
             var routeValues = routeData.Values;
 
-            object versionObject;
-            if (!routeValues.TryGetValue(RouteValueKey, out versionObject))
+            if (!routeValues.TryGetValue(RouteValueKey, out var versionObject))
             {
                 return null;
             }
 
             var versionString = versionObject as string;
 
-            int version;
-            if (ParsingUtility.TryParseVersion(versionString, out version))
+            if (ParsingUtility.TryParseVersion(versionString, out var version))
             {
                 return new VersionResult(version);
             }

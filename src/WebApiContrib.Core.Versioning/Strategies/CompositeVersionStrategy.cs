@@ -6,12 +6,12 @@ namespace WebApiContrib.Core.Versioning
 {
     internal class CompositeVersionStrategy : IVersionStrategy
     {
-        public CompositeVersionStrategy(IEnumerable<IVersionStrategy> versionStrategies)
+        public CompositeVersionStrategy(IReadOnlyCollection<IVersionStrategy> versionStrategies)
         {
             VersionStrategies = versionStrategies;
         }
 
-        private IEnumerable<IVersionStrategy> VersionStrategies { get; }
+        private IReadOnlyCollection<IVersionStrategy> VersionStrategies { get; }
 
         public VersionResult? GetVersion(HttpContext context, RouteData routeData)
         {

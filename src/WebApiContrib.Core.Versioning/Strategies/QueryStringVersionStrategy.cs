@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Primitives;
 
 namespace WebApiContrib.Core.Versioning
 {
@@ -21,13 +20,11 @@ namespace WebApiContrib.Core.Versioning
         /// <inheritdoc />
         public VersionResult? GetVersion(HttpContext context, RouteData routeData)
         {
-            StringValues values;
-            if (context.Request.Query.TryGetValue(ParameterName, out values))
+            if (context.Request.Query.TryGetValue(ParameterName, out var values))
             {
                 var versionString = values.ToString();
 
-                int version;
-                if (ParsingUtility.TryParseVersion(versionString, out version))
+                if (ParsingUtility.TryParseVersion(versionString, out var version))
                 {
                     return new VersionResult(version);
                 }
