@@ -20,9 +20,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.0.2" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
 </Project>
