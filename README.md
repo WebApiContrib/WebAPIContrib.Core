@@ -2,7 +2,7 @@
 
 |                           | Badges                                                                                                                                                       |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| net451 & netstandard 1.6 & netstandard 2.0       | [![Build status](https://ci.appveyor.com/api/projects/status/4n10t3rrkju3fwyy?svg=true)](https://ci.appveyor.com/project/thabart/webapicontrib-core)         |
+| netstandard 2.0       | [![Build status](https://ci.appveyor.com/api/projects/status/4n10t3rrkju3fwyy?svg=true)](https://ci.appveyor.com/project/thabart/webapicontrib-core)         |
 
 WebAPIContrib.Core is a collection of open source projects, add-ons and extensions to help improve your work with ASP.NET Core and ASP.NET Core MVC.
 
@@ -37,9 +37,6 @@ A project allowing you to create Razor web pages without any controller/action i
 
 * [WebApiContrib.Core.Versioning](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Versioning) [![Nuget](http://img.shields.io/nuget/v/WebApiContrib.Core.Versioning.svg?maxAge=10800)](https://www.nuget.org/packages/WebApiContrib.Core.Versioning/) - a library allowing you to define API versioning strategies
 * [WebApiContrib.Core.Razor](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Razor) - Razor add ons and extensions
-* [WebApiContrib.Core.Concurrency](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Concurrency)
-* [WebApiContrib.Core.Concurrency.Redis](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Concurrency.Redis)
-* [WebApiContrib.Core.Concurrency.SqlServer](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Concurrency.SqlServer)
 
 ---
 
