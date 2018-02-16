@@ -7,7 +7,6 @@ using WebApiContrib.Core.Formatter.Csv;
 using WebApiContrib.Core.Formatter.Jsonp;
 using WebApiContrib.Core.Formatter.PlainText;
 using WebApiContrib.Core.Samples.Controllers;
-using WebApiContrib.Core.Razor;
 using WebApiContrib.Core.Samples.Model;
 using WebApiContrib.Core.Versioning;
 using WebApiContrib.Core.Samples.Services;
@@ -48,8 +47,6 @@ namespace WebApiContrib.Core.Samples
                         .UseCustomHeaderStrategy("X-API-Version")
                         .UseQueryStringParameter("version");
                 });
-
-            services.EnableAddTagHelperAssemblyGlobbing();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -57,7 +54,7 @@ namespace WebApiContrib.Core.Samples
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseBranchWithServices<KestrelServer>("/hi-branch",
+            app.UseBranchWithServices("/hi-branch",
                 s => s.AddTransient<IGreetService, HiService>(),
                 a =>
                 {
@@ -68,7 +65,7 @@ namespace WebApiContrib.Core.Samples
                     });
                 });
 
-            app.UseBranchWithServices<KestrelServer>("/welcome-branch",
+            app.UseBranchWithServices("/welcome-branch",
                 s => s.AddTransient<IGreetService, WelcomeService>(),
                 a =>
                 {

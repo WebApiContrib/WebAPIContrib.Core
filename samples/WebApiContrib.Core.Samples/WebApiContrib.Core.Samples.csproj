@@ -17,7 +17,6 @@
     <ProjectReference Include="..\..\src\WebApiContrib.Core.Formatter.Jsonp\WebApiContrib.Core.Formatter.Jsonp.csproj" />
     <ProjectReference Include="..\..\src\WebApiContrib.Core.TagHelpers.Markdown\WebApiContrib.Core.TagHelpers.Markdown.csproj" />
     <ProjectReference Include="..\..\src\WebApiContrib.Core\WebApiContrib.Core.csproj" />
-    <ProjectReference Include="..\..\src\WebApiContrib.Core.Razor\WebApiContrib.Core.Razor.csproj" />
     <ProjectReference Include="..\..\src\WebApiContrib.Core.Versioning\WebApiContrib.Core.Versioning.csproj" />
   </ItemGroup>
 
