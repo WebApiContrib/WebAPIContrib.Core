@@ -4,7 +4,7 @@
     <Description>ASP.NET Core InputFormatter, OutputFormatter for Protobuf</Description>
     <VersionPrefix>2.0.1</VersionPrefix>
     <Authors>damienbod;WebApiContrib Contributors</Authors>
-    <TargetFrameworks>netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>WebApiContrib.Core.Formatter.Protobuf</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Protobuf</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;Protobuf;Content-Type;aspnetcore</PackageTags>

@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <VersionPrefix>2.0.0</VersionPrefix>
     <Description>ASP.NET Core BSON formatter, used for working with Binary JSON responses/requests.</Description>
     <Authors>filipw;thabart;WebApiContrib Contributors</Authors>
-    <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>WebApiContrib.Core.Formatter.Bson</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Bson</PackageId>
     <PackageTags>ASP.NET Core;webapicontrib;bson;aspnetcore;formatter</PackageTags>
@@ -15,13 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.0.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
 </Project>
