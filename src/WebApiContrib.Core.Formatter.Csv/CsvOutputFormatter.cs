@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
@@ -24,15 +23,7 @@ namespace WebApiContrib.Core.Formatter.Csv
         {
             ContentType = "text/csv";
             SupportedMediaTypes.Add(Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Parse("text/csv"));
-
-            if (csvFormatterOptions == null)
-            {
-                throw new ArgumentNullException(nameof(csvFormatterOptions));
-            }
-
-            _options = csvFormatterOptions;
-
-            //SupportedEncodings.Add(Encoding.GetEncoding("utf-8"));
+            _options = csvFormatterOptions ?? throw new ArgumentNullException(nameof(csvFormatterOptions));
         }
 
         protected override bool CanWriteType(Type type)
@@ -73,17 +64,16 @@ namespace WebApiContrib.Core.Formatter.Csv
                 itemType = type.GetElementType();
             }
 
-            StringWriter _stringWriter = new StringWriter();
+            var streamWriter = new StreamWriter(response.Body);
 
             if (_options.UseSingleLineHeaderInCsv)
             {
-                _stringWriter.WriteLine(
+                await streamWriter.WriteLineAsync(
                     string.Join<string>(
                         _options.CsvDelimiter, itemType.GetProperties().Select(x => x.Name)
                     )
                 );
             }
-
 
             foreach (var obj in (IEnumerable<object>)context.Object)
             {
@@ -94,11 +84,10 @@ namespace WebApiContrib.Core.Formatter.Csv
                     }
                 );
 
-                string _valueLine = string.Empty;
+                string valueLine = string.Empty;
 
                 foreach (var val in vals)
                 {
-
                     if (val.Value != null)
                     {
 
@@ -114,20 +103,18 @@ namespace WebApiContrib.Core.Formatter.Csv
                         if (_val.Contains("\n"))
                             _val = _val.Replace("\n", " ");
 
-                        _valueLine = string.Concat(_valueLine, _val, _options.CsvDelimiter);
+                        valueLine = string.Concat(valueLine, _val, _options.CsvDelimiter);
 
                     }
                     else
                     {
-                        _valueLine = string.Concat(_valueLine, string.Empty, _options.CsvDelimiter);
+                        valueLine = string.Concat(valueLine, string.Empty, _options.CsvDelimiter);
                     }
                 }
 
-                _stringWriter.WriteLine(_valueLine.TrimEnd(_options.CsvDelimiter.ToCharArray()));
+                await streamWriter.WriteLineAsync(valueLine.TrimEnd(_options.CsvDelimiter.ToCharArray()));
             }
 
-            var streamWriter = new StreamWriter(response.Body);
-            await streamWriter.WriteAsync(_stringWriter.ToString());
             await streamWriter.FlushAsync();
         }
     }
