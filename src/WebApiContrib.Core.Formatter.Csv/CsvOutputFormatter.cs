@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
@@ -64,7 +65,7 @@ namespace WebApiContrib.Core.Formatter.Csv
                 itemType = type.GetElementType();
             }
 
-            var streamWriter = new StreamWriter(response.Body);
+            var streamWriter = new StreamWriter(response.Body, Encoding.GetEncoding(_options.Encoding));
 
             if (_options.UseSingleLineHeaderInCsv)
             {
