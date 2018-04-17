@@ -18,10 +18,9 @@ The LocalizationRecord class is used as the model class to import and export to 
 You can customize header with the  **DisplayAttribute**.
 
 ```csharp
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AspNetCoreCsvImportExport.Model
+namespace WebApiContrib.Core.Samples.Model
 {
     public class LocalizationRecord
     {
@@ -31,10 +30,11 @@ namespace AspNetCoreCsvImportExport.Model
         public string LocalizationCulture { get; set; }
         public string ResourceKey { get; set; }
 
-		[Display(Name="Value")]
-		public string ResourceValue { get; set; }
+        [Display(Name = "Value")]
+        public string ResourceValue { get; set; }
     }
 }
+
 ```
 
 The MVC Controller CsvTestController  makes it possible to import and export the data. The Get method exports the data using the Accept header in the HTTP Request. Per default, Json will be returned. If the Accept Header is set to 'text/csv', the data will be returned as csv. The GetDataAsCsv method always returns csv data because the Produces attribute is used to force this. This makes it easy to download the csv data in a browser. 
