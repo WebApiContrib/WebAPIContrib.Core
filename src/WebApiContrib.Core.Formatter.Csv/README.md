@@ -11,14 +11,16 @@ WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/
 
 The InputFormatter and the OutputFormatter classes are used to convert the csv data to the C# model classes. 
 
-<strong>Code sample: </strong> https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/samples/WebApiContrib.Core.Samples
+ **Code sample:** https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/samples/WebApiContrib.Core.Samples
 
 The LocalizationRecord class is used as the model class to import and export to and from csv data.
 
-```csharp
-using System;
+You can customize header with the  **DisplayAttribute**.
 
-namespace AspNetCoreCsvImportExport.Model
+```csharp
+using System.ComponentModel.DataAnnotations;
+
+namespace WebApiContrib.Core.Samples.Model
 {
     public class LocalizationRecord
     {
@@ -27,8 +29,12 @@ namespace AspNetCoreCsvImportExport.Model
         public string Text { get; set; }
         public string LocalizationCulture { get; set; }
         public string ResourceKey { get; set; }
+
+        [Display(Name = "Value")]
+        public string ResourceValue { get; set; }
     }
 }
+
 ```
 
 The MVC Controller CsvTestController  makes it possible to import and export the data. The Get method exports the data using the Accept header in the HTTP Request. Per default, Json will be returned. If the Accept Header is set to 'text/csv', the data will be returned as csv. The GetDataAsCsv method always returns csv data because the Produces attribute is used to force this. This makes it easy to download the csv data in a browser. 
@@ -37,10 +43,10 @@ The Import method uses the Content-Type HTTP Request header to decide how to han
 
 ```csharp
 using System.Collections.Generic;
-using AspNetCoreCsvImportExport.Model;
 using Microsoft.AspNetCore.Mvc;
+using WebApiContrib.Core.Samples.Model;
 
-namespace AspNetCoreCsvImportExport.Controllers
+namespace WebApiContrib.Core.Samples.Controllers
 {
     [Route("api/[controller]")]
     public class CsvTestController : Controller
@@ -49,7 +55,7 @@ namespace AspNetCoreCsvImportExport.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(DummyData());
+            return Ok(DummyDataList());
         }
 
         [HttpGet]
@@ -57,10 +63,10 @@ namespace AspNetCoreCsvImportExport.Controllers
         [Produces("text/csv")]
         public IActionResult GetDataAsCsv()
         {
-            return Ok( DummyData());
+            return Ok( DummyDataList());
         }
 
-        private static IEnumerable<LocalizationRecord> DummyData()
+        private static IEnumerable<LocalizationRecord> DummyDataList()
         {
             var model = new List<LocalizationRecord>
             {
@@ -70,7 +76,8 @@ namespace AspNetCoreCsvImportExport.Controllers
                     Key = "test",
                     Text = "test text",
                     LocalizationCulture = "en-US",
-                    ResourceKey = "test"
+                    ResourceKey = "test",
+                    ResourceValue = "test value"
 
                 },
                 new LocalizationRecord
@@ -79,8 +86,8 @@ namespace AspNetCoreCsvImportExport.Controllers
                     Key = "test",
                     Text = "test2 text de-CH",
                     LocalizationCulture = "de-CH",
-                    ResourceKey = "test"
-
+                    ResourceKey = "test",
+                    ResourceValue = "test value"
                 }
             };
 
@@ -102,7 +109,6 @@ namespace AspNetCoreCsvImportExport.Controllers
                 return Ok();
             }
         }
-
     }
 }
 

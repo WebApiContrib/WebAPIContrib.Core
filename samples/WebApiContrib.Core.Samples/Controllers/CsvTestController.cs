@@ -40,7 +40,8 @@ namespace WebApiContrib.Core.Samples.Controllers
                     Key = "test",
                     Text = "test text",
                     LocalizationCulture = "en-US",
-                    ResourceKey = "test"
+                    ResourceKey = "test",
+                    ResourceValue = "test value"
 
                 },
                 new LocalizationRecord
@@ -49,8 +50,8 @@ namespace WebApiContrib.Core.Samples.Controllers
                     Key = "test",
                     Text = "test2 text de-CH",
                     LocalizationCulture = "de-CH",
-                    ResourceKey = "test"
-
+                    ResourceKey = "test",
+                    ResourceValue = "test value"
                 }
             };
 
@@ -67,8 +68,8 @@ namespace WebApiContrib.Core.Samples.Controllers
                     Key = "test",
                     Text = "test text",
                     LocalizationCulture = "en-US",
-                    ResourceKey = "test"
-
+                    ResourceKey = "test",
+                    ResourceValue = "test value"
                 },
                 new LocalizationRecord
                 {
@@ -76,8 +77,8 @@ namespace WebApiContrib.Core.Samples.Controllers
                     Key = "test",
                     Text = "test2 text de-CH",
                     LocalizationCulture = "de-CH",
-                    ResourceKey = "test"
-
+                    ResourceKey = "test",
+                    ResourceValue = "test value"
                 }
             };
 

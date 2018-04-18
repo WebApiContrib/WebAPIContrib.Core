@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApiContrib.Core.Formatter.Csv
 {
@@ -14,7 +16,7 @@ namespace WebApiContrib.Core.Formatter.Csv
     /// http://www.tugberkugurlu.com/archive/creating-custom-csvmediatypeformatter-in-asp-net-web-api-for-comma-separated-values-csv-format
     /// Adapted for ASP.NET Core and uses ; instead of , for delimiters
     /// </summary>
-    public class CsvOutputFormatter :  OutputFormatter
+    public class CsvOutputFormatter : OutputFormatter
     {
         private readonly CsvFormatterOptions _options;
 
@@ -70,8 +72,8 @@ namespace WebApiContrib.Core.Formatter.Csv
             if (_options.UseSingleLineHeaderInCsv)
             {
                 await streamWriter.WriteLineAsync(
-                    string.Join<string>(
-                        _options.CsvDelimiter, itemType.GetProperties().Select(x => x.Name)
+                    string.Join(
+                        _options.CsvDelimiter, itemType.GetProperties().Select(x => x.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? x.Name)
                     )
                 );
             }
@@ -80,7 +82,8 @@ namespace WebApiContrib.Core.Formatter.Csv
             {
 
                 var vals = obj.GetType().GetProperties().Select(
-                    pi => new {
+                    pi => new
+                    {
                         Value = pi.GetValue(obj, null)
                     }
                 );
