@@ -43,10 +43,10 @@ The Import method uses the Content-Type HTTP Request header to decide how to han
 
 ```csharp
 using System.Collections.Generic;
-using AspNetCoreCsvImportExport.Model;
 using Microsoft.AspNetCore.Mvc;
+using WebApiContrib.Core.Samples.Model;
 
-namespace AspNetCoreCsvImportExport.Controllers
+namespace WebApiContrib.Core.Samples.Controllers
 {
     [Route("api/[controller]")]
     public class CsvTestController : Controller
@@ -55,7 +55,7 @@ namespace AspNetCoreCsvImportExport.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(DummyData());
+            return Ok(DummyDataList());
         }
 
         [HttpGet]
@@ -63,10 +63,10 @@ namespace AspNetCoreCsvImportExport.Controllers
         [Produces("text/csv")]
         public IActionResult GetDataAsCsv()
         {
-            return Ok( DummyData());
+            return Ok( DummyDataList());
         }
 
-        private static IEnumerable<LocalizationRecord> DummyData()
+        private static IEnumerable<LocalizationRecord> DummyDataList()
         {
             var model = new List<LocalizationRecord>
             {
@@ -77,7 +77,8 @@ namespace AspNetCoreCsvImportExport.Controllers
                     Text = "test text",
                     LocalizationCulture = "en-US",
                     ResourceKey = "test",
-					ResourceValue = "test value"
+                    ResourceValue = "test value"
+
                 },
                 new LocalizationRecord
                 {
@@ -86,7 +87,7 @@ namespace AspNetCoreCsvImportExport.Controllers
                     Text = "test2 text de-CH",
                     LocalizationCulture = "de-CH",
                     ResourceKey = "test",
-					ResourceValue = "test value"
+                    ResourceValue = "test value"
                 }
             };
 
@@ -108,7 +109,6 @@ namespace AspNetCoreCsvImportExport.Controllers
                 return Ok();
             }
         }
-
     }
 }
 
