@@ -4,6 +4,7 @@ WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/
 
 # History
 
+2018.04.12: Using the encoding from the options in the CsvOutputFormatter, Don't buffer CSV 
 2017.02.14: update to csproj
 2016.06.22: project init
 
