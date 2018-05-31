@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using System.Text;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace WebApiContrib.Core.Formatter.Csv
 {
@@ -99,8 +101,11 @@ namespace WebApiContrib.Core.Formatter.Csv
                 {
                     var itemTypeInGeneric = list.GetType().GetTypeInfo().GenericTypeArguments[0];
                     var item = Activator.CreateInstance(itemTypeInGeneric);
-                    var properties = item.GetType().GetProperties();
-                    for (int i = 0;i<values.Length; i++)
+                    var properties = _options.UseNewtonsoftJsonDataAnnotations
+                        ? item.GetType().GetProperties().Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>().Any()).ToArray()
+                        : item.GetType().GetProperties();
+                    // TODO: Maybe refactor to not use positional mapping?, mapping by index could generate errors pretty easily :)
+                    for (int i = 0; i < values.Length; i++)
                     {
                         properties[i].SetValue(item, Convert.ChangeType(values[i], properties[i].PropertyType), null);
                     }
