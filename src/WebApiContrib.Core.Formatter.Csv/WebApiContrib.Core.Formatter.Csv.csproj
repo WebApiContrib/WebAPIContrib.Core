@@ -8,7 +8,7 @@
     <AssemblyName>WebApiContrib.Core.Formatter.Csv</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Csv</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;CSV;Content-Type;aspnetcore</PackageTags>
-    <PackageReleaseNotes>Adding support for customization of the header with the display attribute</PackageReleaseNotes>
+    <PackageReleaseNotes>Adding support for ignoring properties</PackageReleaseNotes>
     <PackageIconUrl>https://avatars1.githubusercontent.com/u/1561645?s=140</PackageIconUrl>
     <PackageProjectUrl>https://github.com/damienbod/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Csv</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
@@ -16,9 +16,9 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <Version>2.0.4</Version>
-    <AssemblyVersion>2.0.4</AssemblyVersion>
-    <FileVersion>2.0.4</FileVersion>
+    <Version>2.0.5</Version>
+    <AssemblyVersion>2.0.5</AssemblyVersion>
+    <FileVersion>2.0.5</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
