@@ -100,8 +100,6 @@ namespace WebApiContrib.Core.Formatter.Csv
 
             foreach (var obj in (IEnumerable<object>)context.Object)
             {
-
-                //IEnumerable<ObjectValue> vals;
                 var vals = useJsonAttributes
                     ? obj.GetType().GetProperties()
                         .Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>().Any())

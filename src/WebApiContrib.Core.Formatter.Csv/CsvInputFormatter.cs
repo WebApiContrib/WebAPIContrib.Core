@@ -106,7 +106,7 @@ namespace WebApiContrib.Core.Formatter.Csv
                     var properties = useJsonAttributes
                         ? item.GetType().GetProperties().Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>().Any()).ToArray()
                         : item.GetType().GetProperties();
-                    // TODO: Maybe refactor to not use positional mapping?, mapping by index could generate errors pretty easily :)
+
                     for (int i = 0; i < values.Length; i++)
                     {
                         properties[i].SetValue(item, Convert.ChangeType(values[i], properties[i].PropertyType), null);
