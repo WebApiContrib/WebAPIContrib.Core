@@ -131,7 +131,6 @@ public void ConfigureServices(IServiceCollection services)
 	//{
 	//    UseSingleLineHeaderInCsv = true,
 	//    CsvDelimiter = ",",
-	//    UseNewtonsoftJsonDataAnnotations = true;
 	//};
 
 	//services.AddMvc()
