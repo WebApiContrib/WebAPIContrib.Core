@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApiContrib.Core.Samples.Model
 {
     public class LocalizationRecord
     {
+        //[JsonIgnore]
         public long Id { get; set; }
         public string Key { get; set; }
         public string Text { get; set; }

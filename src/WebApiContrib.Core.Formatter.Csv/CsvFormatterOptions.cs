@@ -8,6 +8,6 @@
 
         public string Encoding { get; set; } = "ISO-8859-1";
         
-        public bool UseNewtonsoftJsonDataAnnotations { get; set; } = false;
+        public bool UseJsonPropertyJsonIgnoreAttributes { get; set; } = true;
     }
 }

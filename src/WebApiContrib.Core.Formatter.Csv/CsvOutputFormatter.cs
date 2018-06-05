@@ -87,7 +87,7 @@ namespace WebApiContrib.Core.Formatter.Csv
 
             if (_options.UseSingleLineHeaderInCsv)
             {
-                var values = _options.UseNewtonsoftJsonDataAnnotations
+                var values = _options.UseJsonPropertyJsonIgnoreAttributes
                     ? itemType.GetProperties().Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>(false).Any())    // Only get the properties that do not define JsonIgnore
                         .Select(GetDisplayNameFromNewtonsoftJsonAnnotations)
                     : itemType.GetProperties().Select(pi => pi.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? pi.Name);
@@ -100,7 +100,7 @@ namespace WebApiContrib.Core.Formatter.Csv
             {
 
                 //IEnumerable<ObjectValue> vals;
-                var vals = _options.UseNewtonsoftJsonDataAnnotations
+                var vals = _options.UseJsonPropertyJsonIgnoreAttributes
                     ? obj.GetType().GetProperties()
                         .Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>().Any())
                         .Select(pi => new
