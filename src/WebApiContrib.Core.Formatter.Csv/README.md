@@ -130,7 +130,7 @@ public void ConfigureServices(IServiceCollection services)
 	//var csvOptions = new CsvFormatterOptions
 	//{
 	//    UseSingleLineHeaderInCsv = true,
-	//    CsvDelimiter = ",",
+	//    CsvDelimiter = ","
 	//};
 
 	//services.AddMvc()
