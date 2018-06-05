@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace WebApiContrib.Core.Formatter.Csv
 {
@@ -50,6 +51,21 @@ namespace WebApiContrib.Core.Formatter.Csv
 
             return false;
         }
+        
+        /// <summary>
+        /// Returns the JsonProperty data annotation name
+        /// </summary>
+        /// <param name="pi">Property Info</param>
+        /// <returns></returns>
+        private string GetDisplayNameFromNewtonsoftJsonAnnotations(PropertyInfo pi)
+        {
+            if (pi.GetCustomAttribute<JsonPropertyAttribute>(false)?.PropertyName is string value)
+            {
+                return value;
+            }
+
+            return pi.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? pi.Name;
+        }
 
         public async override Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
         {
@@ -71,22 +87,31 @@ namespace WebApiContrib.Core.Formatter.Csv
 
             if (_options.UseSingleLineHeaderInCsv)
             {
-                await streamWriter.WriteLineAsync(
-                    string.Join(
-                        _options.CsvDelimiter, itemType.GetProperties().Select(x => x.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? x.Name)
-                    )
-                );
+                var values = _options.UseJsonPropertyJsonIgnoreAttributes
+                    ? itemType.GetProperties().Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>(false).Any())    // Only get the properties that do not define JsonIgnore
+                        .Select(GetDisplayNameFromNewtonsoftJsonAnnotations)
+                    : itemType.GetProperties().Select(pi => pi.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? pi.Name);
+
+                await streamWriter.WriteLineAsync(string.Join(_options.CsvDelimiter, values));
             }
+
 
             foreach (var obj in (IEnumerable<object>)context.Object)
             {
 
-                var vals = obj.GetType().GetProperties().Select(
-                    pi => new
-                    {
-                        Value = pi.GetValue(obj, null)
-                    }
-                );
+                //IEnumerable<ObjectValue> vals;
+                var vals = _options.UseJsonPropertyJsonIgnoreAttributes
+                    ? obj.GetType().GetProperties()
+                        .Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>().Any())
+                        .Select(pi => new
+                        {
+                            Value = pi.GetValue(obj, null)
+                        })
+                    : obj.GetType().GetProperties().Select(
+                        pi => new
+                        {
+                            Value = pi.GetValue(obj, null)
+                        });
 
                 string valueLine = string.Empty;
 
