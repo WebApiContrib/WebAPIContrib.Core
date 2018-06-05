@@ -4,6 +4,7 @@ WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/
 
 # History
 
+2018.05.31: Adding support for ignoring propeties in the CSV DTO
 2018.04.18: Adding support for customization of the header with the display attribute
 2018.04.12: Using the encoding from the options in the CsvOutputFormatter, Don't buffer CSV 
 2017.02.14: update to csproj
@@ -26,14 +27,17 @@ namespace WebApiContrib.Core.Samples.Model
 {
     public class LocalizationRecord
     {
-        public long Id { get; set; }
-        public string Key { get; set; }
-        public string Text { get; set; }
-        public string LocalizationCulture { get; set; }
-        public string ResourceKey { get; set; }
+        [JsonIgnore]
+        public long? Id { get; set; }
 
-        [Display(Name = "Value")]
-        public string ResourceValue { get; set; }
+        [JsonProperty(PropertyName = "CustomKeyName")]
+        public string Key { get; set; }
+
+        public string Text { get; set; }
+
+        public string LocalizationCulture { get; set; }
+        
+        public string ResourceKey { get; set; }
     }
 }
 
