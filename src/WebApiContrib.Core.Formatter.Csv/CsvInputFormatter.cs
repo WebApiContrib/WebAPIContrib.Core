@@ -19,6 +19,8 @@ namespace WebApiContrib.Core.Formatter.Csv
     {
         private readonly CsvFormatterOptions _options;
 
+        private readonly bool useJsonAttributes = true;
+
         public CsvInputFormatter(CsvFormatterOptions csvFormatterOptions)
         {
             SupportedMediaTypes.Add(Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Parse("text/csv"));
@@ -101,7 +103,7 @@ namespace WebApiContrib.Core.Formatter.Csv
                 {
                     var itemTypeInGeneric = list.GetType().GetTypeInfo().GenericTypeArguments[0];
                     var item = Activator.CreateInstance(itemTypeInGeneric);
-                    var properties = _options.UseJsonPropertyJsonIgnoreAttributes
+                    var properties = useJsonAttributes
                         ? item.GetType().GetProperties().Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>().Any()).ToArray()
                         : item.GetType().GetProperties();
                     // TODO: Maybe refactor to not use positional mapping?, mapping by index could generate errors pretty easily :)
