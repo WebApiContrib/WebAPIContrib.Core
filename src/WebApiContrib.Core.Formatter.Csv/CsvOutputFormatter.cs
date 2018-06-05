@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
 
 namespace WebApiContrib.Core.Formatter.Csv
 {
@@ -51,21 +50,6 @@ namespace WebApiContrib.Core.Formatter.Csv
 
             return false;
         }
-        
-        /// <summary>
-        /// Returns the JsonProperty data annotation name
-        /// </summary>
-        /// <param name="pi">Property Info</param>
-        /// <returns></returns>
-        private string GetDisplayNameFromNewtonsoftJsonAnnotations(PropertyInfo pi)
-        {
-            if (pi.GetCustomAttribute<JsonPropertyAttribute>(false)?.PropertyName is string value)
-            {
-                return value;
-            }
-
-            return pi.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? pi.Name;
-        }
 
         public async override Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
         {
@@ -87,31 +71,22 @@ namespace WebApiContrib.Core.Formatter.Csv
 
             if (_options.UseSingleLineHeaderInCsv)
             {
-                var values = _options.UseJsonPropertyJsonIgnoreAttributes
-                    ? itemType.GetProperties().Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>(false).Any())    // Only get the properties that do not define JsonIgnore
-                        .Select(GetDisplayNameFromNewtonsoftJsonAnnotations)
-                    : itemType.GetProperties().Select(pi => pi.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? pi.Name);
-
-                await streamWriter.WriteLineAsync(string.Join(_options.CsvDelimiter, values));
+                await streamWriter.WriteLineAsync(
+                    string.Join(
+                        _options.CsvDelimiter, itemType.GetProperties().Select(x => x.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? x.Name)
+                    )
+                );
             }
-
 
             foreach (var obj in (IEnumerable<object>)context.Object)
             {
 
-                //IEnumerable<ObjectValue> vals;
-                var vals = _options.UseJsonPropertyJsonIgnoreAttributes
-                    ? obj.GetType().GetProperties()
-                        .Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>().Any())
-                        .Select(pi => new
-                        {
-                            Value = pi.GetValue(obj, null)
-                        })
-                    : obj.GetType().GetProperties().Select(
-                        pi => new
-                        {
-                            Value = pi.GetValue(obj, null)
-                        });
+                var vals = obj.GetType().GetProperties().Select(
+                    pi => new
+                    {
+                        Value = pi.GetValue(obj, null)
+                    }
+                );
 
                 string valueLine = string.Empty;
 
@@ -122,8 +97,11 @@ namespace WebApiContrib.Core.Formatter.Csv
 
                         var _val = val.Value.ToString();
 
-                        //Check if the value contains a comma and place it in quotes if so
-                        if (_val.Contains(","))
+                        //Escape quotas
+                        _val = _val.Replace("\"", "\"\"");
+
+                        //Check if the value contans a delimiter and place it in quotes if so
+                        if (_val.Contains(_options.CsvDelimiter))
                             _val = string.Concat("\"", _val, "\"");
 
                         //Replace any \r or \n special characters from a new line with a space
