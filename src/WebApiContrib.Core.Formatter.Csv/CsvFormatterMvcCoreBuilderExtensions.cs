@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
-using System;
 
 namespace WebApiContrib.Core.Formatter.Csv
 {
@@ -36,7 +36,7 @@ namespace WebApiContrib.Core.Formatter.Csv
             }
 
             builder.AddMvcOptions(options => options.InputFormatters.Add(new CsvInputFormatter(csvFormatterOptions)));
-            builder.AddMvcOptions(options => options.OutputFormatters.Add(new CsvOutputFormatter(csvFormatterOptions)));
+            builder.AddMvcOptions(options => options.OutputFormatters.Add(new StandardCsvOutputFormatter(csvFormatterOptions)));
 
             return builder;
         }

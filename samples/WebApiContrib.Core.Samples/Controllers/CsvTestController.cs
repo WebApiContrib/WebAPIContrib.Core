@@ -19,7 +19,7 @@ namespace WebApiContrib.Core.Samples.Controllers
         [Produces("text/csv")]
         public IActionResult GetDataAsCsv()
         {
-            return Ok( DummyDataList());
+            return Ok(DummyDataList());
         }
 
         [HttpGet]

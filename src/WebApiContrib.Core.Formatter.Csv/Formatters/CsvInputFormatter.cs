@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
-using System.Text;
 
 namespace WebApiContrib.Core.Formatter.Csv
 {
@@ -19,14 +19,8 @@ namespace WebApiContrib.Core.Formatter.Csv
 
         public CsvInputFormatter(CsvFormatterOptions csvFormatterOptions)
         {
-            SupportedMediaTypes.Add(Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Parse("text/csv"));
-
-            if (csvFormatterOptions == null)
-            {
-                throw new ArgumentNullException(nameof(csvFormatterOptions));
-            }
-
-            _options = csvFormatterOptions;
+            SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/csv"));
+            _options = csvFormatterOptions ?? throw new ArgumentNullException(nameof(csvFormatterOptions));
         }
 
         public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
@@ -36,18 +30,16 @@ namespace WebApiContrib.Core.Formatter.Csv
             MediaTypeHeaderValue requestContentType = null;
             MediaTypeHeaderValue.TryParse(request.ContentType, out requestContentType);
 
-
             var result = ReadStream(type, request.Body);
             return InputFormatterResult.SuccessAsync(result);
         }
 
         public override bool CanRead(InputFormatterContext context)
         {
-            var type = context.ModelType;
-            if (type == null)
-                throw new ArgumentNullException("type");
+            if (context.ModelType == null)
+                throw new ArgumentNullException(nameof(context.ModelType));
 
-            return IsTypeOfIEnumerable(type);
+            return IsTypeOfIEnumerable(context.ModelType);
         }
 
         private bool IsTypeOfIEnumerable(Type type)
@@ -55,7 +47,6 @@ namespace WebApiContrib.Core.Formatter.Csv
 
             foreach (Type interfaceType in type.GetInterfaces())
             {
-
                 if (interfaceType == typeof(IList))
                     return true;
             }

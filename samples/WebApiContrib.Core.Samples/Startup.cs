@@ -11,7 +11,6 @@ using WebApiContrib.Core.Samples.Model;
 using WebApiContrib.Core.Versioning;
 using WebApiContrib.Core.Samples.Services;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace WebApiContrib.Core.Samples
 {
@@ -37,7 +36,15 @@ namespace WebApiContrib.Core.Samples
                 {
                     o.AddJsonpOutputFormatter();
                     o.UseFromBodyBinding(controllerPredicate: c => c.ControllerType.AsType() == typeof(BindingController));
-                }).AddCsvSerializerFormatters()
+                })
+                    // Register fluent csv formatters
+                    .AddCsvSerializerFormatters(
+                        builder =>
+                        {
+                            builder.RegisterConfiguration(new AuthorModelConfiguration());
+                        })
+                    // Register standard csv formatters
+                    .AddCsvSerializerFormatters()
                 .AddPlainTextFormatters()
                 .AddVersionNegotiation(opt =>
                 {
