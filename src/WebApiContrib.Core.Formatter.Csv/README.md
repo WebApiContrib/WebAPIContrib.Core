@@ -233,6 +233,24 @@ Identifier;First Name;Last Name;Date of Birth;IQ;Street;City;Address.Country;Sig
 1;Hermann;Hesse;6-10-18 11:12:10 AM;180;;;;signature
 ```
 
+This data can then be used to upload the csv data to the server which is then converted back to a C# object. I use fiddler, postman or curl can also be used, or any HTTP Client where you can set the header Content-Type.
+
+```csharp
+
+ http://localhost:10336/api/fluentcsvtest/import 
+
+ User-Agent: Fiddler 
+ Content-Type: text/csv 
+ Host: localhost:10336 
+ Content-Length: 503 
+
+
+Identifier;First Name;Last Name;Date of Birth;IQ;Street;City;Address.Country;Signature
+1;Joanne;Rowling;6-10-18 11:12:10 AM;70;;London;UK;signature
+1;Hermann;Hesse;6-10-18 11:12:10 AM;180;;;;signature
+
+```
+
 ## Standard Formatters
 
 Standard formatters use reflection to generate csv based on models (output) or models from incoming csv (input). They support only one level of object hierarchy and thus has limited usages. It also requires the creation of a DTO that will 'carry' the data. In the sample project, the LocalizationRecord class is used as a DTO to import and export to and from csv data.
@@ -408,7 +426,7 @@ The following image shows that the data is imported correctly.
 
 <strong>Notes</strong>
 
-The implementation of the InputFormatter and the OutputFormatter classes are specific for a list of simple classes with only properties. If you require or use more complex classes, these implementations need to be changed.
+The implementation of the InputFormatter and the OutputFormatter classes are specific for a list of simple classes with only properties. If you require or use more complex classes, these implementations need to be changed (or use fluent formatters).
 
 <strong>Links</strong>
 

@@ -146,5 +146,37 @@ namespace WebApiContrib.Core.Samples.Controllers
                 }
             };
         }
+
+        // POST api/fluentcsvtest/import
+        [HttpPost]
+        [Route("import")]
+        public IActionResult Import([FromBody]List<AuthorModel> value)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                List<AuthorModel> data = value;
+                return Ok();
+            }
+        }
+
+        // POST api/fluentcsvtest/import
+        [HttpPost]
+        [Route("importarray")]
+        public IActionResult ImportArray([FromBody]AuthorModel[] value)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                var data = value;
+                return Ok();
+            }
+        }
     }
 }

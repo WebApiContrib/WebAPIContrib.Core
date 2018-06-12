@@ -36,7 +36,7 @@ namespace WebApiContrib.Core.Formatter.Csv
 				throw new ArgumentException("CsvDelimiter cannot be empty");
 			}
 
-			builder.AddMvcOptions(options => options.InputFormatters.Add(new CsvInputFormatter(csvFormatterOptions)));
+			builder.AddMvcOptions(options => options.InputFormatters.Add(new StandardCsvInputFormatter(csvFormatterOptions)));
 			builder.AddMvcOptions(options => options.OutputFormatters.Add(new StandardCsvOutputFormatter(csvFormatterOptions)));
 
 			return builder;
@@ -57,8 +57,7 @@ namespace WebApiContrib.Core.Formatter.Csv
 			configuration.Invoke(configCollection);
 			var registeredTypes = configCollection.GetRegistredTypes();
 
-			// TODO: Write input formatter
-			//builder.AddMvcOptions(options => options.InputFormatters.Add(new CsvInputFormatter(csvFormatterOptions)));
+			builder.AddMvcOptions(options => options.InputFormatters.Add(new FluentCsvInputFormatter(registeredTypes)));
 			builder.AddMvcOptions(options => options.OutputFormatters.Add(new FluentCsvOutputFormatter(registeredTypes)));
 
 			return builder;

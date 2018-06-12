@@ -3,10 +3,9 @@ using System.Linq.Expressions;
 
 namespace WebApiContrib.Core.Formatter.Csv
 {
-    internal class FormattingConfigurationBuilder<TEntity> :
+	internal class FormattingConfigurationBuilder<TEntity> :
 		IFormattingConfigurationBuilder<TEntity>,
-		IFormattingConfigurationPropertyBuilder<TEntity>,
-		IFormattingConfigurationMetadataProvider<TEntity>
+		IFormattingConfigurationPropertyBuilder<TEntity>
 	{
 		private string _lastHeader;
 		private IFormattingConfigurationMetadata<TEntity> _metadata;
@@ -55,16 +54,28 @@ namespace WebApiContrib.Core.Formatter.Csv
 			return this;
 		}
 
-        public IFormattingConfigurationBuilder<TEntity> UseProperty(Expression<Func<TEntity, object>> propertyExpression)
+		public IFormattingConfigurationBuilder<TEntity> UseProperty(Expression<Func<TEntity, object>> propertyExpression)
 		{
-            var memberExpression = propertyExpression.GetMemberExpression();
-            if(memberExpression is null)
-                throw new ArgumentException("Provided expression can only return primitive property of an entity and should not contain method calls.", nameof(propertyExpression));
-            _metadata.PropertiesMetadata.Add(
-                _lastHeader ?? memberExpression.GetPropertyPath(), 
-                propertyExpression);
-            _lastHeader = null;
-            return this;
+			// Validate provided expression
+			var memberExpression = propertyExpression.GetMemberExpression();
+			if (memberExpression is null)
+				throw new ArgumentException(
+                    "Provided expression can only return primitive property of an entity and should not contain method calls.", 
+                    nameof(propertyExpression));
+            
+			var propertyPath = memberExpression.GetPropertyPath();
+			// Construct AssignExpression for input formatter
+			var assignExpression = propertyExpression.ConstructAssignExpression();
+
+			_metadata.PropertiesMetadata.Add(_lastHeader ?? propertyPath, new PropertyAccessMetadata
+			{
+                ReadMetadata = propertyExpression,
+				WriteMetadata = assignExpression,
+				PropertyType = memberExpression.Type
+			});
+
+			_lastHeader = null;
+			return this;
 		}
 	}
 }

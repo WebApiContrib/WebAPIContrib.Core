@@ -21,31 +21,31 @@ namespace WebApiContrib.Core.Formatter.Csv
 
 		protected override IEnumerable<string> GetHeaders(OutputFormatterWriteContext context)
 		{
-			var valuesProvider = GetDynamicDataProvider(context);
-			return valuesProvider.GetHeaders() as ICollection<string>;
+			var metadataFacade = GetDynamicConfigurationMetadataFacade(context);
+			return metadataFacade.GetHeaders() as ICollection<string>;
 		}
 
 		protected override CsvFormatterOptions GetOptions(OutputFormatterWriteContext context)
 		{
-			var valuesProvider = GetDynamicDataProvider(context);
-			return valuesProvider.GetOptions() as CsvFormatterOptions;
+			var metadataFacade = GetDynamicConfigurationMetadataFacade(context);
+			return metadataFacade.GetOptions() as CsvFormatterOptions;
 		}
 
 		protected override IEnumerable<object[]> GetValues(OutputFormatterWriteContext context)
 		{
-			var valuesProvider = GetDynamicDataProvider(context);
+			var metadataFacade = GetDynamicConfigurationMetadataFacade(context);
 			foreach (var item in (IEnumerable<object>)context.Object)
 			{
-				var values = valuesProvider.GetFormattedValues(item) as IDictionary<string, string>;
+				var values = metadataFacade.GetFormattedValues(item) as IDictionary<string, string>;
 				yield return values.Values.ToArray();
 			}
 		}
 
-		private dynamic GetDynamicDataProvider(OutputFormatterWriteContext context)
+		private dynamic GetDynamicConfigurationMetadataFacade(OutputFormatterWriteContext context)
 		{
 			Type type = GetItemType(context);
 			var serviceProvider = context.HttpContext.RequestServices;
-			Type generic = typeof(IFormattingConfigurationDataProvider<>);
+			Type generic = typeof(IFormattingConfigurationMetadataFacade<>);
 			Type constructed = generic.MakeGenericType(type);
 			return serviceProvider.GetService(constructed);
 		}

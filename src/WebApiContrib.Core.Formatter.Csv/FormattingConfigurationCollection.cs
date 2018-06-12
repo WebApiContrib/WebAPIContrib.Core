@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApiContrib.Core.Formatter.Csv
 {
-	public class FormattingConfigurationCollection : IFormattingConfigurationCollection
+    public class FormattingConfigurationCollection : IFormattingConfigurationCollection
 	{
 		private readonly ICollection<Type> _registredTypes = new List<Type>();
 		private readonly IServiceCollection _serviceCollection;
@@ -24,8 +24,8 @@ namespace WebApiContrib.Core.Formatter.Csv
 			var metadata = new FormattingConfigurationMetadata<TEntity>();
 			var builder = new FormattingConfigurationBuilder<TEntity>(metadata);
 			config.Configure(builder);
-			var provider = new FormattingConfigurationDataProvider<TEntity>(metadata);
-			_serviceCollection.AddSingleton<IFormattingConfigurationDataProvider<TEntity>>(provider);
+			var provider = new FormattingConfigurationMetadataFacade<TEntity>(metadata);
+			_serviceCollection.AddSingleton<IFormattingConfigurationMetadataFacade<TEntity>>(provider);
 			_registredTypes.Add(typeof(TEntity));
 		}
 	}
