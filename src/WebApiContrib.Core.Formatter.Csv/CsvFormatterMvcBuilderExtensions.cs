@@ -30,7 +30,7 @@ namespace WebApiContrib.Core.Formatter.Csv
                 csvFormatterOptions = new CsvFormatterOptions();
             }
 
-            if (string.IsNullOrWhiteSpace(csvFormatterOptions.CsvDelimiter))
+            if (string.IsNullOrEmpty(csvFormatterOptions.CsvDelimiter))
             {
                 throw new ArgumentException("CsvDelimiter cannot be empty");
             }

@@ -124,13 +124,16 @@ The formatters can be added to the ASP.NET Core project in the Startup class in 
 
 The default delimiter is set to ';' and the header is included by default.
 
+Optionally setting IncludeExcelDelimiterHeader to true adds the "sep=,"  header, so the files can be opened in Excel directly.
+
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
 	//var csvOptions = new CsvFormatterOptions
 	//{
 	//    UseSingleLineHeaderInCsv = true,
-	//    CsvDelimiter = ","
+	//    CsvDelimiter = ",",
+	//    IncludeExcelDelimiterHeader = true
 	//};
 
 	//services.AddMvc()

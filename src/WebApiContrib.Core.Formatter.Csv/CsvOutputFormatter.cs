@@ -87,6 +87,11 @@ namespace WebApiContrib.Core.Formatter.Csv
 
             var streamWriter = new StreamWriter(response.Body, Encoding.GetEncoding(_options.Encoding));
 
+            if (_options.IncludeExcelDelimiterHeader)
+            {
+                await streamWriter.WriteLineAsync($"sep ={_options.CsvDelimiter}");
+            }
+
             if (_options.UseSingleLineHeaderInCsv)
             {
                 var values = useJsonAttributes
