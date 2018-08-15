@@ -37,6 +37,13 @@ namespace WebApiContrib.Core
                 using (var scope = factory.CreateScope())
                 {
                     context.RequestServices = scope.ServiceProvider;
+                    
+                    var httpContextAccessor = context.RequestServices
+                                                     .GetService<IHttpContextAccessor>();
+
+                    if (httpContextAccessor != null)
+                        httpContextAccessor.HttpContext = context;
+                    
                     await next();
                 }
             });
