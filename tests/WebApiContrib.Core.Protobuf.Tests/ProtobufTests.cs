@@ -134,6 +134,7 @@ namespace WebApiContrib.Core.Protobuf.Tests
             ProtoBuf.Serializer.Serialize<Book>(stream, book);
 
             HttpContent data = new StreamContent(stream);
+            data.Headers.ContentType = new MediaTypeHeaderValue("application/x-protobuf");
 
             request.Content = data;
             var result = await client.SendAsync(request);
@@ -163,6 +164,7 @@ namespace WebApiContrib.Core.Protobuf.Tests
             ProtoBuf.Serializer.Serialize<Book>(stream, book);
 
             HttpContent data = new StreamContent(stream);
+            data.Headers.ContentType = new MediaTypeHeaderValue("application/protobuf");
 
             request.Content = data;
             var result = await client.SendAsync(request);
@@ -192,6 +194,7 @@ namespace WebApiContrib.Core.Protobuf.Tests
             ProtoBuf.Serializer.Serialize<Book>(stream, book);
 
             HttpContent data = new StreamContent(stream);
+            data.Headers.ContentType = new MediaTypeHeaderValue("application/x-google-protobuf");
 
             request.Content = data;
             var result = await client.SendAsync(request);

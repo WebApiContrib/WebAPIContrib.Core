@@ -170,6 +170,7 @@ namespace WebApiContrib.Core.Yaml.Tests
             writer.Flush();
 
             HttpContent data = new StreamContent(stream);
+            data.Headers.ContentType = new MediaTypeHeaderValue("application/x-yaml");
 
             request.Content = data;
             var result = await client.SendAsync(request);
@@ -201,6 +202,7 @@ namespace WebApiContrib.Core.Yaml.Tests
             writer.Flush();
 
             HttpContent data = new StreamContent(stream);
+            data.Headers.ContentType = new MediaTypeHeaderValue("application/yaml");
 
             request.Content = data;
             var result = await client.SendAsync(request);
@@ -232,6 +234,7 @@ namespace WebApiContrib.Core.Yaml.Tests
             writer.Flush();
 
             HttpContent data = new StreamContent(stream);
+            data.Headers.ContentType = new MediaTypeHeaderValue("text/yaml");
 
             request.Content = data;
             var result = await client.SendAsync(request);
@@ -263,6 +266,7 @@ namespace WebApiContrib.Core.Yaml.Tests
             writer.Flush();
 
             HttpContent data = new StreamContent(stream);
+            data.Headers.ContentType = new MediaTypeHeaderValue("text/x-yaml");
 
             request.Content = data;
             var result = await client.SendAsync(request);
@@ -273,7 +277,7 @@ namespace WebApiContrib.Core.Yaml.Tests
             Assert.Equal(book.Author, echo.Author);
             Assert.Equal(book.Title, echo.Title);
         }
-        
+
         [Fact]
         public async Task GetCollection_JSON_Header()
         {

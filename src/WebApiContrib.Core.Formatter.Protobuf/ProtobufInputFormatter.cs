@@ -38,7 +38,7 @@ namespace WebApiContrib.Core.Formatter.Protobuf
             return InputFormatterResult.SuccessAsync(result);
         }
 
-        public override bool CanRead(InputFormatterContext context)
+        protected override bool CanReadType(Type type)
         {
             return true;
         }
