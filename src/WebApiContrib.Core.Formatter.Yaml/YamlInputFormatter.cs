@@ -32,7 +32,7 @@ namespace WebApiContrib.Core.Formatter.Yaml
             }
         }
 
-        public override bool CanRead(InputFormatterContext context)
+        protected override bool CanReadType(Type type)
         {
             return true;
         }

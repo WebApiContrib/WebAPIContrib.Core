@@ -49,19 +49,14 @@ namespace WebApiContrib.Core.Formatter.MessagePack
             return formatterResult;
         }
 
-        public override bool CanRead(InputFormatterContext context)
+        protected override bool CanReadType(Type type)
         {
-            if (context == null)
+            if (type == null)
             {
-                throw new ArgumentNullException(nameof(context));
+                throw new ArgumentException("Type cannot be null");
             }
 
-            if (context.ModelType == null)
-            {
-                throw new ArgumentException("Model Type cannnot be null");
-            }
-
-            var typeInfo = context.ModelType.GetTypeInfo();
+            var typeInfo = type.GetTypeInfo();
             return !typeInfo.IsAbstract && !typeInfo.IsInterface && typeInfo.IsPublic;
         }
     }

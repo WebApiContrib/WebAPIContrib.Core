@@ -45,9 +45,8 @@ namespace WebApiContrib.Core.Formatter.Csv
             return InputFormatterResult.SuccessAsync(result);
         }
 
-        public override bool CanRead(InputFormatterContext context)
+        protected override bool CanReadType(Type type)
         {
-            var type = context.ModelType;
             if (type == null)
                 throw new ArgumentNullException("type");
 
@@ -127,7 +126,7 @@ namespace WebApiContrib.Core.Formatter.Csv
                 }
                 return array;
             }
-            
+
             return list;
         }
     }

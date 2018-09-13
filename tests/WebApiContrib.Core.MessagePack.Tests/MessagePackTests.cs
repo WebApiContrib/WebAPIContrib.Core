@@ -73,6 +73,7 @@ namespace WebApiContrib.Core.MessagePack.Tests
             };
 
             request.Content = new ByteArrayContent(MessagePackSerializer.Serialize<Book>(book, ContractlessStandardResolver.Instance));
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-msgpack");
             var result = await client.SendAsync(request);
 
             var echo = MessagePackSerializer.Deserialize<Book>(await result.Content.ReadAsStreamAsync(), ContractlessStandardResolver.Instance);
