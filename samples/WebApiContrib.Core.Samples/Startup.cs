@@ -11,7 +11,6 @@ using WebApiContrib.Core.Samples.Model;
 using WebApiContrib.Core.Versioning;
 using WebApiContrib.Core.Samples.Services;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace WebApiContrib.Core.Samples
 {
