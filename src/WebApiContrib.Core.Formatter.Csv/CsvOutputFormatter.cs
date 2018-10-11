@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Formatters;
+using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
 
 namespace WebApiContrib.Core.Formatter.Csv
 {
@@ -53,7 +53,7 @@ namespace WebApiContrib.Core.Formatter.Csv
 
             return false;
         }
-        
+
         /// <summary>
         /// Returns the JsonProperty data annotation name
         /// </summary>
@@ -96,7 +96,11 @@ namespace WebApiContrib.Core.Formatter.Csv
             {
                 var values = useJsonAttributes
                     ? itemType.GetProperties().Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>(false).Any())    // Only get the properties that do not define JsonIgnore
-                        .Select(GetDisplayNameFromNewtonsoftJsonAnnotations)
+                        .Select(pi => new
+                        {
+                            Order = pi.GetCustomAttribute<JsonPropertyAttribute>(false)?.Order ?? 0,
+                            Prop = pi
+                        }).OrderBy(d => d.Order).Select(d => GetDisplayNameFromNewtonsoftJsonAnnotations(d.Prop))
                     : itemType.GetProperties().Select(pi => pi.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? pi.Name);
 
                 await streamWriter.WriteLineAsync(string.Join(_options.CsvDelimiter, values));
@@ -110,8 +114,9 @@ namespace WebApiContrib.Core.Formatter.Csv
                         .Where(pi => !pi.GetCustomAttributes<JsonIgnoreAttribute>().Any())
                         .Select(pi => new
                         {
+                            Order = pi.GetCustomAttribute<JsonPropertyAttribute>(false)?.Order ?? 0,
                             Value = pi.GetValue(obj, null)
-                        })
+                        }).OrderBy(d => d.Order).Select(d => new { d.Value })
                     : obj.GetType().GetProperties().Select(
                         pi => new
                         {
