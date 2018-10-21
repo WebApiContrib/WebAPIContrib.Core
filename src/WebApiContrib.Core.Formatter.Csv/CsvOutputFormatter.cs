@@ -43,15 +43,10 @@ namespace WebApiContrib.Core.Formatter.Csv
 
         private bool IsTypeOfIEnumerable(Type type)
         {
-
-            foreach (Type interfaceType in type.GetInterfaces())
-            {
-
-                if (interfaceType == typeof(IList))
-                    return true;
-            }
-
-            return false;
+            if (type == null)
+                throw new ArgumentNullException("type");
+            
+            return typeof(IEnumerable).IsAssignableFrom(type);
         }
 
         /// <summary>
