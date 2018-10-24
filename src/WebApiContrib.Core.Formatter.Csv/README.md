@@ -2,7 +2,7 @@
 
 WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/WebApiContrib.Core.Formatter.Csv.svg?style=flat-square)](https://www.nuget.org/packages/WebApiContrib.Core.Formatter.Csv/)
 
-# History
+## History
 
 - 2018.10.24: Support IEnumerable instead of ILIst for the OutputFormatter, OrderBy and format fix
 - 2018.09.14: Added correct usage of CanRead/CanReadType
@@ -12,7 +12,7 @@ WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/
 - 2017.02.14: update to csproj
 - 2016.06.22: project init
 
-# Documentation
+## Documentation
 
 The InputFormatter and the OutputFormatter classes are used to convert the csv data to the C# model classes. 
 
