@@ -19,5 +19,17 @@ namespace WebApiContrib.Core.Formatter.Bson
                 ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, MvcBsonSerializerOptionsSetup>());
             return builder;
         }
+
+        public static IMvcCoreBuilder AddBsonSerializerFormatters(this IMvcCoreBuilder builder)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, MvcBsonSerializerOptionsSetup>());
+            return builder;
+        }
     }
 }
