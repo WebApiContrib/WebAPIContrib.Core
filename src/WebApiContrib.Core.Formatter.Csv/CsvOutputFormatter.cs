@@ -149,7 +149,7 @@ namespace WebApiContrib.Core.Formatter.Csv
                     }
                 }
 
-                await streamWriter.WriteLineAsync(valueLine.TrimEnd(_options.CsvDelimiter.ToCharArray()));
+                await streamWriter.WriteLineAsync(valueLine.Remove(valueLine.Length - _options.CsvDelimiter.Length));
             }
 
             await streamWriter.FlushAsync();
