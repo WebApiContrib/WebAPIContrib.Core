@@ -2,16 +2,17 @@
 
 WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/WebApiContrib.Core.Formatter.Csv.svg?style=flat-square)](https://www.nuget.org/packages/WebApiContrib.Core.Formatter.Csv/)
 
-# History
+## History
 
-2018.09.14: Added correct usage of CanRead/CanReadType
-2018.05.31: Adding support for ignoring propeties in the CSV DTO
-2018.04.18: Adding support for customization of the header with the display attribute
-2018.04.12: Using the encoding from the options in the CsvOutputFormatter, Don't buffer CSV 
-2017.02.14: update to csproj
-2016.06.22: project init
+- 2018.10.24: Support IEnumerable instead of ILIst for the OutputFormatter, OrderBy and format fix
+- 2018.09.14: Added correct usage of CanRead/CanReadType
+- 2018.05.31: Adding support for ignoring propeties in the CSV DTO
+- 2018.04.18: Adding support for customization of the header with the display attribute
+- 2018.04.12: Using the encoding from the options in the CsvOutputFormatter, Don't buffer CSV 
+- 2017.02.14: update to csproj
+- 2016.06.22: project init
 
-# Documentation
+## Documentation
 
 The InputFormatter and the OutputFormatter classes are used to convert the csv data to the C# model classes. 
 
@@ -189,16 +190,11 @@ This data can then be used to upload the csv data to the server which is then co
 
 ```
 
-The following image shows that the data is imported correctly.
-
-
-<img src="https://damienbod.files.wordpress.com/2016/06/importexportcsv.png" alt="importExportCsv" width="598" height="558" class="alignnone size-full wp-image-6742" />
-
-<strong>Notes</strong>
+## Notes
 
 The implementation of the InputFormatter and the OutputFormatter classes are specific for a list of simple classes with only properties. If you require or use more complex classes, these implementations need to be changed.
 
-<strong>Links</strong>
+## Links
 
 http://www.tugberkugurlu.com/archive/creating-custom-csvmediatypeformatter-in-asp-net-web-api-for-comma-separated-values-csv-format
 
