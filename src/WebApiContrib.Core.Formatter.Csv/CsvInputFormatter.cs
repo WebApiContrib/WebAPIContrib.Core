@@ -66,7 +66,7 @@ namespace WebApiContrib.Core.Formatter.Csv
             return false;
         }
 
-        private object ReadStream(Type type, Stream stream)
+        public object ReadStream(Type type, Stream stream)
         {
             Type itemType;
             var typeIsArray = false;
