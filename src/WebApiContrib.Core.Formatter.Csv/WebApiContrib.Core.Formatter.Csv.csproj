@@ -8,7 +8,7 @@
     <AssemblyName>WebApiContrib.Core.Formatter.Csv</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Csv</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;CSV;Content-Type;aspnetcore</PackageTags>
-    <PackageReleaseNotes>Encoding bug fix, configuration change</PackageReleaseNotes>
+    <PackageReleaseNotes>Encoding bug fix, configuration change, ReadLine input changed to ReadLineAsync and protected</PackageReleaseNotes>
     <PackageIconUrl>https://avatars1.githubusercontent.com/u/1561645?s=140</PackageIconUrl>
     <PackageProjectUrl>https://github.com/damienbod/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Csv</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
