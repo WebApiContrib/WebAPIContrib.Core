@@ -33,7 +33,7 @@ namespace WebApiContrib.Core.Formatter.Csv
             _options = csvFormatterOptions;
         }
 
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
+        public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
         {
             var type = context.ModelType;
             var request = context.HttpContext.Request;
@@ -41,8 +41,8 @@ namespace WebApiContrib.Core.Formatter.Csv
             MediaTypeHeaderValue.TryParse(request.ContentType, out requestContentType);
 
 
-            var result = ReadStream(type, request.Body);
-            return InputFormatterResult.SuccessAsync(result);
+            var result = await ReadStreamAsync(type, request.Body);
+            return await InputFormatterResult.SuccessAsync(result);
         }
 
         protected override bool CanReadType(Type type)
@@ -66,7 +66,7 @@ namespace WebApiContrib.Core.Formatter.Csv
             return false;
         }
 
-        private object ReadStream(Type type, Stream stream)
+        protected async Task<object> ReadStreamAsync(Type type, Stream stream)
         {
             Type itemType;
             var typeIsArray = false;
@@ -92,7 +92,7 @@ namespace WebApiContrib.Core.Formatter.Csv
             bool skipFirstLine = _options.UseSingleLineHeaderInCsv;
             while (!reader.EndOfStream)
             {
-                var line = reader.ReadLine();
+                var line = await reader.ReadLineAsync();
                 var values = line.Split(_options.CsvDelimiter.ToCharArray());
                 if(skipFirstLine)
                 {
