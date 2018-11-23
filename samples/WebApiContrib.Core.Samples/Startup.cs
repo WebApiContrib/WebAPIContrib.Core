@@ -39,7 +39,7 @@ namespace WebApiContrib.Core.Samples
                     o.AddJsonpOutputFormatter();
                     o.UseFromBodyBinding(controllerPredicate: c => c.ControllerType.AsType() == typeof(BindingController));
                 })
-                .AddCsvSerializerFormatters(new CsvFormatterOptions() { Encoding = Encoding.UTF8 })
+                .AddCsvSerializerFormatters()
                 .AddPlainTextFormatters()
                 .AddVersionNegotiation(opt =>
                 {
