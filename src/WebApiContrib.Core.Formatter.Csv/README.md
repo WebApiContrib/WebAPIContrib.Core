@@ -4,6 +4,7 @@ WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/
 
 ## History
 
+- 2018.11.23: Encoding bug fix, configuration change, ReadLine input changed to ReadLineAsync and protected
 - 2018.10.24: Support IEnumerable instead of ILIst for the OutputFormatter, OrderBy and format fix
 - 2018.09.14: Added correct usage of CanRead/CanReadType
 - 2018.05.31: Adding support for ignoring propeties in the CSV DTO
@@ -138,6 +139,7 @@ public void ConfigureServices(IServiceCollection services)
 	//    IncludeExcelDelimiterHeader = true
 	//};
 
+	// .AddCsvSerializerFormatters(new CsvFormatterOptions() { Encoding = Encoding.UTF8 })
 	//services.AddMvc()
 	//    .AddCsvSerializerFormatters(csvOptions);
 

@@ -11,6 +11,8 @@ using WebApiContrib.Core.Samples.Model;
 using WebApiContrib.Core.Versioning;
 using WebApiContrib.Core.Samples.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace WebApiContrib.Core.Samples
 {
@@ -36,7 +38,8 @@ namespace WebApiContrib.Core.Samples
                 {
                     o.AddJsonpOutputFormatter();
                     o.UseFromBodyBinding(controllerPredicate: c => c.ControllerType.AsType() == typeof(BindingController));
-                }).AddCsvSerializerFormatters()
+                })
+                .AddCsvSerializerFormatters()
                 .AddPlainTextFormatters()
                 .AddVersionNegotiation(opt =>
                 {
@@ -45,7 +48,8 @@ namespace WebApiContrib.Core.Samples
                         .UseRouteValueStrategy("version")
                         .UseCustomHeaderStrategy("X-API-Version")
                         .UseQueryStringParameter("version");
-                });
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

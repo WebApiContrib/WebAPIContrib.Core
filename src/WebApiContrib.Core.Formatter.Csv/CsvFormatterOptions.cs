@@ -1,4 +1,6 @@
-﻿namespace WebApiContrib.Core.Formatter.Csv
+﻿using System.Text;
+
+namespace WebApiContrib.Core.Formatter.Csv
 {
     public class CsvFormatterOptions
     {
@@ -6,7 +8,7 @@
 
         public string CsvDelimiter { get; set; } = ";";
 
-        public string Encoding { get; set; } = "ISO-8859-1";
+        public Encoding Encoding { get; set; } = Encoding.Default;
 
         public bool IncludeExcelDelimiterHeader { get; set; } = false;
     }
