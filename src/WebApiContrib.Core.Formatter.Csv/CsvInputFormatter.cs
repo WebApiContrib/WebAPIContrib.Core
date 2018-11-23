@@ -87,7 +87,7 @@ namespace WebApiContrib.Core.Formatter.Csv
                 list = (IList)Activator.CreateInstance(constructedListType);
             }
 
-            var reader = new StreamReader(stream, Encoding.GetEncoding(_options.Encoding));
+            var reader = new StreamReader(stream, _options.Encoding);
 
             bool skipFirstLine = _options.UseSingleLineHeaderInCsv;
             while (!reader.EndOfStream)
