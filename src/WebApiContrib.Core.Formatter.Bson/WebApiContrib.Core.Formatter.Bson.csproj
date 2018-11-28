@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <VersionPrefix>2.0.1</VersionPrefix>
+    <VersionPrefix>2.1.0</VersionPrefix>
     <Description>ASP.NET Core BSON formatter, used for working with Binary JSON responses/requests.</Description>
     <Authors>filipw;thabart;WebApiContrib Contributors</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>

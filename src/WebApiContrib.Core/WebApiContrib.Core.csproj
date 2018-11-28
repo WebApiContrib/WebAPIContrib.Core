@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Community Contributions for ASP.NET Core. Add-ons and extensions to help improve your work with ASP.NET Core and ASP.NET Core MVC.</Description>
-    <VersionPrefix>2.0.0</VersionPrefix>
+    <VersionPrefix>2.1.0</VersionPrefix>
     <Authors>filipw;WebApiContrib Contributors</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>WebApiContrib.Core</AssemblyName>

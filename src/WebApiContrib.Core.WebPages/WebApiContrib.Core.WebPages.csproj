@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>ASP.NET Core library allowing you to create web pages without controllers - just Razor views.</Description>
-    <VersionPrefix>2.0.0</VersionPrefix>
+    <VersionPrefix>2.1.0</VersionPrefix>
     <Authors>filipw;imran_ku07;WebApiContrib Contributors</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>WebApiContrib.Core.WebPages</AssemblyName>

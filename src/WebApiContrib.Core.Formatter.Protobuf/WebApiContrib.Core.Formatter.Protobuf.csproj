@@ -12,7 +12,7 @@
     <PackageProjectUrl>https://github.com/WebAPIContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Protobuf</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/WebApiContrib/WebAPIContrib.Core.git</RepositoryUrl>
-    <Version>2.0.1</Version>
+    <Version>2.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
