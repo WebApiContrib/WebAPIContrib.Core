@@ -8,13 +8,7 @@
     <AssemblyName>WebApiContrib.Core.Formatter.Yaml</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Yaml</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;Yaml;Content-Type;aspnetcore</PackageTags>
-    <PackageIconUrl>https://avatars1.githubusercontent.com/u/1561645?s=140</PackageIconUrl>
     <PackageProjectUrl>https://github.com/WebAPIContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Yaml</PackageProjectUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/WebApiContrib/WebAPIContrib.Core.git</RepositoryUrl>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">

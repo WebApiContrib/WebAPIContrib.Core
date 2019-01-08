@@ -9,18 +9,11 @@
     <PackageId>WebApiContrib.Core.Formatter.Csv</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;CSV;Content-Type;aspnetcore</PackageTags>
     <PackageReleaseNotes>Encoding bug fix, configuration change, ReadLine input changed to ReadLineAsync and protected</PackageReleaseNotes>
-    <PackageIconUrl>https://avatars1.githubusercontent.com/u/1561645?s=140</PackageIconUrl>
     <PackageProjectUrl>https://github.com/damienbod/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Csv</PackageProjectUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/WebApiContrib/WebAPIContrib.Core.git</RepositoryUrl>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <Version>3.0.0</Version>
     <AssemblyVersion>3.0.0</AssemblyVersion>
     <FileVersion>3.0.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseUrl>https://github.com/WebApiContrib/WebAPIContrib.Core/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">

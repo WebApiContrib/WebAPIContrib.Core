@@ -8,13 +8,7 @@
     <AssemblyName>WebApiContrib.Core.Formatter.MessagePack</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.MessagePack</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;MessagePack;Content-Type;aspnetcore</PackageTags>
-    <PackageIconUrl>https://avatars1.githubusercontent.com/u/1561645?s=140</PackageIconUrl>
     <PackageProjectUrl>https://github.com/WebAPIContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.MessagePack</PackageProjectUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/WebApiContrib/WebAPIContrib.Core.git</RepositoryUrl>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
   <ItemGroup>
