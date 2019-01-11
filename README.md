@@ -36,7 +36,6 @@ A project allowing you to create Razor web pages without any controller/action i
 ## Other
 
 * [WebApiContrib.Core.Versioning](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Versioning) [![Nuget](http://img.shields.io/nuget/v/WebApiContrib.Core.Versioning.svg?maxAge=10800)](https://www.nuget.org/packages/WebApiContrib.Core.Versioning/) - a library allowing you to define API versioning strategies
-* [WebApiContrib.Core.Razor](https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Razor) - Razor add ons and extensions
 
 ---
 

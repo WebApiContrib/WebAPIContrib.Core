@@ -8,11 +8,7 @@
     <AssemblyName>WebApiContrib.Core.Formatter.Bson</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Bson</PackageId>
     <PackageTags>ASP.NET Core;webapicontrib;bson;aspnetcore;formatter</PackageTags>
-    <PackageIconUrl>https://avatars1.githubusercontent.com/u/1561645?s=140</PackageIconUrl>
     <PackageProjectUrl>https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Bson</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/WebApiContrib/WebAPIContrib.Core/blob/master/LICENSE</PackageLicenseUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/WebApiContrib/WebAPIContrib.Core.git</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -8,10 +8,7 @@
     <AssemblyName>WebApiContrib.Core.Formatter.Protobuf</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Protobuf</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;Protobuf;Content-Type;aspnetcore</PackageTags>
-    <PackageIconUrl>https://avatars1.githubusercontent.com/u/1561645?s=140</PackageIconUrl>
     <PackageProjectUrl>https://github.com/WebAPIContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Protobuf</PackageProjectUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/WebApiContrib/WebAPIContrib.Core.git</RepositoryUrl>
     <Version>2.1.0</Version>
   </PropertyGroup>
 

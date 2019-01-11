@@ -7,14 +7,7 @@
     <AssemblyName>WebApiContrib.Core.Formatter.Jsonp</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Jsonp</PackageId>
     <PackageTags>ASP.NET Core;webapicontrib;jsonp;aspnetcore;formatter</PackageTags>
-    <PackageIconUrl>https://avatars1.githubusercontent.com/u/1561645?s=140</PackageIconUrl>
     <PackageProjectUrl>https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Jsonp</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/WebApiContrib/WebAPIContrib.Core/blob/master/LICENSE</PackageLicenseUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/WebApiContrib/WebAPIContrib.Core.git</RepositoryUrl>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <Version>2.1.0</Version>
   </PropertyGroup>
 
