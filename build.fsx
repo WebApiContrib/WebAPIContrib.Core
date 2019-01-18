@@ -25,7 +25,7 @@ Target "Pack" (fun _ ->
       (fun p -> 
          { p with 
             Configuration = "Release"
-            OutputPath = "../../artifacts" })
+            OutputPath = "artifacts" })
 )
 
 "Clean"
