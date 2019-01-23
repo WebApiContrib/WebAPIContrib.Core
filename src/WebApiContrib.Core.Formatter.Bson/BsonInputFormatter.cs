@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,8 @@ namespace WebApiContrib.Core.Formatter.Bson
             var request = context.HttpContext.Request;
             using (var reader = new BsonReader(request.Body))
             {
+               reader.ReadRootValueAsArray = IsEnumerable(context.ModelType);
+
                 var successful = true;
                 EventHandler<ErrorEventArgs> errorHandler = (sender, eventArgs) =>
                 {
@@ -75,5 +78,10 @@ namespace WebApiContrib.Core.Formatter.Bson
 
             return _jsonSerializerPool.Get();
         }
-    }
+
+        private bool IsEnumerable(Type type)
+        {
+           return type.GetInterface(nameof(IEnumerable)) != null;
+        }
+   }
 }
