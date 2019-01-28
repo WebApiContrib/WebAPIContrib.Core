@@ -30,6 +30,7 @@ Target "Pack" (fun _ ->
 
 "Clean"
       ==> "Build"
+      ==> "Test"
       ==> "Pack"
 
 RunTargetOrDefault "Pack"
