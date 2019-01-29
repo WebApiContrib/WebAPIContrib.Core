@@ -30,7 +30,7 @@ let buildTask =
     }
 
 let testTask =
-    BuildTask.create "Test" [buildTask] {
+    BuildTask.create "Test" [] {
         let isAppVeyorBuild = AppVeyor.detect()
         !! "tests/**/*.csproj"
         |> Seq.iter
@@ -43,7 +43,7 @@ let testTask =
     }
 
 let packTask =
-    BuildTask.create "Pack" [buildTask] {
+    BuildTask.create "Pack" [buildTask; testTask] {
         let artifactsDir = Path.Combine(__SOURCE_DIRECTORY__, "artifacts")
         !! "src/**/*.csproj"
         |> Seq.iter
@@ -61,6 +61,6 @@ BuildTask.create "Help" [] {
 }
 
 let defaultTask =
-    BuildTask.createEmpty "All" [testTask; packTask]
+    BuildTask.createEmpty "All" [packTask]
 
 BuildTask.runOrDefault defaultTask
