@@ -4,10 +4,10 @@ init:
 install:
   - ECHO %APPVEYOR_BUILD_WORKER_IMAGE%
   - dotnet --version
-  - dotnet restore
+  - dotnet restore WebApiContrib.Core.sln
 build_script:
 - fake.cmd --target Build
 before_build:
-- appveyor-retry dotnet restore -v Minimal
+- appveyor-retry dotnet restore WebApiContrib.Core.sln -v Minimal
 test_script:
 - fake.cmd --target Test
