@@ -2,7 +2,6 @@ group FakeBuild
     source https://api.nuget.org/v3/index.json
     storage: none
 
-    nuget AppVeyor.TestLogger
     nuget BlackFox.Fake.BuildTask
     nuget Fake.BuildServer.AppVeyor
     nuget Fake.Core.Target
