@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,7 +15,27 @@ namespace WebApiContrib.Core
 {
     public static class ParallelApplicationPipelinesExtensions
     {
+        /// <summary>
+        /// Sets up an application branch with an isolated DI container
+        /// </summary>
+        /// <param name="app">Application builder</param>
+        /// <param name="path">Relative path for the application branch</param>
+        /// <param name="servicesConfiguration">DI container configuration</param>
+        /// <param name="appBuilderConfiguration">Application pipeline configuration for the created branch</param>
         public static IApplicationBuilder UseBranchWithServices(this IApplicationBuilder app, PathString path, 
+            Action<IServiceCollection> servicesConfiguration, Action<IApplicationBuilder> appBuilderConfiguration)
+        {
+            return app.UseBranchWithServices(new[] { path }, servicesConfiguration, appBuilderConfiguration);
+        }
+
+        /// <summary>
+        /// Sets up an application branch with an isolated DI container with several routes (entry points)
+        /// </summary>
+        /// <param name="app">Application builder</param>
+        /// <param name="path">Relative paths for the application branch</param>
+        /// <param name="servicesConfiguration">DI container configuration</param>
+        /// <param name="appBuilderConfiguration">Application pipeline configuration for the created branch</param>
+        public static IApplicationBuilder UseBranchWithServices(this IApplicationBuilder app, IEnumerable<PathString> paths,
             Action<IServiceCollection> servicesConfiguration, Action<IApplicationBuilder> appBuilderConfiguration)
         {
             var webHost = new WebHostBuilder().
@@ -37,13 +58,13 @@ namespace WebApiContrib.Core
                 using (var scope = factory.CreateScope())
                 {
                     context.RequestServices = scope.ServiceProvider;
-                    
+
                     var httpContextAccessor = context.RequestServices
                                                      .GetService<IHttpContextAccessor>();
 
                     if (httpContextAccessor != null)
                         httpContextAccessor.HttpContext = context;
-                    
+
                     await next();
                 }
             });
@@ -52,13 +73,18 @@ namespace WebApiContrib.Core
 
             var branchDelegate = branchBuilder.Build();
 
-            return app.Map(path, builder =>
+            foreach (var path in paths)
             {
-                builder.Use(async (context, next) =>
+                app.Map(path, builder =>
                 {
-                    await branchDelegate(context);
+                    builder.Use(async (context, next) =>
+                    {
+                        await branchDelegate(context);
+                    });
                 });
-            });
+            }
+
+            return app;
         }
 
         private class EmptyStartup
