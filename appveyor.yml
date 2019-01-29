@@ -6,8 +6,8 @@ install:
   - dotnet --version
   - dotnet restore
 build_script:
-- build.bat Build
+- fake.cmd --target Build
 before_build:
 - appveyor-retry dotnet restore -v Minimal
 test_script:
-- build.bat Test
+- fake.cmd --target Test

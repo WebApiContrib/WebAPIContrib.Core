@@ -1,36 +1,66 @@
-#r "packages/FAKE/tools/FakeLib.dll"
-open Fake
-open Fake.DotNetCli
+#r "paket: groupref FakeBuild //"
+#load "./.fake/build.fsx/intellisense.fsx"
+#if !FAKE
+#r "Facades/netstandard"
+#r "netstandard"
+#endif
 
-Target "Clean" (fun _ ->
-    !! "artifacts" ++ "src/*/bin" ++ "test/*/bin"
-        |> DeleteDirs
-)
+open System.IO
+open BlackFox.Fake
+open Fake.BuildServer
+open Fake.Core
+open Fake.DotNet
+open Fake.IO
+open Fake.IO.Globbing.Operators
 
-Target "Build" (fun _ ->
-    DotNetCli.Restore id
+let cleanTask =
+    BuildTask.create "Clean" [] {
+        !! "artifacts" ++ "src/*/bin" ++ "test/*/bin"
+        |> Shell.deleteDirs
+    }
 
-    !! "**/*.csproj"
-    |> DotNetCli.Build id
-)
+let buildTask =
+    BuildTask.create "Build" [cleanTask] {
+        !! "**/*.csproj"
+        |> Seq.iter
+          (DotNet.build
+            (fun p ->
+              { p with
+                  Configuration = DotNet.BuildConfiguration.Release }))
+    }
 
-Target "Test" (fun _ ->
-    !! "tests/**/*.csproj"
-    |> DotNetCli.Test id
-)
+let testTask =
+    BuildTask.create "Test" [buildTask] {
+        let isAppVeyorBuild = AppVeyor.detect()
+        !! "tests/**/*.csproj"
+        |> Seq.iter
+          (DotNet.test
+            (fun p ->
+              { p with
+                  Configuration = DotNet.BuildConfiguration.Release
+                  TestAdapterPath = if isAppVeyorBuild then Some "." else None
+                  Logger = if isAppVeyorBuild then Some "AppVeyor" else None }))
+    }
 
-Target "Pack" (fun _ ->
-    !! "src/**/*.csproj"
-    |> DotNetCli.Pack
-      (fun p -> 
-         { p with 
-            Configuration = "Release"
-            OutputPath = "artifacts" })
-)
+let packTask =
+    BuildTask.create "Pack" [buildTask] {
+        let artifactsDir = Path.Combine(__SOURCE_DIRECTORY__, "artifacts")
+        !! "src/**/*.csproj"
+        |> Seq.iter
+          (DotNet.pack
+            (fun p -> 
+              { p with 
+                  NoBuild = true 
+                  Configuration = DotNet.BuildConfiguration.Release
+                  OutputPath = Some artifactsDir }))
+    }
 
-"Clean"
-      ==> "Build"
-      ==> "Test"
-      ==> "Pack"
+BuildTask.create "Help" [] {
+    Trace.logfn "Usage: fake [--target <target>] [<options>]"
+    BuildTask.listAvailable()
+}
 
-RunTargetOrDefault "Pack"
+let defaultTask =
+    BuildTask.createEmpty "All" [testTask; packTask]
+
+BuildTask.runOrDefault defaultTask

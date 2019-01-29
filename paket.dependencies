@@ -1,3 +1,11 @@
-source https://nuget.org/api/v2
+group FakeBuild
+    source https://api.nuget.org/v3/index.json
+    storage: none
 
-nuget FAKE
+    nuget AppVeyor.TestLogger
+    nuget BlackFox.Fake.BuildTask
+    nuget Fake.BuildServer.AppVeyor
+    nuget Fake.Core.Target
+    nuget Fake.DotNet.Cli
+    nuget Fake.IO.FileSystem
+    nuget FSharp.Core 4.3.4
