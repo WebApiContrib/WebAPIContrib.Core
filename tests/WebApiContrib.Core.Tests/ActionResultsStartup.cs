@@ -9,15 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApiContrib.Core.Tests
 {
-    public class TestController : ControllerBase
-    {
-        [HttpGet("test-controller", Name = "TestController")]
-        public IActionResult Get()
-        {
-            return Ok("test controller");
-        }
-    } 
-
     public class Item
     {
         public string Name { get; set; }
@@ -77,6 +68,14 @@ namespace WebApiContrib.Core.Tests
                 });
             });
 
+            app.Map("/nocontent", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.NoContent();
+                });
+            });
+
             app.Map("/notfound", b =>
             {
                 b.Use(async (ctx, next) =>
@@ -90,6 +89,22 @@ namespace WebApiContrib.Core.Tests
                 b.Use(async (ctx, next) =>
                 {
                     await ctx.NotFound(new Item { Name = "test" });
+                });
+            });
+
+            app.Map("/conflict", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.Conflict();
+                });
+            });
+
+            app.Map("/conflict-with-object", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.Conflict(new Item { Name = "test" });
                 });
             });
 
@@ -141,6 +156,14 @@ namespace WebApiContrib.Core.Tests
                 });
             });
 
+            app.Map("/teapot", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.StatusCode(StatusCodes.Status418ImATeapot);
+                });
+            });
+
             app.Map("/unprocessable", b =>
             {
                 b.Use(async (ctx, next) =>
@@ -149,23 +172,82 @@ namespace WebApiContrib.Core.Tests
                 });
             });
 
-            app.Map("/redirect-to-route", b =>
+            app.Map("/redirect", b =>
             {
                 b.Use(async (ctx, next) =>
                 {
-                    await ctx.RedirectToRoute("TestController");
+                    await ctx.Redirect("https://foo.bar");
                 });
             });
 
-            app.Map("/redirect-to-route-permanent", b =>
+            app.Map("/redirect-permanent", b =>
             {
                 b.Use(async (ctx, next) =>
                 {
-                    await ctx.RedirectToRoutePermanent("TestController");
+                    await ctx.RedirectPermanent("https://foo.bar");
                 });
             });
 
-            app.UseMvc();
+            app.Map("/redirect-preserve-temporary", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.RedirectPreserveMethod("https://foo.bar");
+                });
+            });
+
+            app.Map("/redirect-preserve-permanent", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.RedirectPermanentPreserveMethod("https://foo.bar");
+                });
+            });
+
+            app.Map("/local-redirect", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.LocalRedirect("/foo");
+                });
+            });
+
+            app.Map("/local-redirect-permanent", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.LocalRedirectPermanent("/foo");
+                });
+            });
+
+            app.Map("/local-redirect-preserve-temporary", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.LocalRedirectPreserveMethod("/foo");
+                });
+            });
+
+            app.Map("/local-redirect-preserve-permanent", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.LocalRedirectPermanentPreserveMethod("/foo");
+                });
+            });
+
+            app.Map("/problemdetails", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.ValidationProblem(new ValidationProblemDetails
+                    {
+                        Title = "problem details",
+                        Instance = "error",
+                        Detail = "stack trace"
+                    });
+                });
+            });
         }
     }
 }

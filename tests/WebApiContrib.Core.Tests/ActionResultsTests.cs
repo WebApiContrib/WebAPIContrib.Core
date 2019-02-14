@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using System;
@@ -27,10 +28,13 @@ namespace WebApiContrib.Core.Tests
         [Theory]
         [InlineData("/ok", 200)]
         [InlineData("/accepted", 202)]
+        [InlineData("/nocontent", 204)]
         [InlineData("/badrequest", 400)]
         [InlineData("/unauthorized", 401)]
         [InlineData("/forbidden", 403)]
         [InlineData("/notfound", 404)]
+        [InlineData("/conflict", 409)]
+        [InlineData("/teapot", 418)]
         public async Task StatusCode(string route, int httpStatusCode)
         {
             var client = _server.CreateClient();
@@ -46,6 +50,7 @@ namespace WebApiContrib.Core.Tests
         [InlineData("/accepted-with-object", 202)]
         [InlineData("/badrequest-with-object", 400)]
         [InlineData("/notfound-with-object", 404)]
+        [InlineData("/conflict-with-object", 409)]
         [InlineData("/unprocessable", 422)]
         public async Task StatusCodeWithObject(string route, int httpStatusCode)
         {
@@ -60,7 +65,7 @@ namespace WebApiContrib.Core.Tests
         }
 
         [Fact]
-        public async Task CreatedWithObject()
+        public async Task Created()
         {
             var client = _server.CreateClient();
 
@@ -71,6 +76,41 @@ namespace WebApiContrib.Core.Tests
             Assert.Equal(HttpStatusCode.Created, result.StatusCode);
             Assert.Equal("https://foo.bar/", result.Headers.Location.ToString());
             Assert.Equal("test", objectResult.Name);
+        }
+
+        [Theory]
+        [InlineData("/local-redirect-permanent", 301, "/foo")]
+        [InlineData("/redirect-permanent", 301, "https://foo.bar/")]
+        [InlineData("/local-redirect", 302, "/foo")]
+        [InlineData("/redirect", 302, "https://foo.bar/")]
+        [InlineData("/local-redirect-preserve-temporary", 307, "/foo")]
+        [InlineData("/redirect-preserve-temporary", 307, "https://foo.bar/")]
+        [InlineData("/local-redirect-preserve-permanent", 308, "/foo")]
+        [InlineData("/redirect-preserve-permanent", 308, "https://foo.bar/")]
+        public async Task Redirect(string route, int httpStatusCode, string redirect)
+        {
+            var client = _server.CreateClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, route);
+            var result = await client.SendAsync(request);
+
+            Assert.Equal(httpStatusCode, (int)result.StatusCode);
+            Assert.Equal(redirect, result.Headers.Location.ToString());
+        }
+
+        [Fact]
+        public async Task ProblemDetails()
+        {
+            var client = _server.CreateClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/problemdetails");
+            var result = await client.SendAsync(request);
+            var problemDetails = JsonConvert.DeserializeObject<ValidationProblemDetails>(await result.Content.ReadAsStringAsync());
+
+            Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
+            Assert.Equal("problem details", problemDetails.Title);
+            Assert.Equal("stack trace", problemDetails.Detail);
+            Assert.Equal("error", problemDetails.Instance);
         }
     }
 }

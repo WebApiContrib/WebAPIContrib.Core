@@ -164,84 +164,6 @@ namespace WebApiContrib.Core.Results
             return context.WriteActionResult(new LocalRedirectResult(localUrl: localUrl, permanent: true, preserveMethod: true));
         }
 
-        public static Task RedirectToRoute(this HttpContext context, string routeName)
-            => context.RedirectToRoute(routeName, routeValues: null);
-
-        public static Task RedirectToRoute(this HttpContext context, object routeValues)
-            => context.RedirectToRoute(routeName: null, routeValues: routeValues);
-
-        public static Task RedirectToRoute(this HttpContext context, string routeName, object routeValues)
-            => context.RedirectToRoute(routeName, routeValues, fragment: null);
-
-        public static Task RedirectToRoute(this HttpContext context, string routeName, string fragment)
-            => context.RedirectToRoute(routeName, routeValues: null, fragment: fragment);
-
-        public static Task RedirectToRoute(this HttpContext context,
-            string routeName,
-            object routeValues,
-            string fragment)
-        {
-            return context.WriteActionResult(new RedirectToRouteResult(routeName, routeValues, fragment)
-            {
-                UrlHelper = null,
-            });
-        }
-
-        public static Task RedirectToRoutePreserveMethod(this HttpContext context,
-            string routeName = null,
-            object routeValues = null,
-            string fragment = null)
-        {
-            return context.WriteActionResult(new RedirectToRouteResult(
-                routeName: routeName,
-                routeValues: routeValues,
-                permanent: false,
-                preserveMethod: true,
-                fragment: fragment)
-            {
-                UrlHelper = null,
-            });
-        }
-
-        public static Task RedirectToRoutePermanent(this HttpContext context, string routeName)
-            => context.RedirectToRoutePermanent(routeName, routeValues: null);
-
-        public static Task RedirectToRoutePermanent(this HttpContext context, object routeValues)
-            => context.RedirectToRoutePermanent(routeName: null, routeValues: routeValues);
-
-        public static Task RedirectToRoutePermanent(this HttpContext context, string routeName, object routeValues)
-            => context.RedirectToRoutePermanent(routeName, routeValues, fragment: null);
-
-        public static Task RedirectToRoutePermanent(this HttpContext context, string routeName, string fragment)
-            => context.RedirectToRoutePermanent(routeName, routeValues: null, fragment: fragment);
-
-        public static Task RedirectToRoutePermanent(this HttpContext context,
-            string routeName,
-            object routeValues,
-            string fragment)
-        {
-            return context.WriteActionResult(new RedirectToRouteResult(routeName, routeValues, permanent: true, fragment: fragment)
-            {
-                UrlHelper = null,
-            });
-        }
-
-        public static Task RedirectToRoutePermanentPreserveMethod(this HttpContext context,
-            string routeName = null,
-            object routeValues = null,
-            string fragment = null)
-        {
-            return context.WriteActionResult(new RedirectToRouteResult(
-                routeName: routeName,
-                routeValues: routeValues,
-                permanent: true,
-                preserveMethod: true,
-                fragment: fragment)
-            {
-                UrlHelper = null,
-            });
-        }
-
         public static Task File(this HttpContext context, byte[] fileContents, string contentType)
             => context.File(fileContents, contentType, fileDownloadName: null);
 
@@ -512,7 +434,7 @@ namespace WebApiContrib.Core.Results
         public static Task Conflict(this HttpContext context, ModelStateDictionary modelState)
             => context.WriteActionResult(new ObjectResult(modelState)
             {
-                StatusCode = StatusCodes.Status422UnprocessableEntity
+                StatusCode = StatusCodes.Status409Conflict
             });
 
         public static Task ValidationProblem(this HttpContext context, ValidationProblemDetails descriptor)
