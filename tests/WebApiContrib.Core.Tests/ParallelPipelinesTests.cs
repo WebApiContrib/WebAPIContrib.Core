@@ -18,7 +18,7 @@ namespace WebApiContrib.Core.Tests
         {
             _server = new TestServer(new WebHostBuilder()
                     .UseContentRoot(Directory.GetCurrentDirectory())
-                    .UseStartup<Startup>());
+                    .UseStartup<ParallelPipelinesStartup>());
         }
 
         [Theory]

@@ -21,11 +21,11 @@ namespace WebApiContrib.Core.Tests
         public string Hi() => "hi bar";
     }
 
-    public class Startup
+    public class ParallelPipelinesStartup
     {
         public IConfigurationRoot Configuration { get; }
 
-        public Startup(IHostingEnvironment env)
+        public ParallelPipelinesStartup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
