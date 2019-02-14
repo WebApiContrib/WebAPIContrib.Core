@@ -39,6 +39,8 @@ namespace WebApiContrib.Core.Tests
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvcCore().AddJsonFormatters();
+
+            var provider = services.BuildServiceProvider(validateScopes: true);
         }
 
         public void Configure(IApplicationBuilder app)
@@ -72,6 +74,78 @@ namespace WebApiContrib.Core.Tests
                 b.Use(async (ctx, next) =>
                 {
                     await ctx.Accepted(new Item { Name = "test" });
+                });
+            });
+
+            app.Map("/notfound", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.NotFound();
+                });
+            });
+
+            app.Map("/notfound-with-object", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.NotFound(new Item { Name = "test" });
+                });
+            });
+
+            app.Map("/created", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.Created("https://foo.bar", new Item { Name = "test" });
+                });
+            });
+
+            app.Map("/badrequest", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.BadRequest();
+                });
+            });
+
+            app.Map("/badrequest-with-object", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.BadRequest(new Item { Name = "test" });
+                });
+            });
+
+            app.Map("/unauthorized", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.Unauthorized();
+                });
+            });
+
+            app.Map("/unauthorized-with-object", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.Unauthorized(new Item { Name = "test" });
+                });
+            });
+
+            app.Map("/forbidden", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.Forbid();
+                });
+            });
+
+            app.Map("/unprocessable", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.UnprocessableEntity(new Item { Name = "test" });
                 });
             });
 

@@ -33,7 +33,10 @@ namespace WebApiContrib.Core.Results
         }
 
         public static Task StatusCode(this HttpContext context, int statusCode)
-            => context.WriteActionResult(new StatusCodeResult(statusCode));
+        {
+            context.Response.StatusCode = statusCode;
+            return context.Response.Body.FlushAsync();
+        }
 
         public static Task StatusCode(this HttpContext context, int statusCode, object value)
         {
@@ -70,13 +73,16 @@ namespace WebApiContrib.Core.Results
         }
 
         public static Task NoContent(this HttpContext context)
-            => context.WriteActionResult(new NoContentResult());
+            => context.StatusCode(StatusCodes.Status204NoContent);
 
         public static Task Ok(this HttpContext context)
-            => context.WriteActionResult(new OkResult());
+            => context.StatusCode(StatusCodes.Status200OK);
 
         public static Task Ok(this HttpContext context, object value)
-            => context.WriteActionResult(new OkObjectResult(value));
+            => context.WriteActionResult(new ObjectResult(value)
+            {
+                StatusCode = StatusCodes.Status200OK
+            });
 
         public static Task Redirect(this HttpContext context, string url)
         {
@@ -436,19 +442,31 @@ namespace WebApiContrib.Core.Results
             });
 
         public static Task Unauthorized(this HttpContext context)
-            => context.WriteActionResult(new UnauthorizedResult());
+            => context.StatusCode(StatusCodes.Status401Unauthorized);
+
+        public static Task Unauthorized(this HttpContext context, object value)
+            => context.WriteActionResult(new ObjectResult(value)
+            {
+                StatusCode = StatusCodes.Status401Unauthorized
+            });
 
         public static Task NotFound(this HttpContext context)
-            => context.WriteActionResult(new NotFoundResult());
+            => context.StatusCode(StatusCodes.Status404NotFound);
 
         public static Task NotFound(this HttpContext context, object value)
-            => context.WriteActionResult(new NotFoundObjectResult(value));
+            => context.WriteActionResult(new ObjectResult(value)
+            {
+                StatusCode = StatusCodes.Status404NotFound
+            });
 
         public static Task BadRequest(this HttpContext context)
-            => context.WriteActionResult(new BadRequestResult());
+            => context.StatusCode(StatusCodes.Status400BadRequest);
 
         public static Task BadRequest(this HttpContext context, object error)
-            => context.WriteActionResult(new BadRequestObjectResult(error));
+            => context.WriteActionResult(new ObjectResult(error)
+            {
+                StatusCode = StatusCodes.Status400BadRequest
+            });
 
         public static Task BadRequest(this HttpContext context, ModelStateDictionary modelState)
         {
@@ -457,14 +475,17 @@ namespace WebApiContrib.Core.Results
                 throw new ArgumentNullException(nameof(modelState));
             }
 
-            return context.WriteActionResult(new BadRequestObjectResult(modelState));
+            return context.BadRequest(modelState);
         }
 
         public static Task UnprocessableEntity(this HttpContext context)
-            => context.WriteActionResult(new UnprocessableEntityResult());
+            => context.StatusCode(StatusCodes.Status422UnprocessableEntity);
 
         public static Task UnprocessableEntity(this HttpContext context, object error)
-            => context.WriteActionResult(new UnprocessableEntityObjectResult(error));
+            => context.WriteActionResult(new ObjectResult(error)
+            {
+                StatusCode = StatusCodes.Status422UnprocessableEntity
+            });
 
         public static Task UnprocessableEntity(this HttpContext context, ModelStateDictionary modelState)
         {
@@ -473,17 +494,26 @@ namespace WebApiContrib.Core.Results
                 throw new ArgumentNullException(nameof(modelState));
             }
 
-            return context.WriteActionResult(new UnprocessableEntityObjectResult(modelState));
+            return context.WriteActionResult(new ObjectResult(modelState)
+            {
+                StatusCode = StatusCodes.Status422UnprocessableEntity
+            });
         }
 
         public static Task Conflict(this HttpContext context)
-            => context.WriteActionResult(new ConflictResult());
+            => context.StatusCode(StatusCodes.Status409Conflict);
 
         public static Task Conflict(this HttpContext context, object error)
-            => context.WriteActionResult(new ConflictObjectResult(error));
+            => context.WriteActionResult(new ObjectResult(error)
+            {
+                StatusCode = StatusCodes.Status409Conflict
+            });
 
         public static Task Conflict(this HttpContext context, ModelStateDictionary modelState)
-            => context.WriteActionResult(new ConflictObjectResult(modelState));
+            => context.WriteActionResult(new ObjectResult(modelState)
+            {
+                StatusCode = StatusCodes.Status422UnprocessableEntity
+            });
 
         public static Task ValidationProblem(this HttpContext context, ValidationProblemDetails descriptor)
         {
@@ -492,7 +522,10 @@ namespace WebApiContrib.Core.Results
                 throw new ArgumentNullException(nameof(descriptor));
             }
 
-            return context.WriteActionResult(new BadRequestObjectResult(descriptor));
+            return context.WriteActionResult(new ObjectResult(descriptor)
+            {
+                StatusCode = StatusCodes.Status400BadRequest
+            });
         }
 
         public static Task ValidationProblem(this HttpContext context, ModelStateDictionary modelStateDictionary)
@@ -503,7 +536,10 @@ namespace WebApiContrib.Core.Results
             }
 
             var validationProblem = new ValidationProblemDetails(modelStateDictionary);
-            return context.WriteActionResult(new BadRequestObjectResult(validationProblem));
+            return context.WriteActionResult(new ObjectResult(validationProblem)
+            {
+                StatusCode = StatusCodes.Status400BadRequest
+            });
         }
 
         public static Task Created(this HttpContext context, string uri, object value)
@@ -513,7 +549,11 @@ namespace WebApiContrib.Core.Results
                 throw new ArgumentNullException(nameof(uri));
             }
 
-            return context.WriteActionResult(new CreatedResult(uri, value));
+            context.Response.Headers.Add("Location", uri);
+            return context.WriteActionResult(new ObjectResult(value)
+            {
+                StatusCode = StatusCodes.Status201Created
+            });
         }
 
         public static Task Created(this HttpContext context, Uri uri, object value)
@@ -523,23 +563,23 @@ namespace WebApiContrib.Core.Results
                 throw new ArgumentNullException(nameof(uri));
             }
 
-            return context.WriteActionResult(new CreatedResult(uri, value));
+            context.Response.Headers.Add("Location", uri.ToString());
+            return context.WriteActionResult(new ObjectResult(value)
+            {
+                StatusCode = StatusCodes.Status201Created
+            });
         }
 
-        public static Task CreatedAtRoute(this HttpContext context, string routeName, object value)
-            => context.CreatedAtRoute(routeName, routeValues: null, value: value);
-
-        public static Task CreatedAtRoute(this HttpContext context, object routeValues, object value)
-            => context.CreatedAtRoute(routeName: null, routeValues: routeValues, value: value);
-
-        public static Task CreatedAtRoute(this HttpContext context, string routeName, object routeValues, object value)
-            => context.WriteActionResult(new CreatedAtRouteResult(routeName, routeValues, value));
-
         public static Task Accepted(this HttpContext context)
-            => context.WriteActionResult(new AcceptedResult());
+            => context.StatusCode(StatusCodes.Status202Accepted);
 
         public static Task Accepted(this HttpContext context, object value)
-            => context.WriteActionResult(new AcceptedResult(location: null, value: value));
+        {
+            return context.WriteActionResult(new ObjectResult(value)
+            {
+                StatusCode = StatusCodes.Status202Accepted
+            });
+        }
 
         public static Task Accepted(this HttpContext context, Uri uri)
         {
@@ -548,14 +588,24 @@ namespace WebApiContrib.Core.Results
                 throw new ArgumentNullException(nameof(uri));
             }
 
-            return context.WriteActionResult(new AcceptedResult(locationUri: uri, value: null));
+            context.Response.Headers.Add("Location", uri.ToString());
+            return context.StatusCode(StatusCodes.Status202Accepted);
         }
 
         public static Task Accepted(this HttpContext context, string uri)
-            => context.WriteActionResult(new AcceptedResult(location: uri, value: null));
+        {
+            context.Response.Headers.Add("Location", uri);
+            return context.StatusCode(StatusCodes.Status202Accepted);
+        }
         
         public static Task Accepted(this HttpContext context, string uri, object value)
-            => context.WriteActionResult(new AcceptedResult(uri, value));
+        {
+            context.Response.Headers.Add("Location", uri);
+            return context.WriteActionResult(new ObjectResult(value)
+            {
+                StatusCode = StatusCodes.Status202Accepted
+            });
+        }
 
         public static Task Accepted(this HttpContext context, Uri uri, object value)
         {
@@ -564,63 +614,14 @@ namespace WebApiContrib.Core.Results
                 throw new ArgumentNullException(nameof(uri));
             }
 
-            return context.WriteActionResult(new AcceptedResult(locationUri: uri, value: value));
+            context.Response.Headers.Add("Location", uri.ToString());
+            return context.WriteActionResult(new ObjectResult(value)
+            {
+                StatusCode = StatusCodes.Status202Accepted
+            });
         }
 
-        public static Task AcceptedAtRoute(this HttpContext context, object routeValues)
-            => context.AcceptedAtRoute(routeName: null, routeValues: routeValues, value: null);
-
-        public static Task AcceptedAtRoute(this HttpContext context, string routeName)
-            => context.AcceptedAtRoute(routeName, routeValues: null, value: null);
-
-        public static Task AcceptedAtRoute(this HttpContext context, string routeName, object routeValues)
-            => context.AcceptedAtRoute(routeName, routeValues, value: null);
-
-        public static Task AcceptedAtRoute(this HttpContext context, object routeValues, object value)
-            => context.AcceptedAtRoute(routeName: null, routeValues: routeValues, value: value);
-
-        public static Task AcceptedAtRoute(this HttpContext context, string routeName, object routeValues, object value)
-            => context.WriteActionResult(new AcceptedAtRouteResult(routeName, routeValues, value));
-
-        public static Task Challenge(this HttpContext context)
-            => context.WriteActionResult(new ChallengeResult());
-
-        public static Task Challenge(this HttpContext context, params string[] authenticationSchemes)
-            => context.WriteActionResult(new ChallengeResult(authenticationSchemes));
-
-        public static Task Challenge(this HttpContext context, AuthenticationProperties properties)
-            => context.WriteActionResult(new ChallengeResult(properties));
-
-        public static Task Challenge(this HttpContext context,
-            AuthenticationProperties properties,
-            params string[] authenticationSchemes)
-            => context.WriteActionResult(new ChallengeResult(authenticationSchemes, properties));
-
         public static Task Forbid(this HttpContext context)
-            => context.WriteActionResult(new ForbidResult());
-
-        public static Task Forbid(this HttpContext context, params string[] authenticationSchemes)
-            => context.WriteActionResult(new ForbidResult(authenticationSchemes));
-
-        public static Task Forbid(this HttpContext context, AuthenticationProperties properties)
-            => context.WriteActionResult(new ForbidResult(properties));
-
-        public static Task Forbid(this HttpContext context, AuthenticationProperties properties, params string[] authenticationSchemes)
-            => context.WriteActionResult(new ForbidResult(authenticationSchemes, properties));
-
-        public static Task SignIn(this HttpContext context, ClaimsPrincipal principal, string authenticationScheme)
-            => context.WriteActionResult(new SignInResult(authenticationScheme, principal));
-
-        public static Task SignIn(this HttpContext context,
-            ClaimsPrincipal principal,
-            AuthenticationProperties properties,
-            string authenticationScheme)
-            => context.WriteActionResult(new SignInResult(authenticationScheme, principal, properties));
-
-        public static Task SignOut(this HttpContext context, params string[] authenticationSchemes)
-            => context.WriteActionResult(new SignOutResult(authenticationSchemes));
-
-        public static Task SignOut(this HttpContext context, AuthenticationProperties properties, params string[] authenticationSchemes)
-            => context.WriteActionResult(new SignOutResult(authenticationSchemes, properties));
+            => context.StatusCode(StatusCodes.Status403Forbidden);
     }
 }
