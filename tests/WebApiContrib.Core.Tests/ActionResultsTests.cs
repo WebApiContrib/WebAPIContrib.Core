@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -78,6 +81,20 @@ namespace WebApiContrib.Core.Tests
             Assert.Equal("test", objectResult.Name);
         }
 
+        [Fact]
+        public async Task Content()
+        {
+            var client = _server.CreateClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/content");
+            var result = await client.SendAsync(request);
+            var objectResult = JsonConvert.DeserializeObject<Item>(await result.Content.ReadAsStringAsync());
+
+            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+            Assert.Equal("application/json", result.Content.Headers.ContentType.MediaType.ToString());
+            Assert.Equal("test", objectResult.Name);
+        }
+
         [Theory]
         [InlineData("/local-redirect-permanent", 301, "/foo")]
         [InlineData("/redirect-permanent", 301, "https://foo.bar/")]
@@ -111,6 +128,25 @@ namespace WebApiContrib.Core.Tests
             Assert.Equal("problem details", problemDetails.Title);
             Assert.Equal("stack trace", problemDetails.Detail);
             Assert.Equal("error", problemDetails.Instance);
+        }
+
+        [Theory]
+        [InlineData("/file-byte")]
+        [InlineData("/file-stream")]
+        [InlineData("/file-physical")]
+        [InlineData("/file-virtual")]
+        public async Task File(string route)
+        {
+            var client = _server.CreateClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, route);
+            var result = await client.SendAsync(request);
+            var body = Encoding.UTF8.GetString(await result.Content.ReadAsByteArrayAsync());
+
+            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+            Assert.Equal("text/plain", result.Content.Headers.ContentType.MediaType.ToString());
+            Assert.Equal("file.txt", result.Content.Headers.ContentDisposition.FileName);
+            Assert.Equal("file", body, StringComparer.InvariantCulture);
         }
     }
 }

@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Http;
 using WebApiContrib.Core.Results;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Text;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace WebApiContrib.Core.Tests
 {
@@ -20,6 +24,8 @@ namespace WebApiContrib.Core.Tests
 
         public ActionResultsStartup(IHostingEnvironment env)
         {
+            env.WebRootFileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -30,8 +36,6 @@ namespace WebApiContrib.Core.Tests
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvcCore().AddJsonFormatters();
-
-            var provider = services.BuildServiceProvider(validateScopes: true);
         }
 
         public void Configure(IApplicationBuilder app)
@@ -172,6 +176,14 @@ namespace WebApiContrib.Core.Tests
                 });
             });
 
+            app.Map("/content", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    await ctx.Content(JsonConvert.SerializeObject(new Item { Name = "test" }), "application/json");
+                });
+            });
+
             app.Map("/redirect", b =>
             {
                 b.Use(async (ctx, next) =>
@@ -246,6 +258,42 @@ namespace WebApiContrib.Core.Tests
                         Instance = "error",
                         Detail = "stack trace"
                     });
+                });
+            });
+
+            app.Map("/file-byte", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    var file = Encoding.UTF8.GetBytes("file");
+                    await ctx.File(file, "text/plain", "file.txt");
+                });
+            });
+
+            app.Map("/file-stream", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    var file = new MemoryStream(Encoding.UTF8.GetBytes("file"));
+                    await ctx.File(file, "text/plain", "file.txt");
+                });
+            });
+
+            app.Map("/file-physical", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    var path = Path.GetFullPath(Path.Combine("test-files", "file.txt"));
+                    await ctx.PhysicalFile(path, "text/plain", "file.txt");
+                });
+            });
+
+            app.Map("/file-virtual", b =>
+            {
+                b.Use(async (ctx, next) =>
+                {
+                    var path = Path.Combine("test-files", "file.txt");
+                    await ctx.File(path, "text/plain", "file.txt");
                 });
             });
         }
