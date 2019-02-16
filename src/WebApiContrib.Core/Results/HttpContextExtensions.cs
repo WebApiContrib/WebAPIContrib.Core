@@ -17,6 +17,8 @@ namespace WebApiContrib.Core.Results
 {
     public static class HttpContextExtensions
     {
+        // adapted from https://kristian.hellang.com/using-mvc-result-executors-in-middleware/
+        // see the blog post for details on how and why it works
         public static Task WriteActionResult<TResult>(this HttpContext context, TResult result) where TResult : IActionResult
         {
             var executor = context.RequestServices.GetService<IActionResultExecutor<TResult>>();
