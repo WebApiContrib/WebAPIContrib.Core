@@ -50,5 +50,14 @@ namespace WebApiContrib.Core.Tests
 
             Assert.Equal($"hi {path.Substring(0, path.Length-1)}", stringResult);
         }
+
+        [Fact]
+        public async Task PipelineBeforeTheBranchStillHasWorkingServiceProvider()
+        {
+            var client = _server.CreateClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/baz");
+            await client.SendAsync(request);
+        }
     }
 }
