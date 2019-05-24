@@ -55,6 +55,7 @@ namespace WebApiContrib.Core
 
             branchBuilder.Use(async (context, next) =>
             {
+                var oldServiceProvider = context.RequestServices;
                 using (var scope = factory.CreateScope())
                 {
                     context.RequestServices = scope.ServiceProvider;
@@ -67,6 +68,7 @@ namespace WebApiContrib.Core
 
                     await next();
                 }
+                context.RequestServices = oldServiceProvider;
             });
 
             appBuilderConfiguration(branchBuilder);
