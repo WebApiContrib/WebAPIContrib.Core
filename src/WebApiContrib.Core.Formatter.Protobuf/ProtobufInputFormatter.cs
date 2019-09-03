@@ -17,6 +17,11 @@ namespace WebApiContrib.Core.Formatter.Protobuf
             {
                 SupportedMediaTypes.Add(new MediaTypeHeaderValue(contentType));
             }
+
+            foreach (var surrogate in protobufFormatterOptions.Surrogates)
+            {
+                model.Value.Add(surrogate.Key, false).SetSurrogate(surrogate.Value);
+            }
         }
 
         private static Lazy<RuntimeTypeModel> model = new Lazy<RuntimeTypeModel>(CreateTypeModel);
@@ -32,7 +37,6 @@ namespace WebApiContrib.Core.Formatter.Protobuf
             var request = context.HttpContext.Request;
             MediaTypeHeaderValue requestContentType = null;
             MediaTypeHeaderValue.TryParse(request.ContentType, out requestContentType);
-
 
             object result = Model.Deserialize(context.HttpContext.Request.Body, null, type);
             return InputFormatterResult.SuccessAsync(result);
