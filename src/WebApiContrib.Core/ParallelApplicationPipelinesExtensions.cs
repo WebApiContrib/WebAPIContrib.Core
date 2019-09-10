@@ -32,7 +32,7 @@ namespace WebApiContrib.Core
         /// Sets up an application branch with an isolated DI container with several routes (entry points)
         /// </summary>
         /// <param name="app">Application builder</param>
-        /// <param name="path">Relative paths for the application branch</param>
+        /// <param name="paths">Relative paths for the application branch</param>
         /// <param name="servicesConfiguration">DI container configuration</param>
         /// <param name="appBuilderConfiguration">Application pipeline configuration for the created branch</param>
         public static IApplicationBuilder UseBranchWithServices(this IApplicationBuilder app, IEnumerable<PathString> paths,
