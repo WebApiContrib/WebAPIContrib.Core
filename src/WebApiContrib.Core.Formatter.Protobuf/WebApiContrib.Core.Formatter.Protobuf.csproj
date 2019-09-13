@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <Description>ASP.NET Core InputFormatter, OutputFormatter for Protobuf</Description>
-    <VersionPrefix>2.0.1</VersionPrefix>
+    <VersionPrefix>2.1.1</VersionPrefix>
     <Authors>damienbod;WebApiContrib Contributors</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>WebApiContrib.Core.Formatter.Protobuf</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Protobuf</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;Protobuf;Content-Type;aspnetcore</PackageTags>
     <PackageProjectUrl>https://github.com/WebAPIContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Protobuf</PackageProjectUrl>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
