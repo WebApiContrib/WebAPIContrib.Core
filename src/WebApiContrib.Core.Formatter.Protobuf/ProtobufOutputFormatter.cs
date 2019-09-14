@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using ProtoBuf.Meta;
@@ -36,12 +38,16 @@ namespace WebApiContrib.Core.Formatter.Protobuf
             return typeModel;
         }
 
-        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
+        public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
         {
             var response = context.HttpContext.Response;
-    
-            Model.Serialize(response.Body, context.Object);
-            return Task.FromResult(response);
+
+            MemoryStream stream = new MemoryStream();
+            Model.Serialize(stream, context.Object);
+
+            stream.Position = 0;
+            var sr = new StreamReader(stream);
+            await response.WriteAsync(sr.ReadToEnd());
         }
     }
 }
