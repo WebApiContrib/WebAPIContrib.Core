@@ -41,9 +41,8 @@ namespace WebApiContrib.Core.Formatter.Protobuf
 
             MemoryStream stream = new MemoryStream();
             await request.Body.CopyToAsync(stream);
-
             stream.Position = 0;
-            object result = Model.Deserialize(stream, null, type);
+            object result = Model.Deserialize(stream, null, type, stream.Length);
             return await InputFormatterResult.SuccessAsync(result);
         }
 

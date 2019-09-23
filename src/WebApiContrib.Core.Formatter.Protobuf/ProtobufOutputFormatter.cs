@@ -41,13 +41,10 @@ namespace WebApiContrib.Core.Formatter.Protobuf
         public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
         {
             var response = context.HttpContext.Response;
-
             MemoryStream stream = new MemoryStream();
             Model.Serialize(stream, context.Object);
-
-            stream.Position = 0;
-            var sr = new StreamReader(stream);
-            await response.WriteAsync(sr.ReadToEnd());
+            var data = stream.ToArray();
+            await response.Body.WriteAsync(data, 0, data.Length);
         }
     }
 }
