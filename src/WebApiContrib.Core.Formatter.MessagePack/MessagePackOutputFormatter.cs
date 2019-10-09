@@ -24,15 +24,18 @@ namespace WebApiContrib.Core.Formatter.MessagePack
             }
         }
 
-        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
+        public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
         {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
-            MessagePackSerializer.NonGeneric.Serialize(context.ObjectType, context.HttpContext.Response.Body, context.Object, _options.FormatterResolver);
-            return Task.FromResult(0);
+            using (MemoryStream stream = new MemoryStream())
+            {
+                MessagePackSerializer.NonGeneric.Serialize(context.ObjectType, stream, context.Object, _options.FormatterResolver);
+                await context.HttpContext.Response.Body.WriteAsync(stream.ToArray(), 0, (int)stream.Length);
+            }
         }
     }
 }
