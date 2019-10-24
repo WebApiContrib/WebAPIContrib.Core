@@ -16,20 +16,16 @@ namespace WebApiContrib.Core.Formatter.Bson
         private readonly JsonSerializerSettings _jsonSerializerSettings;
 
         private JsonSerializer _serializer;
-        
+
         public BsonOutputFormatter(JsonSerializerSettings serializerSettings)
         {
-            if (serializerSettings == null)
-            {
-                throw new ArgumentNullException(nameof(serializerSettings));
-            }
+            _jsonSerializerSettings = serializerSettings ?? throw new ArgumentNullException(nameof(serializerSettings));
 
-
-            _jsonSerializerSettings = serializerSettings;
             SupportedEncodings.Add(Encoding.UTF8);
             SupportedEncodings.Add(Encoding.Unicode);
             SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/bson"));
         }
+
         public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
         {
             if (context == null)
@@ -43,22 +39,17 @@ namespace WebApiContrib.Core.Formatter.Bson
             }
 
             var response = context.HttpContext.Response;
-            using (var bsonWriter = new BsonWriter(response.Body) { CloseOutput = false })
+            using (var bsonWriter = new BsonDataWriter(response.Body) { CloseOutput = false })
             {
                 var jsonSerializer = CreateJsonSerializer();
                 jsonSerializer.Serialize(bsonWriter, context.Object);
                 bsonWriter.Flush();
             }
         }
-        
+
         private JsonSerializer CreateJsonSerializer()
         {
-            if (_serializer == null)
-            {
-                _serializer = JsonSerializer.Create(_jsonSerializerSettings);
-            }
-
-            return _serializer;
+            return _serializer ?? (_serializer = JsonSerializer.Create(_jsonSerializerSettings));
         }
     }
 }
