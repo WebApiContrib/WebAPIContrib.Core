@@ -127,10 +127,10 @@ namespace WebApiContrib.Core.Formatter.Csv
 
                         var _val = val.Value.ToString();
 
-                        //Escape quotas
+                        //Escape quotes
                         _val = _val.Replace("\"", "\"\"");
 
-                        //Check if the value contans a delimiter and place it in quotes if so
+                        //Check if the value contains a delimiter and place it in quotes if so
                         if (_val.Contains(_options.CsvDelimiter))
                             _val = string.Concat("\"", _val, "\"");
 
