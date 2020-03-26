@@ -127,6 +127,10 @@ namespace WebApiContrib.Core.Formatter.Csv
 
                         var _val = val.Value.ToString();
 
+                        //Substitute smart quotes in Windows-1252
+                        if (_options.Encoding.EncodingName == "Western European (ISO)")
+                            _val = _val.Replace('“', '"').Replace('”', '"');
+
                         //Escape quotes
                         _val = _val.Replace("\"", "\"\"");
 
