@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Core", "01. Core", "{5898776F-DBF8-4C30-85A3-66401B12016F}"
 EndProject
@@ -44,7 +44,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Formatte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Yaml.Tests", "tests\WebApiContrib.Core.Yaml.Tests\WebApiContrib.Core.Yaml.Tests.csproj", "{3EC99E77-9F1E-4D43-B70B-E67C61D7E8DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Core.Tests", "tests\WebApiContrib.Core.Tests\WebApiContrib.Core.Tests.csproj", "{6466DD2D-6358-4D7F-8562-2517F7F53E3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Tests", "tests\WebApiContrib.Core.Tests\WebApiContrib.Core.Tests.csproj", "{6466DD2D-6358-4D7F-8562-2517F7F53E3F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiContrib.Core.Csv.Tests", "tests\WebApiContrib.Core.Csv.Tests\WebApiContrib.Core.Csv.Tests.csproj", "{202BC540-B2CA-4CCA-8E9C-EE18B0B59A20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -124,6 +126,10 @@ Global
 		{6466DD2D-6358-4D7F-8562-2517F7F53E3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6466DD2D-6358-4D7F-8562-2517F7F53E3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6466DD2D-6358-4D7F-8562-2517F7F53E3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{202BC540-B2CA-4CCA-8E9C-EE18B0B59A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{202BC540-B2CA-4CCA-8E9C-EE18B0B59A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{202BC540-B2CA-4CCA-8E9C-EE18B0B59A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{202BC540-B2CA-4CCA-8E9C-EE18B0B59A20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +154,7 @@ Global
 		{D542971E-D9D3-4E8F-A4BF-D1638D7C2613} = {5898776F-DBF8-4C30-85A3-66401B12016F}
 		{3EC99E77-9F1E-4D43-B70B-E67C61D7E8DB} = {A7A8D928-30D6-4497-8B7D-F233B79A2917}
 		{6466DD2D-6358-4D7F-8562-2517F7F53E3F} = {A7A8D928-30D6-4497-8B7D-F233B79A2917}
+		{202BC540-B2CA-4CCA-8E9C-EE18B0B59A20} = {A7A8D928-30D6-4497-8B7D-F233B79A2917}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C1758983-E7A8-4669-9176-F46E7A08E588}
