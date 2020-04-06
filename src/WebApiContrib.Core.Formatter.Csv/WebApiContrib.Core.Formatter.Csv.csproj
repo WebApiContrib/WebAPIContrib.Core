@@ -8,11 +8,11 @@
     <AssemblyName>WebApiContrib.Core.Formatter.Csv</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Csv</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;CSV;Content-Type;aspnetcore</PackageTags>
-    <PackageReleaseNotes>Encoding bug fix, configuration change, ReadLine input changed to ReadLineAsync and protected</PackageReleaseNotes>
+    <PackageReleaseNotes>Replace smart quotes when encoding is Windows-1252</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/damienbod/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Csv</PackageProjectUrl>
     <Version>3.0.0</Version>
-    <AssemblyVersion>3.0.0</AssemblyVersion>
-    <FileVersion>3.0.0</FileVersion>
+    <AssemblyVersion>3.0.1</AssemblyVersion>
+    <FileVersion>3.0.1</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
