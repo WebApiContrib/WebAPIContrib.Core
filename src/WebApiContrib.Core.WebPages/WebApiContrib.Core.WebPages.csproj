@@ -9,7 +9,15 @@
     <PackageId>WebApiContrib.Core.WebPages</PackageId>
     <PackageTags>ASP.NET Core;webapicontrib;webpages;razor;aspnetcore</PackageTags>
     <PackageProjectUrl>https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.WebPages</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.3" />
