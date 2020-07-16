@@ -61,7 +61,7 @@ namespace WebApiContrib.Core.Formatter.Csv
                 return value;
             }
 
-            return pi.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? pi.Name;
+            return pi.GetCustomAttribute<DisplayAttribute>(false)?.GetName() ?? pi.Name;
         }
 
         public async override Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
