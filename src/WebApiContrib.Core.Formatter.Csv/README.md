@@ -4,6 +4,7 @@ WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/
 
 ## History
 
+- 2020.07.17: Add Support for Header Translation
 - 2020.04.06: Replace smart quotes when encoding is Windows-1252
 - 2018.11.23: Encoding bug fix, configuration change, ReadLine input changed to ReadLineAsync and protected
 - 2018.10.24: Support IEnumerable instead of ILIst for the OutputFormatter, OrderBy and format fix
