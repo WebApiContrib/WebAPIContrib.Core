@@ -9,7 +9,15 @@
     <PackageId>WebApiContrib.Core.TagHelpers.Markdown</PackageId>
     <PackageTags>ASP.NET Core;webapicontrib;markdown;razor;aspnetcore</PackageTags>
     <PackageProjectUrl>https://github.com/WebApiContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.TagHelpers.Markdown</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <Content Include="markdig-license.txt">

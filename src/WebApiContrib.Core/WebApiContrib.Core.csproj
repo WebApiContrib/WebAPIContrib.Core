@@ -9,7 +9,15 @@
     <PackageId>WebApiContrib.Core</PackageId>
     <PackageTags>ASP.NET Core;webapicontrib;api;aspnetcore;mvc;routing;convention</PackageTags>
     <PackageProjectUrl>https://github.com/WebApiContrib/WebAPIContrib.Core</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.1.1" />

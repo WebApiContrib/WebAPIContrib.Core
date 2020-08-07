@@ -9,7 +9,15 @@
     <PackageId>WebApiContrib.Core.Formatter.MessagePack</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;MessagePack;Content-Type;aspnetcore</PackageTags>
     <PackageProjectUrl>https://github.com/WebAPIContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.MessagePack</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.3" />
