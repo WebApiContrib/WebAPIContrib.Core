@@ -2,19 +2,25 @@
 
   <PropertyGroup>
     <Description>ASP.NET Core InputFormatter, OutputFormatter for Protobuf</Description>
-    <VersionPrefix>2.1.2</VersionPrefix>
+    <VersionPrefix>3.0.0</VersionPrefix>
     <Authors>damienbod;WebApiContrib Contributors</Authors>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
     <AssemblyName>WebApiContrib.Core.Formatter.Protobuf</AssemblyName>
     <PackageId>WebApiContrib.Core.Formatter.Protobuf</PackageId>
     <PackageTags>ASP.NET Core;InputFormatter;OutputFormatter;MediaFormatter;Protobuf;Content-Type;aspnetcore</PackageTags>
     <PackageProjectUrl>https://github.com/WebAPIContrib/WebAPIContrib.Core/tree/master/src/WebApiContrib.Core.Formatter.Protobuf</PackageProjectUrl>
-    <Version>2.1.3</Version>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.3" />
-    <PackageReference Include="protobuf-net" Version="2.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.16" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' ">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  
+  <ItemGroup>
+      <PackageReference Include="protobuf-net" Version="3.0.29" />
   </ItemGroup>
 
 </Project>
