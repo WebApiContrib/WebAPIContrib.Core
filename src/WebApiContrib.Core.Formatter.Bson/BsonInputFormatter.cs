@@ -57,6 +57,7 @@ namespace WebApiContrib.Core.Formatter.Bson
                 }
                 finally
                 {
+                    jsonSerializer.Error -= errorHandler;
                     _jsonSerializerPool.Return(jsonSerializer);
                 }
 
