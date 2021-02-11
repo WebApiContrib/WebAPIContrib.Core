@@ -16,7 +16,7 @@ namespace WebApiContrib.Core.Formatter.Csv
             return AddCsvSerializerFormatters(builder, csvFormatterOptions: null);
         }
 
-        public static IMvcBuilder AddCsvSerializerFormatters( this IMvcBuilder builder, CsvFormatterOptions csvFormatterOptions)
+        public static IMvcBuilder AddCsvSerializerFormatters(this IMvcBuilder builder, CsvFormatterOptions csvFormatterOptions)
         {
             if (builder == null)
             {

@@ -45,7 +45,7 @@ namespace WebApiContrib.Core.Formatter.Csv
         {
             if (type == null)
                 throw new ArgumentNullException("type");
-            
+
             return typeof(IEnumerable).IsAssignableFrom(type);
         }
 

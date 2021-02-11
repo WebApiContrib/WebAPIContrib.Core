@@ -94,7 +94,7 @@ namespace WebApiContrib.Core.Formatter.Csv
             {
                 var line = await reader.ReadLineAsync();
                 var values = line.Split(_options.CsvDelimiter.ToCharArray());
-                if(skipFirstLine)
+                if (skipFirstLine)
                 {
                     skipFirstLine = false;
                 }
@@ -116,11 +116,11 @@ namespace WebApiContrib.Core.Formatter.Csv
 
             }
 
-            if(typeIsArray)
+            if (typeIsArray)
             {
                 Array array = Array.CreateInstance(itemType, list.Count);
 
-                for(int t = 0; t < list.Count; t++)
+                for (int t = 0; t < list.Count; t++)
                 {
                     array.SetValue(list[t], t);
                 }
