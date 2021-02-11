@@ -11,5 +11,7 @@ namespace WebApiContrib.Core.Formatter.Csv
         public Encoding Encoding { get; set; } = Encoding.Default;
 
         public bool IncludeExcelDelimiterHeader { get; set; } = false;
+
+        public bool ReplaceLineBreakCharacters { get; set; } = true;
     }
 }
