@@ -4,6 +4,7 @@ WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/
 
 ## History
 
+- 2021.02.11: Enclosed quotes expansion
 - 2020.07.17: Add Support for Header Translation
 - 2020.04.16: Improved compliance to [RFC4180](https://tools.ietf.org/html/rfc4180)
 - 2020.04.06: Replace smart quotes when encoding is Windows-1252
