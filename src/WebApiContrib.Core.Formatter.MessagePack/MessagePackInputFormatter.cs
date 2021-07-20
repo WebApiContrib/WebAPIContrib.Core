@@ -43,10 +43,13 @@ namespace WebApiContrib.Core.Formatter.MessagePack
                 request.Body.Seek(0L, SeekOrigin.Begin);
             }
 
-            var result = MessagePackSerializer.NonGeneric.Deserialize(context.ModelType, request.Body, _options.FormatterResolver);
-            var formatterResult = await InputFormatterResult.SuccessAsync(result);
-
-            return formatterResult;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                await request.Body.CopyToAsync(stream);
+                stream.Position = 0;
+                var result = MessagePackSerializer.NonGeneric.Deserialize(context.ModelType, stream, _options.FormatterResolver);
+                return await InputFormatterResult.SuccessAsync(result);
+            }
         }
 
         protected override bool CanReadType(Type type)
