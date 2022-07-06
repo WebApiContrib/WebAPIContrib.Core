@@ -90,9 +90,9 @@ namespace WebApiContrib.Core.Formatter.Csv
             var reader = new StreamReader(stream, _options.Encoding);
 
             bool skipFirstLine = _options.UseSingleLineHeaderInCsv;
-            while (!reader.EndOfStream)
+            String line;
+            while ((line = await reader.ReadLineAsync()) != null)
             {
-                var line = await reader.ReadLineAsync();
                 var values = line.Split(_options.CsvDelimiter.ToCharArray());
                 if (skipFirstLine)
                 {
