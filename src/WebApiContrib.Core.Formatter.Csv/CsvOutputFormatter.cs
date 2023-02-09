@@ -69,6 +69,10 @@ namespace WebApiContrib.Core.Formatter.Csv
             var response = context.HttpContext.Response;
 
             Type type = context.Object.GetType();
+			if (!type.IsGenericType || type.GetGenericTypeDefinition() != typeof(IEnumerable<>))
+			{
+				type = type.GetInterfaces().First(z => z.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+			}
             Type itemType;
 
             if (type.GetGenericArguments().Length > 0)
