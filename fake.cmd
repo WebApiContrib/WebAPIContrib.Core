@@ -1,4 +1,5 @@
 @echo off
 
-dotnet restore build.proj
+dotnet tool restore
+dotnet fake --version
 dotnet fake build %*

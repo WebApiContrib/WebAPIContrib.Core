@@ -4,6 +4,9 @@ WebApiContrib.Core.Formatter.Csv [![NuGet Status](http://img.shields.io/nuget/v/
 
 ## History
 
+- 2021.02.11: Enclosed quotes expansion
+- 2020.07.17: Add Support for Header Translation
+- 2020.04.16: Improved compliance to [RFC4180](https://tools.ietf.org/html/rfc4180)
 - 2020.04.06: Replace smart quotes when encoding is Windows-1252
 - 2018.11.23: Encoding bug fix, configuration change, ReadLine input changed to ReadLineAsync and protected
 - 2018.10.24: Support IEnumerable instead of ILIst for the OutputFormatter, OrderBy and format fix
@@ -128,7 +131,7 @@ The formatters can be added to the ASP.NET Core project in the Startup class in 
 
 The default delimiter is set to ';' and the header is included by default.
 
-Optionally setting IncludeExcelDelimiterHeader to true adds the "sep=,"  header, so the files can be opened in Excel directly.
+Optionally setting IncludeExcelDelimiterHeader to true adds the "sep=,"  header, so the files can be opened in Excel directly and setting ReplaceLineBreakCharacters to false preserves line break characters by enclosing text with quotes.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

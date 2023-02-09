@@ -7,4 +7,4 @@ group FakeBuild
     nuget Fake.Core.Target
     nuget Fake.DotNet.Cli
     nuget Fake.IO.FileSystem
-    nuget FSharp.Core 4.3.4
+    nuget FSharp.Core

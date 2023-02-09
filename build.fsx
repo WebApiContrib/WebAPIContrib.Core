@@ -24,9 +24,7 @@ let buildTask =
         !! "**/*.csproj"
         |> Seq.iter
           (DotNet.build
-            (fun p ->
-              { p with
-                  Configuration = DotNet.BuildConfiguration.Release }))
+            (fun p -> p))
     }
 
 let testTask =

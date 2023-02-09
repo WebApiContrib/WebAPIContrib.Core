@@ -45,7 +45,7 @@ namespace WebApiContrib.Core.Formatter.Csv
         {
             if (type == null)
                 throw new ArgumentNullException("type");
-            
+
             return typeof(IEnumerable).IsAssignableFrom(type);
         }
 
@@ -61,7 +61,7 @@ namespace WebApiContrib.Core.Formatter.Csv
                 return value;
             }
 
-            return pi.GetCustomAttribute<DisplayAttribute>(false)?.Name ?? pi.Name;
+            return pi.GetCustomAttribute<DisplayAttribute>(false)?.GetName() ?? pi.Name;
         }
 
         public async override Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
@@ -138,15 +138,15 @@ namespace WebApiContrib.Core.Formatter.Csv
                         //Escape quotes
                         _val = _val.Replace("\"", "\"\"");
 
-                        //Check if the value contains a delimiter and place it in quotes if so
-                        if (_val.Contains(_options.CsvDelimiter))
-                            _val = string.Concat("\"", _val, "\"");
-
                         //Replace any \r or \n special characters from a new line with a space
-                        if (_val.Contains("\r"))
+                        if (_options.ReplaceLineBreakCharacters && _val.Contains("\r"))
                             _val = _val.Replace("\r", " ");
-                        if (_val.Contains("\n"))
+                        if (_options.ReplaceLineBreakCharacters && _val.Contains("\n"))
                             _val = _val.Replace("\n", " ");
+
+                        //Check if the value contains a delimiter/quote/newline and place it in quotes if so
+                        if (_val.Contains(_options.CsvDelimiter) || _val.Contains("\"") || _val.Contains("\r") || _val.Contains("\n"))
+                            _val = string.Concat("\"", _val, "\"");
 
                         valueLine = string.Concat(valueLine, _val, _options.CsvDelimiter);
 
